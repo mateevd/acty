@@ -1,0 +1,93 @@
+/*------------------------------------------------------------------------------*/
+/*								THEME PRINTANIER								*/
+/*------------------------------------------------------------------------------*/
+:root {
+	/* theme */
+	--theme-fonce-mini: #607060;
+	--theme-fonce-leger: #306040;
+	--theme-fonce-moyen: #205030;
+	--theme-fonce-fort: #106030;
+	--theme-fonce-ultra: #004520;
+
+	--theme-clair-mini: #9090b0;
+	--theme-clair-leger: #b0b0d0;
+	--theme-clair-moyen: #d0d0e0;
+	--theme-clair-fort: #f0f0ff;
+	--theme-clair-ultra: #fafaff;
+
+	--theme-libelle: #085020;
+	
+	--theme-important: #ab4d00;  /*sur fond clair*/
+	--theme-important-alt: #ff8300; /* sur fond foncé */
+	--theme-important-back: #eeccaa; /* surlignage */
+	--theme-important-back-over: #d09773; /* surlignage hover */
+
+	/* global */
+	--info: #87a800; /*vert*/
+	--success: #87a800; /*vert*/
+	--warning: #f25e23; /*orange*/
+	--warning-fatal: #cc2600; /*rouge*/
+	--error: #e33030; /*rouge foncé*/
+
+	/* éléments de modales */
+	--bouton-modal-retour: #e33030;
+	--bouton-modal-valider: #87a800;
+
+	/* polices */
+	/* historique : --realise: #70ad47;*/
+	/* historique :	--prevu: #5b9bd5;*/
+
+	--realise: #60a040;
+	--prevu: #6090c0;
+	--prevu-total: #a0522d;
+	--absence: #d11a1a;
+	--activite: #e69500;
+	--historique: #7f7f7f;
+	--deconnexion: #f04040;
+	--charge: #6090c0;
+	--help: #7f7f7f;
+	--enveloppe: #ffa500;
+
+	/* statuts */
+	--status-active: #085020;
+	--status-active: var(--theme-libelle);
+	--status-terminated: #7f7f7f;
+	--status-not-validated: #f04040;
+	--status-validated: #60a040;
+
+	/* icônes statiques d'état */
+	--public: #87a800;
+	--private: #cc2600;
+	--milestone: #cc2600;
+
+	/* icônes d'action*/
+	--action-creation: #6495ed;
+	--action-terminate: #87a800;
+	--action-undo: #87a800;
+	--action-add-time: #6495ed;
+	--action-trash: #cc2600;
+	--action-edit: #d0a020;
+	--action-copy: #d0a020;
+	--action-move: #d0a020;
+	--action-planification: #d2691e;
+	--action-info: #eeee00;
+	--action-eye: #eeee00;
+	--action-disabled: #f0f0ff;
+
+	/* boutons absences */
+	--time-add: #60a040;
+	--time-doff: #d11a1a;
+
+	/* phases */
+	--phase: #e0c0c0;
+	--phase-selected: #c7a7a7;
+
+	/* tasks */
+	--task: #a0522d;
+	--task-head: #d6ab97;
+	--task-selected: #e8d5cd;
+}
+
+
+
+	

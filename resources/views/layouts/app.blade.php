@@ -12,6 +12,22 @@
 
 	<!-- Scripts -->
 	<script src="{{ asset('js/app.js') }}" defer></script>
+	<script src="{{ asset('js/main.js') }}" defer></script>
+	<script src="{{ asset('js/idleTimer.min.js') }}" defer></script>
+	<script src="{{ asset('js/absences.js') }}" defer></script>
+	<script src="{{ asset('js/activities.js') }}" defer></script>
+	<script src="{{ asset('js/charges.js') }}" defer></script>
+	<script src="{{ asset('js/configs.js') }}" defer></script>
+	<script src="{{ asset('js/dashboard.js') }}" defer></script>
+	<script src="{{ asset('js/dragdrop.js') }}" defer></script>
+	<script src="{{ asset('js/info.js') }}" defer></script>
+	<script src="{{ asset('js/log_activity.js') }}" defer></script>
+	<script src="{{ asset('js/login.js') }}" defer></script>
+	<script src="{{ asset('js/phases.js') }}" defer></script>
+	<script src="{{ asset('js/planning.js') }}" defer></script>
+	<script src="{{ asset('js/tasks.js') }}" defer></script>
+	<script src="{{ asset('js/users.js') }}" defer></script>
+	<script src="{{ asset('js/work_days.js') }}" defer></script>
 
 	<!-- Fonts -->
 	<link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -19,6 +35,16 @@
 
 	<!-- Styles -->
 	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
+	<link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+	<link href="{{ asset('css/dragdrop.css') }}" rel="stylesheet">
+	<link href="{{ asset('css/flashy.css') }}" rel="stylesheet">
+	{{--<link href="{{ asset('css/theme_01.css') }}" rel="stylesheet">--}}
+	{{--<link href="{{ asset('css/theme_02.css') }}" rel="stylesheet">--}}
+	{{--<link href="{{ asset('css/theme_03.css') }}" rel="stylesheet">--}}
+	<link href="{{ asset('css/zoom_75.css') }}" rel="stylesheet">
+	{{--<link href="{{ asset('css/zoom_100.css') }}" rel="stylesheet">--}}
+	{{--<link href="{{ asset('css/zoom_125.css') }}" rel="stylesheet">--}}
+
 </head>
 
 <body>
