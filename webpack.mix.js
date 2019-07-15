@@ -29,7 +29,7 @@ mix
 	.js('resources/assets/js/users.js', 'public/js')
 	.js('resources/assets/js/work_days.js', 'public/js')
 
-   .sass('resources/assets/sass/app.scss', 'public/css')
+   // .sass('resources/assets/sass/app.scss', 'public/css')
    .sass('resources/assets/sass/dragdrop.scss', 'public/css')
    .sass('resources/assets/sass/flashy.scss', 'public/css')
    .sass('resources/assets/sass/theme_01.scss', 'public/css')

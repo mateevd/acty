@@ -15,7 +15,7 @@
 					<a class="nav-link-extended" href="{{ route('login') }}">{{ trans('app.Login') }}</a>
 				</li>
 			@else
-				@if(auth()->user()->hasRole(config('constants.role_admin')) )
+				@if(auth()->user()->roles->name == (config('constants.role_admin')) )
 					<li class="nav-item-default apply-spin">
 						<a class="nav-link-extended style-journal"
 						   href="{{ url('/logActivity') }}"
@@ -24,7 +24,7 @@
 						   title="{{trans('app.logs_tool')}}"><i class="far fa-list-alt"></i></a>
 					</li>
 				@endif
-				@if(auth()->user()->hasRole(config('constants.role_admin')) || auth()->user()->hasRole(config('constants.role_directeur')) || auth()->user()->hasRole(config('constants.role_service')) )
+				@if(auth()->user()->roles->name == (config('constants.role_admin')) || auth()->user()->roles->name == (config('constants.role_directeur')) || auth()->user()->roles->name == (config('constants.role_service')) )
 					<li class="nav-item-default apply-spin">
 						<a class="nav-link-extended style-utilisateur"
 						   href="{{ route('utilisateurs') }}"

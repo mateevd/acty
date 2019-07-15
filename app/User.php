@@ -36,11 +36,6 @@ class User extends Authenticatable
 		'password', 'remember_token',
 	];
 	
-	public function hasRole($role)
-	{
-		return User::where('role_id', $role)->get();
-	}
-	
 	/**
 	 * @param string $token
 	 */
