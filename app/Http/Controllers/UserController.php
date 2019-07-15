@@ -4,6 +4,7 @@
 	
 	use App\Helpers\LogActivity;
 	use App\Models\Role;
+	use Carbon\Carbon;
 	use Illuminate\Foundation\Auth\AuthenticatesUsers;
 	use Illuminate\Http\Request;
 	use App\User;
@@ -26,10 +27,6 @@
 			$this->middleware('auth');
 		}
 		
-		public static function hasRole($role)
-		{
-			return User::whereIn('role_id', [$role])->get();
-		}
 		/**
 		 * @param $value string/int $value the value to be handled
 		 * @return int value
@@ -122,11 +119,11 @@
 				->leftJoin('departments', 'departments.id', '=', 'users.department_id');
 			
 			switch ('users') {
-				case(auth()->user()->hasRole(config('constants.role_directeur'))):
+				case(auth()->user()->roles->name == (config('constants.role_directeur'))):
 					$users = $users->where('users.department_id', '=', auth::user()->department_id);
 					break;
 				
-				case(auth()->user()->hasRole(config('constants.role_service'))):
+				case(auth()->user()->roles->name == (config('constants.role_service'))):
 					$users = $users->where('users.service_id', '=', auth::user()->service_id);
 					break;
 			}
@@ -156,10 +153,10 @@
 			//SJL CHECK
 			/*Get departments*/
 			$departments = DB::table('departments');
-			if (auth()->user()->role->name == config('constants.role_service')) {
+			if (auth()->user()->roles->name == config('constants.role_service')) {
 				$departments = $departments->where('id', '=', auth()->user()->department_id)
 					->pluck('name', 'id');
-			} elseif (auth()->user()->role->name == config('constants.role_directeur')) {
+			} elseif (auth()->user()->roles->name == config('constants.role_directeur')) {
 				$departments = $departments->where('id', '=', auth()->user()->department_id)
 					->pluck('name', 'id');
 			} else {
@@ -168,10 +165,10 @@
 			
 			/*liste services modal edition*/
 			$services = DB::table('services');
-			if (auth()->user()->role->name == config('constants.role_service')) {
+			if (auth()->user()->roles->name == config('constants.role_service')) {
 				$services = $services->where('id', '=', auth()->user()->service_id)
 					->pluck('name', 'id');
-			} elseif (auth()->user()->role->name == config('constants.role_directeur')) {
+			} elseif (auth()->user()->roles->name == config('constants.role_directeur')) {
 				$services = $services->where('department_id', '=', auth()->user()->department_id)
 					->pluck('name', 'id');
 			} else {
@@ -180,7 +177,7 @@
 			
 			//LISTE DES ROLES
 			$roles = DB::table('roles')
-				->where('id', '>=', auth()->user()->role->id)
+				->where('id', '>=', auth()->user()->roles->id)
 				->pluck('name', 'id');
 			
 			return view('users.user_index', 
