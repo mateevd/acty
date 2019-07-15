@@ -1,0 +1,18 @@
+<?php
+	
+	namespace App\Models;
+	
+	use Illuminate\Database\Eloquent\Model;
+	
+	class Role extends Model
+	{
+		public $timestamps = false;
+		
+		/**
+		 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+		 */
+		public function users()
+		{
+			return $this->hasMany('App\User', 'role_id');
+		}
+	}
