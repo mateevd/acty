@@ -3,6 +3,7 @@
 	namespace App\Http\Controllers;
 	
 	use App\Helpers\LogActivity;
+	use App\Models\Role;
 	use Illuminate\Foundation\Auth\AuthenticatesUsers;
 	use Illuminate\Http\Request;
 	use App\User;
@@ -25,6 +26,10 @@
 			$this->middleware('auth');
 		}
 		
+		public static function hasRole($role)
+		{
+			return User::whereIn('role_id', [$role])->get();
+		}
 		/**
 		 * @param $value string/int $value the value to be handled
 		 * @return int value
