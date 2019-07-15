@@ -1,3 +1,18 @@
+/** SPINNER ANIMATION **/
+$(window).on("load", function () {
+	$('#main-div').show();
+	$('#loading-message').hide();
+	$('#spinner-top').hide();
+	$('#footer-text').show();
+});
+
+$(document).on('click', '.apply-spin', function () {
+	$('#footer-text').hide();
+	$('#spinner-top').show();
+	$('#loading-message').show();
+	$('#main-div').hide();
+});
+
 $(document).ready(function () {
 
 	/** BTN BACK TO TOP **/
@@ -6,7 +21,7 @@ $(document).ready(function () {
 	};
 
 	function scrollFunction() {
-		if (document.body.scrollTop > 150 || document.documentElement.scrollTop > 150) {
+		if (document.body.scrollTop > 10 || document.documentElement.scrollTop > 10) {
 			document.getElementById("back_to_top").style.display = "block";
 		} else {
 			document.getElementById("back_to_top").style.display = "none";
@@ -18,21 +33,6 @@ $(document).ready(function () {
 		document.body.scrollTop = 0; // For Safari
 		document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 	}
-
-	/** SPINNER ANIMATION **/
-	$(window).on("load", function () {
-		$('#main-div').show();
-		$('#loading-message').hide();
-		$('#spinner-top').hide();
-		$('#footer-text').show();
-	});
-
-	$(document).on('click', '.apply-spin', function () {
-		$('#footer-text').hide();
-		$('#spinner-top').show();
-		$('#loading-message').show();
-		$('#main-div').hide();
-	});
 
 	/** FLASHY MESSAGES**/
 	function flashy(message, link) {

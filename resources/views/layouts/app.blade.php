@@ -21,5 +21,5 @@
 
 @include('includes.flashy_message')
 @include('includes.scripts')
-{{--@include('flashy::message')--}}
+@include('flashy::message')
 </html>

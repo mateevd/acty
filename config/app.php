@@ -147,7 +147,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 //	    Collective\Html\HtmlServiceProvider::class,
-//	    MercurySeries\Flashy\FlashyServiceProvider::class,
+	    MercurySeries\Flashy\FlashyServiceProvider::class,
 //	    HTMLMin\HTMLMin\HTMLMinServiceProvider::class,
 
         /*
@@ -214,7 +214,7 @@ return [
 //	    'Form'=> Collective\Html\FormFacade::class,
 //	    'Html'=>Collective\Html\HtmlFacade::class,
 //	    'LogActivity' => App\Helpers\LogActivity::class,
-//	    'Flashy' => MercurySeries\Flashy\Flashy::class,
+	    'Flashy' => MercurySeries\Flashy\Flashy::class,
 //	    'HTMLMin' => HTMLMin\HTMLMin\Facades\HTMLMin::class,
     ],
 

@@ -86,6 +86,21 @@ module.exports = __webpack_require__(11);
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
+/** SPINNER ANIMATION **/
+$(window).on("load", function () {
+	$('#main-div').show();
+	$('#loading-message').hide();
+	$('#spinner-top').hide();
+	$('#footer-text').show();
+});
+
+$(document).on('click', '.apply-spin', function () {
+	$('#footer-text').hide();
+	$('#spinner-top').show();
+	$('#loading-message').show();
+	$('#main-div').hide();
+});
+
 $(document).ready(function () {
 
 	/** BTN BACK TO TOP **/
@@ -94,7 +109,7 @@ $(document).ready(function () {
 	};
 
 	function scrollFunction() {
-		if (document.body.scrollTop > 150 || document.documentElement.scrollTop > 150) {
+		if (document.body.scrollTop > 10 || document.documentElement.scrollTop > 10) {
 			document.getElementById("back_to_top").style.display = "block";
 		} else {
 			document.getElementById("back_to_top").style.display = "none";
@@ -106,21 +121,6 @@ $(document).ready(function () {
 		document.body.scrollTop = 0; // For Safari
 		document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 	}
-
-	/** SPINNER ANIMATION **/
-	$(window).on("load", function () {
-		$('#main-div').show();
-		$('#loading-message').hide();
-		$('#spinner-top').hide();
-		$('#footer-text').show();
-	});
-
-	$(document).on('click', '.apply-spin', function () {
-		$('#footer-text').hide();
-		$('#spinner-top').show();
-		$('#loading-message').show();
-		$('#main-div').hide();
-	});
 
 	/** FLASHY MESSAGES**/
 	function flashy(message, link) {
@@ -136,7 +136,7 @@ $(document).ready(function () {
 	/** BOOTSTRAP SORT COLUMS**/
 	function sortSelect(selElem, sortVal) {
 		// Checks for an object or string. Uses string as ID.
-		switch (typeof selElem === "undefined" ? "undefined" : _typeof(selElem)) {
+		switch (typeof selElem === 'undefined' ? 'undefined' : _typeof(selElem)) {
 			case "string":
 				selElem = document.getElementById(selElem);
 				break;
