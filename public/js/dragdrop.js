@@ -1,1 +1,587 @@
-!function(e){var t={};function r(a){if(t[a])return t[a].exports;var n=t[a]={i:a,l:!1,exports:{}};return e[a].call(n.exports,n,n.exports,r),n.l=!0,n.exports}r.m=e,r.c=t,r.d=function(e,t,a){r.o(e,t)||Object.defineProperty(e,t,{configurable:!1,enumerable:!0,get:a})},r.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return r.d(t,"a",t),t},r.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},r.p="/",r(r.s=22)}({22:function(e,t,r){e.exports=r(23)},23:function(e,t){!function(){if(document.querySelectorAll&&"draggable"in document.createElement("span")&&!window.opera){for(var e=document.querySelectorAll('[data-draggable="target"]'),t=e.length,r=0;r<t;r++)e[r].setAttribute("aria-dropeffect","none");var a=document.querySelectorAll('[data-draggable="item"]');for(t=a.length,r=0;r<t;r++)a[r].setAttribute("draggable","true"),a[r].setAttribute("aria-grabbed","false"),a[r].setAttribute("tabindex","0");var n={items:[],owner:null,droptarget:null};document.addEventListener("mousedown",function(e){e.target.getAttribute("draggable")?(s(),g(e)||"false"!=e.target.getAttribute("aria-grabbed")||(d(),o(e.target))):g(e)?s():(s(),d())},!1),document.addEventListener("mouseup",function(e){e.target.getAttribute("draggable")&&g(e)&&("true"==e.target.getAttribute("aria-grabbed")?(u(e.target),n.items.length||(n.owner=null)):o(e.target))},!1),document.addEventListener("dragstart",function(e){n.owner==e.target.parentNode?(g(e)&&"false"==e.target.getAttribute("aria-grabbed")&&o(e.target),e.dataTransfer.setData("text",""),l()):e.preventDefault()},!1),document.addEventListener("keydown",function(t){if(t.target.getAttribute("aria-grabbed")&&(32==t.keyCode&&(g(t)?"true"==t.target.getAttribute("aria-grabbed")?(1==n.items.length&&s(),u(t.target),n.items.length&&l(),n.items.length||(n.owner=null)):(o(t.target),l()):"false"==t.target.getAttribute("aria-grabbed")?(s(),d(),o(t.target),l()):l(),t.preventDefault()),77==t.keyCode&&g(t))){if(n.items.length)if(l(),n.owner==e[e.length-1])e[0].focus();else for(var r=e.length,a=0;a<r;a++)if(n.owner==e[a]){e[a+1].focus();break}t.preventDefault()}27==t.keyCode&&n.items.length&&(s(),n.items[n.items.length-1].focus(),d())},!1);var i=null;document.addEventListener("dragenter",function(e){i=e.target},!1),document.addEventListener("dragleave",function(e){var t=function(e){do{if(1==e.nodeType&&e.getAttribute("aria-dropeffect"))return e}while(e=e.parentNode);return null}(i);t==n.owner&&(t=null),t!=n.droptarget&&(n.droptarget&&(n.droptarget.className=n.droptarget.className.replace(/ dragover/g,"")),t&&(t.className+=" dragover"),n.droptarget=t)},!1),document.addEventListener("dragover",function(e){n.items.length&&e.preventDefault()},!1),document.addEventListener("dragend",function(e){if(n.droptarget){for(var t=n.items.length,r=0;r<t;r++)n.droptarget.appendChild(n.items[r]);e.preventDefault()}if(n.items.length&&(s(),n.droptarget)){var a=[];$("#user_id li").each(function(){a.push($(this).data("value"))}),$("#user_id_values").attr("value",JSON.stringify(a)),d(),n.droptarget.className=n.droptarget.className.replace(/ dragover/g,""),n.droptarget=null}},!1)}function o(e){if(n.owner){if(n.owner!=e.parentNode)return}else n.owner=e.parentNode;e.setAttribute("aria-grabbed","true"),n.items.push(e)}function u(e){e.setAttribute("aria-grabbed","false");for(var t=n.items.length,r=0;r<t;r++)if(n.items[r]==e){n.items.splice(r,1);break}}function d(){if(n.items.length){n.owner=null;for(var e=n.items.length,t=0;t<e;t++)n.items[t].setAttribute("aria-grabbed","false");n.items=[]}}function g(e){return e.ctrlKey}function l(){for(var t=e.length,r=0;r<t;r++)e[r]!=n.owner&&"none"==e[r].getAttribute("aria-dropeffect")&&(e[r].setAttribute("aria-dropeffect","move"),e[r].setAttribute("tabindex","0"));for(t=a.length,r=0;r<t;r++)a[r].parentNode!=n.owner&&a[r].getAttribute("aria-grabbed")&&(a[r].removeAttribute("aria-grabbed"),a[r].removeAttribute("tabindex"))}function s(){if(n.items.length){for(var t=e.length,r=0;r<t;r++)"none"!=e[r].getAttribute("aria-dropeffect")&&(e[r].setAttribute("aria-dropeffect","none"),e[r].removeAttribute("tabindex"));for(t=a.length,r=0;r<t;r++)a[r].getAttribute("aria-grabbed")?"true"==a[r].getAttribute("aria-grabbed")&&a[r].setAttribute("tabindex","0"):(a[r].setAttribute("aria-grabbed","false"),a[r].setAttribute("tabindex","0"))}}}()}});
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "/";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 22);
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ 22:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(23);
+
+
+/***/ }),
+
+/***/ 23:
+/***/ (function(module, exports) {
+
+(function () {
+	//exclude older browsers by the features we need them to support
+	//and legacy opera explicitly so we don't waste time on a dead browser
+	if (!document.querySelectorAll || !('draggable' in document.createElement('span')) || window.opera) {
+		return;
+	}
+
+	//get the collection of draggable targets and add their draggable attribute
+	for (var targets = document.querySelectorAll('[data-draggable="target"]'), len = targets.length, i = 0; i < len; i++) {
+		targets[i].setAttribute('aria-dropeffect', 'none');
+	}
+
+	//get the collection of draggable items and add their draggable attributes
+	for (var items = document.querySelectorAll('[data-draggable="item"]'), len = items.length, i = 0; i < len; i++) {
+		items[i].setAttribute('draggable', 'true');
+		items[i].setAttribute('aria-grabbed', 'false');
+		items[i].setAttribute('tabindex', '0');
+	}
+
+	//dictionary for storing the selections data
+	//comprising an array of the currently selected items
+	//a reference to the selected items' owning container
+	//and a refernce to the current drop target container
+	var selections = {
+		items: [],
+		owner: null,
+		droptarget: null
+	};
+
+	//function for selecting an item
+	function ChangeSelectionDown(item) {
+		//reset this item's grabbed state
+		item.setAttribute('aria-grabbed', 'false');
+
+		//then find and remove this item from the existing items array
+		for (var len = selections.items.length, i = 0; i < len; i++) {
+			if (selections.items[i] == item) {
+				selections.items.splice(i, 1);
+				break;
+			}
+		}
+
+		var nextitem = item.nextElementSibling;
+
+		if (nextitem) {
+			//set this item's grabbed state
+			nextitem.setAttribute('aria-grabbed', 'true');
+			nextitem.focus();
+
+			//add it to the items array
+			selections.items.push(nextitem);
+		}
+	}
+
+	function ChangeSelectionUp(item) {
+		//reset this item's grabbed state
+		item.setAttribute('aria-grabbed', 'false');
+
+		//then find and remove this item from the existing items array
+		for (var len = selections.items.length, i = 0; i < len; i++) {
+			if (selections.items[i] == item) {
+				selections.items.splice(i, 1);
+				break;
+			}
+		}
+
+		var previousitem = item.previousElementSibling;
+
+		if (previousitem) {
+			//set this item's grabbed state
+			previousitem.setAttribute('aria-grabbed', 'true');
+			previousitem.focus();
+
+			//add it to the items array
+			selections.items.push(previousitem);
+		}
+	}
+
+	//function for selecting an item
+	function addSelection(item) {
+		//if the owner reference is still null, set it to this item's parent
+		//so that further selection is only allowed within the same container
+		if (!selections.owner) {
+			selections.owner = item.parentNode;
+		}
+
+		//or if that's already happened then compare it with this item's parent
+		//and if they're not the same container, return to prevent selection
+		else if (selections.owner != item.parentNode) {
+				return;
+			}
+
+		//set this item's grabbed state
+		item.setAttribute('aria-grabbed', 'true');
+
+		//add it to the items array
+		selections.items.push(item);
+	}
+
+	//function for unselecting an item
+	function removeSelection(item) {
+		//reset this item's grabbed state
+		item.setAttribute('aria-grabbed', 'false');
+
+		//then find and remove this item from the existing items array
+		for (var len = selections.items.length, i = 0; i < len; i++) {
+			if (selections.items[i] == item) {
+				selections.items.splice(i, 1);
+				break;
+			}
+		}
+	}
+
+	//function for resetting all selections
+	function clearSelections() {
+		//if we have any selected items
+		if (selections.items.length) {
+			//reset the owner reference
+			selections.owner = null;
+
+			//reset the grabbed state on every selected item
+			for (var len = selections.items.length, i = 0; i < len; i++) {
+				selections.items[i].setAttribute('aria-grabbed', 'false');
+			}
+
+			//then reset the items array
+			selections.items = [];
+		}
+	}
+
+	//shorctut function for testing whether CTRL is pressed
+	function hasModifier(e) {
+		// return (e.ctrlKey || e.metaKey);
+		return e.ctrlKey;
+	}
+
+	//shorctut function for testing whether SHIFT is pressed
+	function hasModifierShift(e) {
+		return e.shiftKey;
+	}
+
+	//function for applying dropeffect to the target containers
+	function addDropeffects() {
+		//apply aria-dropeffect and tabindex to all targets apart from the owner
+		for (var len = targets.length, i = 0; i < len; i++) {
+			if (targets[i] != selections.owner && targets[i].getAttribute('aria-dropeffect') == 'none') {
+				targets[i].setAttribute('aria-dropeffect', 'move');
+				targets[i].setAttribute('tabindex', '0');
+			}
+		}
+
+		//remove aria-grabbed and tabindex from all items inside those containers
+		for (var len = items.length, i = 0; i < len; i++) {
+			if (items[i].parentNode != selections.owner && items[i].getAttribute('aria-grabbed')) {
+				items[i].removeAttribute('aria-grabbed');
+				items[i].removeAttribute('tabindex');
+			}
+		}
+	}
+
+	//function for removing dropeffect from the target containers
+	function clearDropeffects() {
+		//if we have any selected items
+		if (selections.items.length) {
+			//reset aria-dropeffect and remove tabindex from all targets
+			for (var len = targets.length, i = 0; i < len; i++) {
+				if (targets[i].getAttribute('aria-dropeffect') != 'none') {
+					targets[i].setAttribute('aria-dropeffect', 'none');
+					targets[i].removeAttribute('tabindex');
+				}
+			}
+
+			//restore aria-grabbed and tabindex to all selectable items
+			//without changing the grabbed value of any existing selected items
+			for (var len = items.length, i = 0; i < len; i++) {
+				if (!items[i].getAttribute('aria-grabbed')) {
+					items[i].setAttribute('aria-grabbed', 'false');
+					items[i].setAttribute('tabindex', '0');
+				} else if (items[i].getAttribute('aria-grabbed') == 'true') {
+					items[i].setAttribute('tabindex', '0');
+				}
+			}
+		}
+	}
+
+	//shortcut function for identifying an event element's target container
+	function getContainer(element) {
+		do {
+			if (element.nodeType == 1 && element.getAttribute('aria-dropeffect')) {
+				return element;
+			}
+		} while (element = element.parentNode);
+
+		return null;
+	}
+
+	//mousedown event to implement single selection
+	document.addEventListener('mousedown', function (e) {
+		//if the element is a draggable item
+		if (e.target.getAttribute('draggable')) {
+			//clear dropeffect from the target containers
+			clearDropeffects();
+
+			//if the multiple selection modifier is not pressed
+			//and the item's grabbed state is currently false
+			if (!hasModifier(e) && e.target.getAttribute('aria-grabbed') == 'false') {
+				//clear all existing selections
+				clearSelections();
+
+				//then add this new selection
+				addSelection(e.target);
+			}
+		}
+
+		//else [if the element is anything else]
+		//and the selection modifier is not pressed
+		else if (!hasModifier(e)) {
+				//clear dropeffect from the target containers
+				clearDropeffects();
+
+				//clear all existing selections
+				clearSelections();
+			}
+
+			//else [if the element is anything else and the modifier is pressed]
+			else {
+					//clear dropeffect from the target containers
+					clearDropeffects();
+				}
+	}, false);
+
+	//mouseup event to implement multiple selection
+	document.addEventListener('mouseup', function (e) {
+		//if the element is a draggable item
+		//and the multipler selection modifier is pressed
+		if (e.target.getAttribute('draggable') && hasModifier(e)) {
+			//if the item's grabbed state is currently true
+			if (e.target.getAttribute('aria-grabbed') == 'true') {
+				//unselect this item
+				removeSelection(e.target);
+
+				//if that was the only selected item
+				//then reset the owner container reference
+				if (!selections.items.length) {
+					selections.owner = null;
+				}
+			}
+
+			//else [if the item's grabbed state is false]
+			else {
+					//add this additional selection
+					addSelection(e.target);
+				}
+		}
+	}, false);
+
+	//dragstart event to initiate mouse dragging
+	document.addEventListener('dragstart', function (e) {
+		//if the element's parent is not the owner, then block this event
+		if (selections.owner != e.target.parentNode) {
+			e.preventDefault();
+			return;
+		}
+
+		//[else] if the multiple selection modifier is pressed
+		//and the item's grabbed state is currently false
+		if (hasModifier(e) && e.target.getAttribute('aria-grabbed') == 'false') {
+			//add this additional selection
+			addSelection(e.target);
+		}
+
+		//we don't need the transfer data, but we have to define something
+		//otherwise the drop action won't work at all in firefox
+		//most browsers support the proper mime-type syntax, eg. "text/plain"
+		//but we have to use this incorrect syntax for the benefit of IE10+
+		e.dataTransfer.setData('text', '');
+
+		//apply dropeffect to the target containers
+		addDropeffects();
+	}, false);
+
+	//keydown event to implement selection and abort
+	document.addEventListener('keydown', function (e) {
+		//if the element is a grabbable item
+		if (e.target.getAttribute('aria-grabbed')) {
+			//Space is the selection or unselection keystroke
+			if (e.keyCode == 32) {
+				//if the multiple selection modifier is pressed
+				if (hasModifier(e)) {
+					//if the item's grabbed state is currently true
+					if (e.target.getAttribute('aria-grabbed') == 'true') {
+						//if this is the only selected item, clear dropeffect
+						//from the target containers, which we must do first
+						//in case subsequent unselection sets owner to null
+						if (selections.items.length == 1) {
+							clearDropeffects();
+						}
+
+						//unselect this item
+						removeSelection(e.target);
+
+						//if we have any selections
+						//apply dropeffect to the target containers,
+						//in case earlier selections were made by mouse
+						if (selections.items.length) {
+							addDropeffects();
+						}
+
+						//if that was the only selected item
+						//then reset the owner container reference
+						if (!selections.items.length) {
+							selections.owner = null;
+						}
+					}
+
+					//else [if its grabbed state is currently false]
+					else {
+							//add this additional selection
+							addSelection(e.target);
+
+							//apply dropeffect to the target containers
+							addDropeffects();
+						}
+				}
+
+				//else [if the multiple selection modifier is not pressed]
+				//and the item's grabbed state is currently false
+				else if (e.target.getAttribute('aria-grabbed') == 'false') {
+						//clear dropeffect from the target containers
+						clearDropeffects();
+
+						//clear all existing selections
+						clearSelections();
+
+						//add this new selection
+						addSelection(e.target);
+
+						//apply dropeffect to the target containers
+						addDropeffects();
+					}
+
+					//else [if modifier is not pressed and grabbed is already true]
+					else {
+							//apply dropeffect to the target containers
+							addDropeffects();
+						}
+
+				//then prevent default to avoid any conflict with native actions
+				e.preventDefault();
+			}
+
+			//Modifier + M is the end-of-selection keystroke
+			if (e.keyCode == 77 && hasModifier(e)) {
+				//if we have any selected items
+				if (selections.items.length) {
+					//apply dropeffect to the target containers
+					//in case earlier selections were made by mouse
+					addDropeffects();
+
+					//if the owner container is the last one, focus the first one
+					if (selections.owner == targets[targets.length - 1]) {
+						targets[0].focus();
+					}
+
+					//else [if it's not the last one], find and focus the next one
+					else {
+							for (var len = targets.length, i = 0; i < len; i++) {
+								if (selections.owner == targets[i]) {
+									targets[i + 1].focus();
+									break;
+								}
+							}
+						}
+				}
+
+				//then prevent default to avoid any conflict with native actions
+				e.preventDefault();
+			}
+
+			// //up arrow
+			// if(e.keyCode == 38)
+			// {
+			// 	ChangeSelectionUp(e.target);
+
+			// 	//then prevent default to avoid any conflict with native actions
+			// 	e.preventDefault();
+			// }
+
+			// //down arrow
+			// if(e.keyCode == 40)
+			// {
+			// 	ChangeSelectionDown(e.target);
+
+			// 	//then prevent default to avoid any conflict with native actions
+			// 	e.preventDefault();
+			// }
+
+		}
+
+		//Escape is the abort keystroke (for any target element)
+		if (e.keyCode == 27) {
+			//if we have any selected items
+			if (selections.items.length) {
+				//clear dropeffect from the target containers
+				clearDropeffects();
+
+				//then set focus back on the last item that was selected, which is
+				//necessary because we've removed tabindex from the current focus
+				selections.items[selections.items.length - 1].focus();
+
+				//clear all existing selections
+				clearSelections();
+
+				//but don't prevent default so that native actions can still occur
+			}
+		}
+	}, false);
+
+	//related variable is needed to maintain a reference to the
+	//dragleave's relatedTarget, since it doesn't have e.relatedTarget
+	var related = null;
+
+	//dragenter event to set that variable
+	document.addEventListener('dragenter', function (e) {
+		related = e.target;
+	}, false);
+
+	//dragleave event to maintain target highlighting using that variable
+	document.addEventListener('dragleave', function (e) {
+		//get a drop target reference from the relatedTarget
+		var droptarget = getContainer(related);
+
+		//if the target is the owner then it's not a valid drop target
+		if (droptarget == selections.owner) {
+			droptarget = null;
+		}
+
+		//if the drop target is different from the last stored reference
+		//(or we have one of those references but not the other one)
+		if (droptarget != selections.droptarget) {
+			//if we have a saved reference, clear its existing dragover class
+			if (selections.droptarget) {
+				selections.droptarget.className = selections.droptarget.className.replace(/ dragover/g, '');
+			}
+
+			//apply the dragover class to the new drop target reference
+			if (droptarget) {
+				droptarget.className += ' dragover';
+			}
+
+			//then save that reference for next time
+			selections.droptarget = droptarget;
+		}
+	}, false);
+
+	//dragover event to allow the drag by preventing its default
+	document.addEventListener('dragover', function (e) {
+		//if we have any selected items, allow them to be dragged
+		if (selections.items.length) {
+			e.preventDefault();
+		}
+	}, false);
+
+	//dragend event to implement items being validly dropped into targets,
+	//or invalidly dropped elsewhere, and to clean-up the interface either way
+	document.addEventListener('dragend', function (e) {
+		//if we have a valid drop target reference
+		//(which implies that we have some selected items)
+		if (selections.droptarget) {
+			//append the selected items to the end of the target container
+			for (var len = selections.items.length, i = 0; i < len; i++) {
+				selections.droptarget.appendChild(selections.items[i]);
+			}
+
+			//prevent default to allow the action
+			e.preventDefault();
+		}
+
+		//if we have any selected items
+		if (selections.items.length) {
+			//clear dropeffect from the target containers
+			clearDropeffects();
+
+			//if we have a valid drop target reference
+			if (selections.droptarget) {
+				var user_id_values = [];
+
+				$('#user_id li').each(function () {
+					// id of ul
+					user_id_values.push($(this).data('value'));
+				});
+				$('#user_id_values').attr('value', JSON.stringify(user_id_values));
+
+				//reset the selections array
+				clearSelections();
+
+				//reset the target's dragover class
+				selections.droptarget.className = selections.droptarget.className.replace(/ dragover/g, '');
+
+				//reset the target reference
+				selections.droptarget = null;
+			}
+		}
+	}, false);
+})();
+
+/***/ })
+
+/******/ });

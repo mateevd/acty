@@ -1,1 +1,103 @@
-!function(t){var e={};function n(o){if(e[o])return e[o].exports;var r=e[o]={i:o,l:!1,exports:{}};return t[o].call(r.exports,r,r.exports,n),r.l=!0,r.exports}n.m=t,n.c=e,n.d=function(t,e,o){n.o(t,e)||Object.defineProperty(t,e,{configurable:!1,enumerable:!0,get:o})},n.n=function(t){var e=t&&t.__esModule?function(){return t.default}:function(){return t};return n.d(e,"a",e),e},n.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},n.p="/",n(n.s=24)}({24:function(t,e,n){t.exports=n(25)},25:function(t,e){$(function(){var t=localStorage.getItem("info-tab-active");t?$('#info-tab-selection a[href="'+t+'"]').tab("show"):$('#info-tab-selection a[href="#task_types"]').tab("show"),$('#info-tab-selection a[data-toggle="tab"]').click(function(t){var e=$(t.target).attr("href");e||(e=$(this).attr("href")),localStorage.setItem("info-tab-active",e),$('#info-tab-selection a[href="'+e+'"]').tab("show")})})}});
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "/";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 24);
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ 24:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(25);
+
+
+/***/ }),
+
+/***/ 25:
+/***/ (function(module, exports) {
+
+$(function () {
+
+	// Available panels
+	// #task_types
+	// #open_days
+	// #change_log
+	var tab_active = localStorage.getItem('info-tab-active');
+	if (tab_active) {
+		$('#info-tab-selection a[href="' + tab_active + '"]').tab('show');
+	} else {
+		$('#info-tab-selection a[href="#task_types"]').tab('show'); //default panel
+	}
+
+	$('#info-tab-selection a[data-toggle="tab"]').click(function (e) {
+		var _target = $(e.target).attr('href');
+		if (!_target) _target = $(this).attr('href');
+
+		localStorage.setItem('info-tab-active', _target);
+		$('#info-tab-selection a[href="' + _target + '"]').tab('show');
+	});
+});
+
+/***/ })
+
+/******/ });

@@ -1,1 +1,102 @@
-!function(t){var a={};function e(r){if(a[r])return a[r].exports;var o=a[r]={i:r,l:!1,exports:{}};return t[r].call(o.exports,o,o.exports,e),o.l=!0,o.exports}e.m=t,e.c=a,e.d=function(t,a,r){e.o(t,a)||Object.defineProperty(t,a,{configurable:!1,enumerable:!0,get:r})},e.n=function(t){var a=t&&t.__esModule?function(){return t.default}:function(){return t};return e.d(a,"a",a),a},e.o=function(t,a){return Object.prototype.hasOwnProperty.call(t,a)},e.p="/",e(e.s=20)}({20:function(t,a,e){t.exports=e(21)},21:function(t,a){$(function(){var t=localStorage.getItem("dashboard-tab-active");t?$('#dashboard-tab-selection a[href="'+t+'"]').tab("show"):$('#dashboard-tab-selection a[href="#dashboard_user"]').tab("show"),$('#dashboard-tab-selection a[data-toggle="tab"]').click(function(t){var a=$(t.target).attr("href");a||(a=$(this).attr("href")),localStorage.setItem("dashboard-tab-active",a),$('#dashboard-tab-selection a[href="'+a+'"]').tab("show")})})}});
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "/";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 20);
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ 20:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(21);
+
+
+/***/ }),
+
+/***/ 21:
+/***/ (function(module, exports) {
+
+$(function () {
+
+	// Available panels
+	// #dashboard_user
+	// #dashboard_entity
+	var tab_active = localStorage.getItem('dashboard-tab-active');
+	if (tab_active) {
+		$('#dashboard-tab-selection a[href="' + tab_active + '"]').tab('show');
+	} else {
+		$('#dashboard-tab-selection a[href="#dashboard_user"]').tab('show'); //default panel
+	}
+
+	$('#dashboard-tab-selection a[data-toggle="tab"]').click(function (e) {
+		var _target = $(e.target).attr('href');
+		if (!_target) _target = $(this).attr('href');
+
+		localStorage.setItem('dashboard-tab-active', _target);
+		$('#dashboard-tab-selection a[href="' + _target + '"]').tab('show');
+	});
+});
+
+/***/ })
+
+/******/ });
