@@ -18,11 +18,11 @@
 	<div class="navbar-tabs-select-date">
 		<form id="date_change" action="{{route('journal')}}" method="get" name="dateSelect" class="hide-submit">
 			<div class="">
-				{!! Form::selectMonth('monthSelect', $current_date->month ? $current_date->month : Carbon\Carbon::now()->month , 
+				{!! Form::selectMonth('monthSelect', $current_date->month ? $current_date->month : Carbon\Carbon::now()->month ,
 						["class"=>"drop-date-common drop-date-month"])!!}
 			</div>
 			<div class="">
-				{!! Form::selectRange('yearSelect', config('constants.start_year'), config('constants.end_year'), $current_date->year ? $current_date->year : Carbon\Carbon::now()->year, 
+				{!! Form::selectRange('yearSelect', config('constants.start_year'), config('constants.end_year'), $current_date->year ? $current_date->year : Carbon\Carbon::now()->year,
 						["class"=>"drop-date-common drop-date-year"])!!}
 			</div>
 			<div class="drop-date-submit">
