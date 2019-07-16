@@ -37,6 +37,7 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
 	        \App\Http\Middleware\Language::class,
 	        \App\Http\Middleware\DateSelect::class,
+	        \App\Http\Middleware\TaskCountBadge::class,
         ],
 
         'api' => [

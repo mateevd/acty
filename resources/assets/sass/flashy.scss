@@ -3,94 +3,94 @@
 /*HAVE TO REMOVE STYLE SECTION OF ABOVE FILE IN ORDER CSS WORKS*/
 
 ::-webkit-scrollbar {
-	display: none;
+  display: none;
 }
 
 .flashy {
-	font-family: Roboto, Calibri, sans-serif, 'Gentium Book Basic', serif, -apple-system;
+  font-family: Roboto, Calibri, sans-serif, 'Gentium Book Basic', serif, -apple-system;
 
-	padding: 3px;
-	padding: 0.3rem;
+  padding: 3px;
+  padding: 0.3rem;
 
-	border-radius: 4px;
-	border-radius: 0.4rem;
+  border-radius: 4px;
+  border-radius: 0.4rem;
 
-	font-weight: bold;
+  font-weight: bold;
 
-	position: fixed;
-	bottom: 20px;
-	bottom: 2rem;
-	right: 20px;
-	right: 2rem;
+  position: fixed;
+  bottom: 20px;
+  bottom: 2rem;
+  right: 20px;
+  right: 2rem;
 
-	font-size: 12px;
-	font-size: 1.2rem;
+  font-size: 12px;
+  font-size: 1.2rem;
 
-	color: #fafaff;
+  color: #fafaff;
 }
 
 .flashy--success {
-	background-color: #87a800;
-	color: #fafaff;
+  background-color: #87a800;
+  color: #fafaff;
 }
 
 .flashy--warning {
-	color: #8a6d3b;
-	background-color: #f25e23;
-	border-color: #e33030;
+  color: #8a6d3b;
+  background-color: #f25e23;
+  border-color: #e33030;
 }
 
 .flashy--muted {
-	background: #eee;
-	color: #3a3a3a;
-	border: 1px solid #e2e2e2;
+  background: #eee;
+  color: #3a3a3a;
+  border: 1px solid #e2e2e2;
 }
 
 .flashy--muted-dark {
-	background: #133259;
-	color: #e2e1e7;
+  background: #133259;
+  color: #e2e1e7;
 }
 
 .flashy--info a,
 .flashy--primary-dark a {
-	color: #fafaff;
+  color: #fafaff;
 }
 
 .flashy--error {
-	background: #e33030;
-	color: #fafaff;
+  background: #e33030;
+  color: #fafaff;
 }
 
 .flashy--primary {
-	background: #203050;
+  background: #203050;
 }
 
 .flashy--primary-dark {
-	background: linear-gradient(to right, #133259 30%, #0d233e);
+  background: linear-gradient(to right, #133259 30%, #0d233e);
 }
 
 .flashy--info {
-	background: #304060;
+  background: #304060;
 }
 
 .flashy > ul {
-	padding-left: 15px;
+  padding-left: 15px;
 }
 
 .flashy > p:only-of-type {
-	margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 .flashy i {
-/*	margin-right: 8px;
-	position: relative;
-	top: 6px;*/
-	padding: 3px;
-	padding: 0.3rem;
+  margin-right: 8px;
+  position: relative;
+  top: 6px;
+  padding: 3px;
+  padding: 0.3rem;
 }
 
 .flashy .flashy__body {
-	color: inherit;
+  color: inherit;
 }
 
 /*@media only screen and (max-width: 1050px) {

@@ -79,9 +79,9 @@
 }
 
 .flashy i {
-  /*	margin-right: 8px;
-	position: relative;
-	top: 6px;*/
+  margin-right: 8px;
+  position: relative;
+  top: 6px;
   padding: 3px;
   padding: 0.3rem;
 }

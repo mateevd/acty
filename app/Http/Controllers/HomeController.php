@@ -758,6 +758,7 @@
 			
 			$open_days_by_month = $open_days_by_month
 				->select(DB::raw('open_days.month as mm, IFNULL((open_days.days), 0) as od'))
+				->groupBy('mm')
 				->orderBy('mm')
 				->get();
 			
