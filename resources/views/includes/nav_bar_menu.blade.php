@@ -54,7 +54,7 @@
 					   data-toggle="tooltip"
 					   data-placement="bottom"
 					   title="{{trans('app.tasks_tool')}}">{{trans('app.tasks')}}
-						<div class="badge badge-info">{{ \Illuminate\Support\Facades\Session::has('taskCount') ? \Illuminate\Support\Facades\Session::get('taskCount') : '' }}</div>
+						<div class="badge badge-info">{{ session()->has('taskCount') ? session()->get('taskCount') : '' }}</div>
 					</a>
 				</li>
 				<li class="nav-item-default apply-spin">
@@ -63,7 +63,7 @@
 					   data-toggle="tooltip"
 					   data-placement="bottom"
 					   title="{{trans('app.absences_tool')}}">{{trans('app.absences')}}
-						<div class="badge badge-info">{{ \Illuminate\Support\Facades\Session::has('absenceCount') ? \Illuminate\Support\Facades\Session::get('absenceCount') : '' }}</div>
+						<div class="badge badge-info">{{ session()->has('absenceCount') ? session()->get('absenceCount') : '' }}</div>
 					</a>
 				</li>
 				<li class="nav-item-default apply-spin">

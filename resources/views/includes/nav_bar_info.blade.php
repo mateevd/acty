@@ -3,15 +3,15 @@
 	<div class="flex-row justify-flex-start items-center pad-h-right-small">
 		<div class="logo-container @if(!auth()->check()) bg-clair-ultra @endif">
 			<img class="custom-infos-brand-logo"
-				src="{{ URL::to('/logos/'. \Illuminate\Support\Facades\Session::get('app_logo') ) }}">
+				src="{{ url()->to('/logos/'. session()->get('app_logo') ) }}">
 		</div>
 		<div class="custom-infos-brand wrap-no pad-v-small">
-			{{ \Illuminate\Support\Facades\Session::get('app_name') }}
+			{{ session()->get('app_name') }}
 		</div>
 	</div>
 
 	<div class="flex-row justify-center items-center custom-infos-page flex-wrap-no wrap-no pad-h-small pad-v-small">
-		<span class="pad-h-left-small">{{ucfirst(Request::route()->getName())}}</span>
+		<span class="pad-h-left-small">{{ucfirst(request()->route()->getName())}}</span>
 	</div>
 
 	<div class="flex-col pad-all-small">
@@ -22,7 +22,7 @@
 					{{session()->get('user_role')}}>{{session()->get('user_tri')}}>{{session()->get('user_service')}}
 					>{{session()->get('user_department')}}
 				@else
-					Connexion à {{ \Illuminate\Support\Facades\Session::get('app_name') }}
+					Connexion à {{ session()->get('app_name') }}
 				@endif
 			</span>
 

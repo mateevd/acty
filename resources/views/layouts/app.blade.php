@@ -10,7 +10,7 @@
 				@yield('content')
 			</div>
 
-			<button onclick="topFunction()" id="back_to_top" title="{{'Remonter'}}"><i
+			<button id="back_to_top" title="{{'Remonter'}}"><i
 						class="fas fa-arrow-up svg-huge style-glowing-text"></i></button>
 
 		</main>

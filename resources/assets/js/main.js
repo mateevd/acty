@@ -15,24 +15,22 @@ $(document).on('click', '.apply-spin', function () {
 
 $(document).ready(function () {
 
-	/** BTN BACK TO TOP **/
-	window.onscroll = function () {
-		scrollFunction()
-	};
-
+	window.onscroll = function () {scrollFunction()};
+	//Show btn after scroll
 	function scrollFunction() {
-		if (document.body.scrollTop > 10 || document.documentElement.scrollTop > 10) {
+		if (document.body.scrollTop > 150 || document.documentElement.scrollTop > 150) {
 			document.getElementById("back_to_top").style.display = "block";
 		} else {
 			document.getElementById("back_to_top").style.display = "none";
 		}
 	}
 
-// When the user clicks on the button, scroll to the top of the document
-	function topFunction() {
-		document.body.scrollTop = 0; // For Safari
-		document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-	}
+	//Back to top on click
+	var el = document.getElementById("back_to_top");
+	el.addEventListener("click", function (e) {
+			e.preventDefault();
+			$('html, body').animate({scrollTop:0}, '130');
+	}, false);
 
 	/** FLASHY MESSAGES**/
 	function flashy(message, link) {
