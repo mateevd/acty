@@ -41,6 +41,10 @@
 {{--SCRIPTS--}}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
+<script src="{{ asset('js/app.js') }}" defer></script>
+{{--<script src="https://kit.fontawesome.com/4d3b8c129c.js"></script>--}}
+<script src="{{ asset('js/main.js') }}" defer></script>
+<script src="{{ asset('js/idleTimer.min.js') }}" defer></script>
 {{--<script rel="script" src="{{ asset('fontAwsome/js/all.min.js') }}"></script>--}}
 
 {{--<script rel="script" src="{{ asset('bootstrap-sortable/Scripts/bootstrap-sortable.js') }}"></script>--}}
