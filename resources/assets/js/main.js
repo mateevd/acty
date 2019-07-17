@@ -14,6 +14,20 @@ $(document).on('click', '.apply-spin', function () {
 });
 
 $(document).ready(function () {
+	require('./absences.js');
+	require('./activities.js');
+	require('./charges.js');
+	require('./configs.js');
+	require('./dashboard.js');
+	require('./dragdrop.js');
+	require('./info.js');
+	require('./log_activity.js');
+	require('./login.js');
+	require('./phases.js');
+	require('./planning.js');
+	require('./tasks.js');
+	require('./users.js');
+	require('./work_days.js');
 
 	window.onscroll = function () {scrollFunction()};
 	//Show btn after scroll
