@@ -1,5 +1,4 @@
 $(function () {
-
 	// Available panels
 	// #users_list
 	var tab_active = localStorage.getItem('users-tab-active');
@@ -20,7 +19,8 @@ $(function () {
 });
 
 $(function () {
-	
+	var url = window.location.href;
+
 	$('a[data-toggle="tab"]').on( 'shown.bs.tab', function (e) {
 		$.fn.dataTable.tables( {visible: true, api: true} ).columns.adjust();
 	} );

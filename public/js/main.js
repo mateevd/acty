@@ -989,21 +989,20 @@ $(function () {
 	// Available panels
 	// #dashboard_user
 	// #dashboard_entity
-	// var tab_active = localStorage.getItem('dashboard-tab-active');
-	// if (tab_active) {
-	// 	$('#dashboard-tab-selection a[href="' + tab_active + '"]').tab('show');
-	// }
-	// else {
-	// 	$('#dashboard-tab-selection a[href="#dashboard_user"]').tab('show'); //default panel
-	// }
-	//
-	// $('#dashboard-tab-selection a[data-toggle="tab"]').click( function (e) {
-	// 	var _target = $(e.target).attr('href');
-	// 	if (!_target) _target = $(this).attr('href');
-	//
-	// 	localStorage.setItem('dashboard-tab-active', _target);
-	// 	$('#dashboard-tab-selection a[href="' + _target + '"]').tab('show');
-	// });
+	var tab_active = localStorage.getItem('dashboard-tab-active');
+	if (tab_active) {
+		$('#dashboard-tab-selection a[href="' + tab_active + '"]').tab('show');
+	} else {
+		$('#dashboard-tab-selection a[href="#dashboard_user"]').tab('show'); //default panel
+	}
+
+	$('#dashboard-tab-selection a[data-toggle="tab"]').click(function (e) {
+		var _target = $(e.target).attr('href');
+		if (!_target) _target = $(this).attr('href');
+
+		localStorage.setItem('dashboard-tab-active', _target);
+		$('#dashboard-tab-selection a[href="' + _target + '"]').tab('show');
+	});
 });
 
 /***/ }),
@@ -1552,21 +1551,20 @@ $(function () {
 
 	// Available panels
 	// #log_activity
-	// var tab_active = localStorage.getItem('log_activity-tab-active');
-	// if (tab_active) {
-	// 	$('#log_activity-tab-selection a[href="' + tab_active + '"]').tab('show');
-	// }
-	// else {
-	// 	$('#log_activity-tab-selection a[href="#log_activity"]').tab('show'); //default panel
-	// }
-	//
-	// $('#plannilog_activityng-tab-selection a[data-toggle="tab"]').click( function (e) {
-	// 	var _target = $(e.target).attr('href');
-	// 	if (!_target) _target = $(this).attr('href');
-	//
-	// 	localStorage.setItem('log_activity-tab-active', _target);
-	// 	$('#log_activity-tab-selection a[href="' + _target + '"]').tab('show');
-	// });
+	var tab_active = localStorage.getItem('log_activity-tab-active');
+	if (tab_active) {
+		$('#log_activity-tab-selection a[href="' + tab_active + '"]').tab('show');
+	} else {
+		$('#log_activity-tab-selection a[href="#log_activity"]').tab('show'); //default panel
+	}
+
+	$('#plannilog_activityng-tab-selection a[data-toggle="tab"]').click(function (e) {
+		var _target = $(e.target).attr('href');
+		if (!_target) _target = $(this).attr('href');
+
+		localStorage.setItem('log_activity-tab-active', _target);
+		$('#log_activity-tab-selection a[href="' + _target + '"]').tab('show');
+	});
 });
 
 /***/ }),
@@ -2256,7 +2254,6 @@ $(function () {
 /***/ (function(module, exports) {
 
 $(function () {
-
 	// Available panels
 	// #users_list
 	var tab_active = localStorage.getItem('users-tab-active');
@@ -2276,6 +2273,7 @@ $(function () {
 });
 
 $(function () {
+	var url = window.location.href;
 
 	$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 		$.fn.dataTable.tables({ visible: true, api: true }).columns.adjust();

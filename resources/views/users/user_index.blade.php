@@ -29,26 +29,7 @@
 			@endif
 		</ul>
 	</div>
-	<div class="navbar-tabs-select-date">
-		<form id="date_change" action="{{route('utilisateurs')}}" method="get" name="dateSelect" class="hide-submit">
-			<div class="">
-				{!! Form::selectMonth('monthSelect', $current_date->month ? $current_date->month : Carbon\Carbon::now()->month , 
-						["class"=>"drop-date-common drop-date-month"])!!}
-			</div>
-			<div class="">
-				{!! Form::selectRange('yearSelect', config('constants.start_year'), config('constants.end_year'), $current_date->year ? $current_date->year : Carbon\Carbon::now()->year, 
-						["class"=>"drop-date-common drop-date-year"])!!}
-			</div>
-			<div class="drop-date-submit">
-				<button id="btn-submit-form-date" class="drop-date-custom-btn"
-				        data-toggle="tooltip"
-				        data-placement="bottom"
-				        title="{{trans('app.ok')}}">
-					<i class="fas fa-arrow-circle-right"></i>
-				</button>
-			</div>
-		</form>
-	</div>
+	@include('includes.date_select')
 </div>
 
 {{--<div class="tab-content">--}}
@@ -168,27 +149,6 @@
 			</table>
 		{{--</div>--}}
 		<div class="text-center total-separator"></div>
-	{{--</div>--}}
-	{{--<table id="example" class="display" style="width:100%">--}}
-		{{--<thead>--}}
-		{{--<tr>--}}
-			{{--<th>user_first_name</th>--}}
-			{{--<th>user_last_name</th>--}}
-			{{--<th>user_login</th>--}}
-			{{--<th>user_role_name</th>--}}
-			{{--<th>user_email</th>--}}
-			{{--<th>user_status</th>--}}
-			{{--<th>user_trigramme</th>--}}
-			{{--<th>user_department_name</th>--}}
-			{{--<th>user_service_name</th>--}}
-			{{--<th>user_daily_cost</th>--}}
-		{{--</tr>--}}
-		{{--</thead>--}}
-		{{--<tbody></tbody>--}}
-	{{--</table>--}}
-{{--</div>	--}}
 @include('users.user_modals')
-
-
 
 @endsection
