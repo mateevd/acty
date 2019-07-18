@@ -1,5 +1,6 @@
 {
     "/js/main.js": "/js/main.js",
+    "/css/custom.css": "/css/custom.css",
     "/css/dragdrop.css": "/css/dragdrop.css",
     "/css/flashy.css": "/css/flashy.css",
     "/css/theme_01.css": "/css/theme_01.css",
@@ -7,20 +8,5 @@
     "/css/theme_03.css": "/css/theme_03.css",
     "/css/zoom_75.css": "/css/zoom_75.css",
     "/css/zoom_100.css": "/css/zoom_100.css",
-    "/css/zoom_125.css": "/css/zoom_125.css",
-    "/css/custom.css": "/css/custom.css",
-    "/js/work_days.js": "/js/work_days.js",
-    "/js/users.js": "/js/users.js",
-    "/js/tasks.js": "/js/tasks.js",
-    "/js/planning.js": "/js/planning.js",
-    "/js/phases.js": "/js/phases.js",
-    "/js/login.js": "/js/login.js",
-    "/js/log_activity.js": "/js/log_activity.js",
-    "/js/info.js": "/js/info.js",
-    "/js/dragdrop.js": "/js/dragdrop.js",
-    "/js/dashboard.js": "/js/dashboard.js",
-    "/js/configs.js": "/js/configs.js",
-    "/js/charges.js": "/js/charges.js",
-    "/js/activities.js": "/js/activities.js",
-    "/js/absences.js": "/js/absences.js"
+    "/css/zoom_125.css": "/css/zoom_125.css"
 }

@@ -20,6 +20,7 @@ $(function () {
 });
 
 $(function () {
+	
 	$('a[data-toggle="tab"]').on( 'shown.bs.tab', function (e) {
 		$.fn.dataTable.tables( {visible: true, api: true} ).columns.adjust();
 	} );
@@ -57,7 +58,7 @@ $(function () {
 			{
 				className: 'fa fa-plus svg-large btn-theme-fonce-leger',
 				action: function ( e, dt, node, config ) {
-					$("#createUser").modal("show");
+					jQuery("#createUser").modal("show");
 				}
 			},
 			{

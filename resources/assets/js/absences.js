@@ -3,21 +3,21 @@ $(function () {
 	// Available panels
 	// #absence_user
 	// #absence_direction
-	// var tab_active = localStorage.getItem('absences-tab-active');
-	// if (tab_active) {
-	// 	$('#absences-tab-selection a[href="' + tab_active + '"]').tab('show');
-	// }
-	// else {
-	// 	$('#absences-tab-selection a[href="#absence_user"]').tab('show'); //default panel
-	// }
-	//
-	// $('#absences-tab-selection a[data-toggle="tab"]').click( function (e) {
-	// 	var _target = $(e.target).attr('href');
-	// 	if (!_target) _target = $(this).attr('href');
-	//
-	// 	localStorage.setItem('absences-tab-active', _target);
-	// 	$('#absences-tab-selection a[href="' + _target + '"]').tab('show');
-	// });
+	var tab_active = localStorage.getItem('absences-tab-active');
+	if (tab_active) {
+		$('#absences-tab-selection a[href="' + tab_active + '"]').tab('show');
+	}
+	else {
+		$('#absences-tab-selection a[href="#absence_user"]').tab('show'); //default panel
+	}
+
+	$('#absences-tab-selection a[data-toggle="tab"]').click( function (e) {
+		var _target = $(e.target).attr('href');
+		if (!_target) _target = $(this).attr('href');
+
+		localStorage.setItem('absences-tab-active', _target);
+		$('#absences-tab-selection a[href="' + _target + '"]').tab('show');
+	});
 
 
 	//DAYS
