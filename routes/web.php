@@ -28,6 +28,10 @@ Auth::routes();
 	Route::get('add-to-log', 'HomeController@myTestAddToLog')->name('journal');
 	Route::get('logActivity', 'HomeController@logActivity')->name('journal');
 	
+	Route::get('/dateSelect', function(){
+		return redirect()->back();
+	})->middleware(\App\Http\Middleware\DateSelect::class);
+	
 	/*Projects Routes*/
 	Route::get('activities', ['uses' => 'ActivityController@index', 'as' => 'activités']);
 	Route::post('activities/create', ['uses' => 'ActivityController@create', 'as' => 'activities.create']);
