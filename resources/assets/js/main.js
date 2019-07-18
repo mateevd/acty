@@ -146,40 +146,40 @@ $(document).ready(function () {
 	});
 
 	/** SESSION TIMEOUT LOGOUT + REDIRECT**/
-	$(function () {
-		var session_timeout = process.env.MIX_SESSION_LIFETIME;
-
-		$.idleTimer(session_timeout * 60000);
-
-		$(document).on("idle.idleTimer", function () {
-			var dest_url = '/logout';
-			$.ajax({
-				type: "POST",
-				url: dest_url,
-				data: {_token: $('meta[name="csrf-token"]').attr('content')},
-				success: function () {
-					window.location.href = '/login';
-				}
-			});
-		});
-	});
-
-	//success message timeout
-	setTimeout(function () {
-		$('#successMessage').fadeOut('fast');
-	}, 5000);
+	// $(function () {
+	// 	var session_timeout = process.env.MIX_SESSION_LIFETIME;
+	//
+	// 	$.idleTimer(session_timeout * 60000);
+	//
+	// 	$(document).on("idle.idleTimer", function () {
+	// 		var dest_url = '/logout';
+	// 		$.ajax({
+	// 			type: "POST",
+	// 			url: dest_url,
+	// 			data: {_token: $('meta[name="csrf-token"]').attr('content')},
+	// 			success: function () {
+	// 				window.location.href = '/login';
+	// 			}
+	// 		});
+	// 	});
+	// });
+	//
+	// //success message timeout
+	// setTimeout(function () {
+	// 	$('#successMessage').fadeOut('fast');
+	// }, 5000);
 
 	//disable dropdown if att readonly
 	if ($(".select_false").attr("readonly")) {
 		$(".select_false").css("pointer-events", "none");
 	}
 
-	$(function () {
-		$('[data-toggle="popover"]').popover()
-	});
-	$('.popover-dismiss').popover({
-		trigger: 'focus'
-	});
+	// $(function () {
+	// 	$('[data-toggle="popover"]').popover()
+	// });
+	// $('.popover-dismiss').popover({
+	// 	trigger: 'focus'
+	// });
 
 	$(".readonly").keydown(function (e) {
 		e.preventDefault();

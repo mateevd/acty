@@ -32,7 +32,7 @@
 </div>
 
 {{--EDIT USER--}}
-@if(isset($user))
+{{--@if(isset($user))--}}
 	<div class="modal" id="editUser" tabindex="-1" role="dialog" aria-labelledby="{{trans('users.act_edit')}}">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -67,116 +67,116 @@
 			</div>
 		</div>
 	</div>
-@endif
+{{--@endif--}}
 
 {{--DEACTIVATE USER--}}
-@if(isset($user))
-	<div class="modal" id="terminateUser" tabindex="-1" role="dialog" aria-labelledby="{{trans('users.act_deactivate')}}">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-custom-title">{{trans('app.deactivate')}}</div>
-				<div class="modal-custom-libelle" id="user_name"></div>
-				<div class="modal-custom-description">{{trans('users.act_deactivate_confirm')}}</div>
-				<form action="{{route('users.terminate')}}" method="post"
-				      class="needs-validation hide-submit modal-custom-form" novalidate>
-					{{method_field('post')}}
-					{{csrf_field()}}
+{{--@if(isset($user))--}}
+	{{--<div class="modal" id="terminateUser" tabindex="-1" role="dialog" aria-labelledby="{{trans('users.act_deactivate')}}">--}}
+		{{--<div class="modal-dialog" role="document">--}}
+			{{--<div class="modal-content">--}}
+				{{--<div class="modal-custom-title">{{trans('app.deactivate')}}</div>--}}
+				{{--<div class="modal-custom-libelle" id="user_name"></div>--}}
+				{{--<div class="modal-custom-description">{{trans('users.act_deactivate_confirm')}}</div>--}}
+				{{--<form action="{{route('users.terminate')}}" method="post"--}}
+				      {{--class="needs-validation hide-submit modal-custom-form" novalidate>--}}
+					{{--{{method_field('post')}}--}}
+					{{--{{csrf_field()}}--}}
 
-					<input type="hidden" name="user_id" id="user_id" value="">
+					{{--<input type="hidden" name="user_id" id="user_id" value="">--}}
 
-					<div class="modal-custom-detail style-ids" id="user_id"></div>
-					<div class="modal-custom-bottom">
-						<button type="button" class="modal-custom-btn-horizontal" tabindex="100"
-						        data-dismiss="modal"
-						        data-toggle="tooltip"
-						        data-placement="bottom"
-						        title="{{trans('app.back')}}">
-							<i class="far fa-times-circle"></i>
-						</button>
-						<button class="modal-custom-btn-horizontal apply-spin" tabindex="101"
-						        data-toggle="tooltip"
-						        data-placement="bottom"
-						        title="{{trans('app.ok')}}">
-							<i class="far fa-check-circle"></i>
-						</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-@endif
+					{{--<div class="modal-custom-detail style-ids" id="user_id"></div>--}}
+					{{--<div class="modal-custom-bottom">--}}
+						{{--<button type="button" class="modal-custom-btn-horizontal" tabindex="100"--}}
+						        {{--data-dismiss="modal"--}}
+						        {{--data-toggle="tooltip"--}}
+						        {{--data-placement="bottom"--}}
+						        {{--title="{{trans('app.back')}}">--}}
+							{{--<i class="far fa-times-circle"></i>--}}
+						{{--</button>--}}
+						{{--<button class="modal-custom-btn-horizontal apply-spin" tabindex="101"--}}
+						        {{--data-toggle="tooltip"--}}
+						        {{--data-placement="bottom"--}}
+						        {{--title="{{trans('app.ok')}}">--}}
+							{{--<i class="far fa-check-circle"></i>--}}
+						{{--</button>--}}
+					{{--</div>--}}
+				{{--</form>--}}
+			{{--</div>--}}
+		{{--</div>--}}
+	{{--</div>--}}
+{{--@endif--}}
 
 {{--ACTIVATE USER--}}
-@if(isset($user))
-	<div class="modal" id="activateUser" tabindex="-1" role="dialog" aria-labelledby="{{trans('users.act_activate')}}">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-custom-title">{{trans('app.activate')}}</div>
-				<div class="modal-custom-libelle" id="user_name"></div>
-				<div class="modal-custom-description">{{trans('users.act_activate_confirm')}}</div>
+{{--@if(isset($user))--}}
+	{{--<div class="modal" id="activateUser" tabindex="-1" role="dialog" aria-labelledby="{{trans('users.act_activate')}}">--}}
+		{{--<div class="modal-dialog" role="document">--}}
+			{{--<div class="modal-content">--}}
+				{{--<div class="modal-custom-title">{{trans('app.activate')}}</div>--}}
+				{{--<div class="modal-custom-libelle" id="user_name"></div>--}}
+				{{--<div class="modal-custom-description">{{trans('users.act_activate_confirm')}}</div>--}}
 
-				<form action="{{route('users.activate')}}" method="post"
-				      class="needs-validation hide-submit modal-custom-form" novalidate>
-					{{method_field('post')}}
-					{{csrf_field()}}
+				{{--<form action="{{route('users.activate')}}" method="post"--}}
+				      {{--class="needs-validation hide-submit modal-custom-form" novalidate>--}}
+					{{--{{method_field('post')}}--}}
+					{{--{{csrf_field()}}--}}
 
-					<input type="hidden" name="user_id" id="user_id" value="">
+					{{--<input type="hidden" name="user_id" id="user_id" value="">--}}
 
-					<div class="modal-custom-detail style-ids" id="user_id"></div>
-					<div class="modal-custom-bottom">
-						<button type="button" class="modal-custom-btn-horizontal" tabindex="100"
-						        data-dismiss="modal"
-						        data-toggle="tooltip"
-						        data-placement="bottom"
-						        title="{{trans('app.back')}}">
-							<i class="far fa-times-circle"></i>
-						</button>
-						<button class="modal-custom-btn-horizontal apply-spin" tabindex="101"
-						        data-toggle="tooltip"
-						        data-placement="bottom"
-						        title="{{trans('app.ok')}}">
-							<i class="far fa-check-circle"></i>
-						</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-@endif
+					{{--<div class="modal-custom-detail style-ids" id="user_id"></div>--}}
+					{{--<div class="modal-custom-bottom">--}}
+						{{--<button type="button" class="modal-custom-btn-horizontal" tabindex="100"--}}
+						        {{--data-dismiss="modal"--}}
+						        {{--data-toggle="tooltip"--}}
+						        {{--data-placement="bottom"--}}
+						        {{--title="{{trans('app.back')}}">--}}
+							{{--<i class="far fa-times-circle"></i>--}}
+						{{--</button>--}}
+						{{--<button class="modal-custom-btn-horizontal apply-spin" tabindex="101"--}}
+						        {{--data-toggle="tooltip"--}}
+						        {{--data-placement="bottom"--}}
+						        {{--title="{{trans('app.ok')}}">--}}
+							{{--<i class="far fa-check-circle"></i>--}}
+						{{--</button>--}}
+					{{--</div>--}}
+				{{--</form>--}}
+			{{--</div>--}}
+		{{--</div>--}}
+	{{--</div>--}}
+{{--@endif--}}
 
 {{--DELETE USER--}}
-@if(isset($user))
-	<div class="modal" id="deleteUser" tabindex="-1" role="dialog" aria-labelledby="{{trans('users.act_delete')}}">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-custom-title">{{trans('app.delete')}}</div>
-				<div class="modal-custom-libelle" id="user_name"></div>
-				<div class="modal-custom-description">{{trans('users.act_delete_confirm')}}</div>
+{{--@if(isset($user))--}}
+	{{--<div class="modal" id="deleteUser" tabindex="-1" role="dialog" aria-labelledby="{{trans('users.act_delete')}}">--}}
+		{{--<div class="modal-dialog" role="document">--}}
+			{{--<div class="modal-content">--}}
+				{{--<div class="modal-custom-title">{{trans('app.delete')}}</div>--}}
+				{{--<div class="modal-custom-libelle" id="user_name"></div>--}}
+				{{--<div class="modal-custom-description">{{trans('users.act_delete_confirm')}}</div>--}}
 
-				<form action="{{route('users.destroy')}}" method="post" class="hide-submit modal-custom-form">
-					{{method_field('delete')}}
-					{{csrf_field()}}
+				{{--<form action="{{route('users.destroy')}}" method="post" class="hide-submit modal-custom-form">--}}
+					{{--{{method_field('delete')}}--}}
+					{{--{{csrf_field()}}--}}
 
-					<input type="hidden" name="user_id" id="user_id">
+					{{--<input type="hidden" name="user_id" id="user_id">--}}
 
-					<div class="modal-custom-detail style-ids" id="user_id"></div>
-					<div class="modal-custom-bottom">
-						<button type="button" class="modal-custom-btn-horizontal" tabindex="100"
-						        data-dismiss="modal"
-						        data-toggle="tooltip"
-						        data-placement="bottom"
-						        title="{{trans('app.back')}}">
-							<i class="far fa-times-circle"></i>
-						</button>
-						<button class="modal-custom-btn-horizontal apply-spin" tabindex="101"
-						        data-toggle="tooltip"
-						        data-placement="bottom"
-						        title="{{trans('app.ok')}}">
-							<i class="far fa-check-circle"></i>
-						</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-@endif
+					{{--<div class="modal-custom-detail style-ids" id="user_id"></div>--}}
+					{{--<div class="modal-custom-bottom">--}}
+						{{--<button type="button" class="modal-custom-btn-horizontal" tabindex="100"--}}
+						        {{--data-dismiss="modal"--}}
+						        {{--data-toggle="tooltip"--}}
+						        {{--data-placement="bottom"--}}
+						        {{--title="{{trans('app.back')}}">--}}
+							{{--<i class="far fa-times-circle"></i>--}}
+						{{--</button>--}}
+						{{--<button class="modal-custom-btn-horizontal apply-spin" tabindex="101"--}}
+						        {{--data-toggle="tooltip"--}}
+						        {{--data-placement="bottom"--}}
+						        {{--title="{{trans('app.ok')}}">--}}
+							{{--<i class="far fa-check-circle"></i>--}}
+						{{--</button>--}}
+					{{--</div>--}}
+				{{--</form>--}}
+			{{--</div>--}}
+		{{--</div>--}}
+	{{--</div>--}}
+{{--@endif--}}

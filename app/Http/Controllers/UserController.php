@@ -94,6 +94,48 @@
 			return redirect()->back();
 		}
 		
+		public function getData()
+		{
+			$users = DB::table('users')
+				->leftJoin('roles', 'roles.id', '=', 'users.role_id')
+				->leftJoin('services', 'services.id', '=', 'users.service_id')
+				->leftJoin('departments', 'departments.id', '=', 'users.department_id');
+			
+			switch ('users') {
+				case(auth()->user()->roles->name == (config('constants.role_directeur'))):
+					$users = $users->where('users.department_id', '=', auth::user()->department_id);
+					break;
+				
+				case(auth()->user()->roles->name == (config('constants.role_service'))):
+					$users = $users->where('users.service_id', '=', auth::user()->service_id);
+					break;
+			}
+			$users = $users->select('users.id as user_id',
+				'users.first_name as user_first_name',
+				'users.last_name as user_last_name',
+				'users.email as user_email',
+				'users.login as user_login',
+				'users.trigramme as user_trigramme',
+				'users.daily_cost as user_daily_cost',
+				'users.status as user_status',
+				'users.department_id as user_department_id',
+				'users.department_id as user_department_id2',
+				'users.service_id as user_service_id',
+				'users.service_id as user_service_id2',
+				'users.role_id as user_role_id',
+				'departments.name as user_department_name',
+				'services.name as user_service_name',
+				'roles.name as user_role_name')
+				->orderBy('users.last_name', 'asc')
+				->orderBy('users.first_name', 'asc')
+				->orderBy('users.login', 'asc')
+				->orderBy('users.department_id', 'asc')
+				->orderBy('users.service_id', 'asc')
+				->get();
+			
+			return response()->json(['data' => $users]);
+		}
+		
 		/**
 		 * @info Display a listing of the resource.
 		 *

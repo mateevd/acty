@@ -104,6 +104,7 @@ Auth::routes();
 //Users routes
 	Route::get('users', ['uses' => 'UserController@index', 'as' => 'utilisateurs']);
 	Route::get('users/show/', ['uses' => 'UserController@show', 'as' => 'users.show']);
+	Route::get('users/getData/', ['uses' => 'UserController@getData', 'as' => 'users.data']);
 	Route::post('users/create/', ['uses' => 'UserController@create', 'as' => 'users.create']);
 	Route::put('users/update/', ['uses' => 'UserController@update', 'as' => 'users.update']);
 	Route::delete('users/destroy/', ['uses' => 'UserController@destroy', 'as' => 'users.destroy']);

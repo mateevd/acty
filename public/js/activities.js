@@ -1,3 +1,81 @@
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "/";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 13);
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ 13:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(14);
+
+
+/***/ }),
+
+/***/ 14:
+/***/ (function(module, exports) {
+
 $(function () {
 	// Available panels
 	// #mine
@@ -29,31 +107,31 @@ $(function () {
 	});
 
 	$(document).on('change', '#type_charges', function () {
-			var selected_item = $('#type_charges').val();
+		var selected_item = $('#type_charges').val();
 
-			if (selected_item == 1) {
-				$('#exportTables #is_dates').attr('hidden', false);
-				$('#exportTables #charge_date_end').attr('required', true);
-				$('#exportTables #charge_date_start').attr('required', true);
-			} else {
-				$('#exportTables #is_dates').attr('hidden', true);
-				$('#exportTables #charge_date_end').attr('required', false);
-				$('#exportTables #charge_date_start').attr('required', false);
-			}
+		if (selected_item == 1) {
+			$('#exportTables #is_dates').attr('hidden', false);
+			$('#exportTables #charge_date_end').attr('required', true);
+			$('#exportTables #charge_date_start').attr('required', true);
+		} else {
+			$('#exportTables #is_dates').attr('hidden', true);
+			$('#exportTables #charge_date_end').attr('required', false);
+			$('#exportTables #charge_date_start').attr('required', false);
+		}
 	});
 
 	$(document).on('change', '#type_personal', function () {
-			var selected_item = $('#type_personal').val();
+		var selected_item = $('#type_personal').val();
 
-			if (selected_item == 1) {
-				$('#exportTables #is_dates_personal').attr('hidden', false);
-				$('#exportTables #personal_date_end').attr('required', true);
-				$('#exportTables #personal_date_start').attr('required', true);
-			} else {
-				$('#exportTables #is_dates_personal').attr('hidden', true);
-				$('#exportTables #personal_date_end').attr('required', false);
-				$('#exportTables #personal_date_start').attr('required', false);
-			}
+		if (selected_item == 1) {
+			$('#exportTables #is_dates_personal').attr('hidden', false);
+			$('#exportTables #personal_date_end').attr('required', true);
+			$('#exportTables #personal_date_start').attr('required', true);
+		} else {
+			$('#exportTables #is_dates_personal').attr('hidden', true);
+			$('#exportTables #personal_date_end').attr('required', false);
+			$('#exportTables #personal_date_start').attr('required', false);
+		}
 	});
 
 	$(document).on('click', '#createActivityButton', function () {
@@ -105,38 +183,35 @@ $(function () {
 
 				if (value.task_days_p != null || value.task_days_r) {
 					var val_task_days_p = value.task_days_p;
-					var val_task_days_r = value.task_days_r
+					var val_task_days_r = value.task_days_r;
 				} else {
 					var val_task_days_p = 0;
-					var val_task_days_r = 0
+					var val_task_days_r = 0;
 				}
 				var display_task_days_p = $.number(value.task_days_p, 3, ',', ' ');
 				var display_task_days_r = $.number(value.task_days_r, 3, ',', ' ');
 
 				var status_flag = '<tr>';
-				
-				if (cra_validate == false)
-				{
-					if (value.task_status == 1) var status_flag = '<tr class="tr-task-terminated">'; 
-					if (value.task_status == 2) var status_flag = '<tr class="tr-task-not-validated">'; 
-					if (value.task_status == 3) var status_flag = '<tr class="tr-task-validated">'; 
+
+				if (cra_validate == false) {
+					if (value.task_status == 1) var status_flag = '<tr class="tr-task-terminated">';
+					if (value.task_status == 2) var status_flag = '<tr class="tr-task-not-validated">';
+					if (value.task_status == 3) var status_flag = '<tr class="tr-task-validated">';
 				}
 
-				if (cra_validate == true)
-				{
-					if (value.task_status == 1) var status_flag = '<tr class="tr-task-terminated">'; 
-					if (value.task_status == 2) var status_flag = '<tr class="tr-task-not-validated">'; 
-					if (value.task_status == 3) var status_flag = '<tr class="tr-task-validated">'; 
+				if (cra_validate == true) {
+					if (value.task_status == 1) var status_flag = '<tr class="tr-task-terminated">';
+					if (value.task_status == 2) var status_flag = '<tr class="tr-task-not-validated">';
+					if (value.task_status == 3) var status_flag = '<tr class="tr-task-validated">';
 				}
 
-				
 				//create table + add values
 				var line1 = $('<td class="text-left wrap-yes action-btn-no-body truncate-details">').attr("data-value", value.task_phase_name).text(value.task_phase_name);
 
 				//Utile pour debug des cra, à enlever une fois que tout est testé
 				//var line2 = $('<td class="text-left wrap-yes truncate-large">').attr("data-value", value.task_name).text(value.task_name);
 				var line2 = $('<td class="text-left wrap-yes truncate-large">').attr("data-value", value.task_name).text(value.task_name.concat(' (').concat(value.task_status).concat(')'));
-				
+
 				var line3 = $('<td class="text-left wrap-yes truncate-details">').attr("data-value", value.task_full_name).text(value.task_full_name);
 				var line4 = $('<td class="text-left wrap-yes truncate-details">').attr("data-value", value.task_type_name).text(value.task_type_name);
 				var line5 = $('<td class="text-center wrap-yes truncate-small">').attr("data-value", value.task_start_p).text(display_task_start_p);
@@ -156,7 +231,6 @@ $(function () {
 		$('#deleteActivity #activity_id').val(_activity_id);
 		$("#deleteActivity #activity_id").text('id='.concat(_activity_id));
 		$('#deleteActivity #activity_name').text(_activity_name);
-
 	});
 
 	//TERMINATE
@@ -186,18 +260,17 @@ $(function () {
 		$('#privacyActivity #activity_name').text(activity_name);
 	});
 
-
-	$('#activity_create').submit(function(event) {
+	$('#activity_create').submit(function (event) {
 		//validation des champs
 		var fail = false;
 		var fail_log = '';
 		var name;
-		$('#activity_create').find( 'select, textarea, input' ).each(function(){
-			if(!$(this).prop('hidden')){
-				if( $(this).prop('required')){
+		$('#activity_create').find('select, textarea, input').each(function () {
+			if (!$(this).prop('hidden')) {
+				if ($(this).prop('required')) {
 					//c'est ici qu'on testera les valeurs et expressions régulières
 					//pour le moment on ne teste que si le champ est vide
-					if (!$(this).val() ) {
+					if (!$(this).val()) {
 						fail = true;
 						name = $(this).attr('name');
 						fail_log += name + " is required.\n";
@@ -207,27 +280,26 @@ $(function () {
 		});
 		console.log(fail_log);
 
-		if ( fail ) {
+		if (fail) {
 			//c'est nok, on annule le submit
 			event.preventDefault();
-		}
-		else {
+		} else {
 			//c'est ok, on lance l'affichage du loading
 			$(this).find('#btn-submit-form').addClass('apply-spin');
 		}
 	});
 
-	$('#activity_update').submit(function(event) {
+	$('#activity_update').submit(function (event) {
 		//validation des champs
 		var fail = false;
 		var fail_log = '';
 		var name;
-		$('#activity_update').find( 'select, textarea, input' ).each(function(){
-			if(!$(this).prop('hidden')){
-				if( $(this).prop('required')){
+		$('#activity_update').find('select, textarea, input').each(function () {
+			if (!$(this).prop('hidden')) {
+				if ($(this).prop('required')) {
 					//c'est ici qu'on testera les valeurs et expressions régulières
 					//pour le moment on ne teste que si le champ est vide
-					if (!$(this).val() ) {
+					if (!$(this).val()) {
 						fail = true;
 						name = $(this).attr('name');
 						fail_log += name + " is required.\n";
@@ -237,27 +309,26 @@ $(function () {
 		});
 		console.log(fail_log);
 
-		if ( fail ) {
+		if (fail) {
 			//c'est nok, on annule le submit
 			event.preventDefault();
-		}
-		else {
+		} else {
 			//c'est ok, on lance l'affichage du loading
 			$(this).find('#btn-submit-form').addClass('apply-spin');
 		}
 	});
 
-	$('#activity_export').submit(function(event) {
+	$('#activity_export').submit(function (event) {
 		//validation des champs
 		var fail = false;
 		var fail_log = '';
 		var name;
-		$('#activity_export').find( 'select, textarea, input' ).each(function(){
-			if(!$(this).prop('hidden')){
-				if( $(this).prop('required')){
+		$('#activity_export').find('select, textarea, input').each(function () {
+			if (!$(this).prop('hidden')) {
+				if ($(this).prop('required')) {
 					//c'est ici qu'on testera les valeurs et expressions régulières
 					//pour le moment on ne teste que si le champ est vide
-					if (!$(this).val() ) {
+					if (!$(this).val()) {
 						fail = true;
 						name = $(this).attr('name');
 						fail_log += name + " is required.\n";
@@ -267,130 +338,122 @@ $(function () {
 		});
 		console.log(fail_log);
 
-		if ( fail ) {
+		if (fail) {
 			//c'est nok, on annule le submit
 			event.preventDefault();
-		}
-		else {
+		} else {
 			//c'est ok, on lance l'affichage du loading
 			$(this).find('#btn-submit-form').addClass('apply-spin');
 		}
 	});
 
-	$('#charges_export').submit(function(event) {
+	$('#charges_export').submit(function (event) {
 		//validation des champs
 		var fail = false;
 		var fail_log = '';
 		var name;
-		$('#charges_export').find( 'select, textarea, input' ).each(function(){
-			if(!$(this).prop('hidden')){
-				if( $(this).prop('required')){
+		$('#charges_export').find('select, textarea, input').each(function () {
+			if (!$(this).prop('hidden')) {
+				if ($(this).prop('required')) {
 					//c'est ici qu'on testera les valeurs et expressions régulières
 
-					if ( $('#exportTables #charge_date_end').val() && $('#exportTables #charge_date_start').val() ){
+					if ($('#exportTables #charge_date_end').val() && $('#exportTables #charge_date_start').val()) {
 
-						if ( $('#exportTables #charge_date_end').val() < $('#exportTables #charge_date_start').val() ){
+						if ($('#exportTables #charge_date_end').val() < $('#exportTables #charge_date_start').val()) {
 							fail = true;
 							name = $('#exportTables #charge_date_end').attr('name');
 							name_start = $('#exportTables #charge_date_start').attr('name');
 							fail_log += name + " > " + name_start + ".\n";
 							$('#exportTables #date_error_gap').attr('hidden', false);
-						}
-						else {
+						} else {
 							$('#exportTables #date_error_gap').attr('hidden', true);
 						}
 					}
 
-					if (!$(this).val() ) {
+					if (!$(this).val()) {
 						fail = true;
 						name = $(this).attr('name');
 						fail_log += name + " is required.\n";
-
 					}
 				}
 			}
 		});
 		console.log(fail_log);
 
-		if ( fail ) {
+		if (fail) {
 			//c'est nok, on annule le submit
 			event.preventDefault();
-		}
-		else {
+		} else {
 			//c'est ok, on lance l'affichage du loading
 			$(this).find('#btn-submit-form').addClass('apply-spin');
 			$('#exportTables').modal('hide');
 		}
 	});
 
-	$('#personal_export').submit(function(event) {
+	$('#personal_export').submit(function (event) {
 		//validation des champs
 		var fail = false;
 		var fail_log = '';
 		var name;
-		$('#personal_export').find( 'select, textarea, input' ).each(function(){
-			if(!$(this).prop('hidden')){
-				if( $(this).prop('required')){
+		$('#personal_export').find('select, textarea, input').each(function () {
+			if (!$(this).prop('hidden')) {
+				if ($(this).prop('required')) {
 					//c'est ici qu'on testera les valeurs et expressions régulières
 
-					if ( $('#exportTables #personal_date_end').val() && $('#exportTables #personal_date_start').val() ){
+					if ($('#exportTables #personal_date_end').val() && $('#exportTables #personal_date_start').val()) {
 
-						if ( $('#exportTables #personal_date_end').val() < $('#exportTables #personal_date_start').val() ){
+						if ($('#exportTables #personal_date_end').val() < $('#exportTables #personal_date_start').val()) {
 							fail = true;
 							name = $('#exportTables #personal_date_end').attr('name');
 							name_start = $('#exportTables #personal_date_start').attr('name');
 							fail_log += name + " > " + name_start + ".\n";
 							$('#exportTables #date_error_gap_personal').attr('hidden', false);
-						}
-						else {
+						} else {
 							$('#exportTables #date_error_gap_personal').attr('hidden', true);
 						}
 					}
 
-					if (!$(this).val() ) {
+					if (!$(this).val()) {
 						fail = true;
 						name = $(this).attr('name');
 						fail_log += name + " is required.\n";
-
 					}
 				}
 			}
 		});
 		console.log(fail_log);
 
-		if ( fail ) {
+		if (fail) {
 			//c'est nok, on annule le submit
 			event.preventDefault();
-		}
-		else {
+		} else {
 			//c'est ok, on lance l'affichage du loading
 			$(this).find('#btn-submit-form').addClass('apply-spin');
 			$('#exportTables').modal('hide');
 		}
 	});
-
 });
 
+//bootstrap input validation
+(function () {
+	'use strict';
 
-	//bootstrap input validation
-	(function () {
-		'use strict';
-		window.addEventListener('load', function () {
-			// Fetch all the forms we want to apply custom Bootstrap validation styles to
-			var forms = document.getElementsByClassName('needs-validation');
-			// Loop over them and prevent submission
-			var validation = Array.prototype.filter.call(forms, function (form) {
-				form.addEventListener('submit', function (event) {
-					if (form.checkValidity() === false) {
-						event.preventDefault();
-						event.stopPropagation();
-					}
-					form.classList.add('was-validated');
-				}, false);
-			});
-		}, false);
-	})();
+	window.addEventListener('load', function () {
+		// Fetch all the forms we want to apply custom Bootstrap validation styles to
+		var forms = document.getElementsByClassName('needs-validation');
+		// Loop over them and prevent submission
+		var validation = Array.prototype.filter.call(forms, function (form) {
+			form.addEventListener('submit', function (event) {
+				if (form.checkValidity() === false) {
+					event.preventDefault();
+					event.stopPropagation();
+				}
+				form.classList.add('was-validated');
+			}, false);
+		});
+	}, false);
+})();
 
+/***/ })
 
-
-	
+/******/ });

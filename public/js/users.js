@@ -1,3 +1,81 @@
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "/";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 35);
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ 35:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(36);
+
+
+/***/ }),
+
+/***/ 36:
+/***/ (function(module, exports) {
+
 $(function () {
 
 	// Available panels
@@ -5,12 +83,11 @@ $(function () {
 	var tab_active = localStorage.getItem('users-tab-active');
 	if (tab_active) {
 		$('#users-tab-selection a[href="' + tab_active + '"]').tab('show');
-	}
-	else {
+	} else {
 		$('#users-tab-selection a[href="#users_list"]').tab('show'); //default panel
 	}
 
-	$('#users-tab-selection a[data-toggle="tab"]').click( function (e) {
+	$('#users-tab-selection a[data-toggle="tab"]').click(function (e) {
 		var _target = $(e.target).attr('href');
 		if (!_target) _target = $(this).attr('href');
 
@@ -20,16 +97,16 @@ $(function () {
 });
 
 $(function () {
-	$('a[data-toggle="tab"]').on( 'shown.bs.tab', function (e) {
-		$.fn.dataTable.tables( {visible: true, api: true} ).columns.adjust();
-	} );
+	$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+		$.fn.dataTable.tables({ visible: true, api: true }).columns.adjust();
+	});
 
-	$('#example thead th').each( function () {
+	$('#example thead th').each(function () {
 		var title = $(this).text();
-		$(this).html( '<input style="z-index: 99999" type="text" placeholder="Search '+title+'" />' );
-	} );
+		$(this).html('<input style="z-index: 99999" type="text" placeholder="Search ' + title + '" />');
+	});
 
-	var table = $('#example').DataTable( {
+	var table = $('#example').DataTable({
 		"processing": true,
 		"paginate": false,
 		// "responsive": true,
@@ -40,74 +117,54 @@ $(function () {
 			"url": "http://localhost:8000/users/getData",
 			"type": "GET"
 		},
-		"columns": [
-			{"data": "user_last_name"},
-			{"data": "user_first_name"},
-			{"data": "user_login"},
-			{"data": "user_role_name"},
-			{"data": "user_email"},
-			{"data": "user_status"},
-			{"data": "user_trigramme"},
-			{"data": "user_department_name"},
-			{"data": "user_service_name"},
-			{"data": "user_daily_cost"}
-		],
+		"columns": [{ "data": "user_last_name" }, { "data": "user_first_name" }, { "data": "user_login" }, { "data": "user_role_name" }, { "data": "user_email" }, { "data": "user_status" }, { "data": "user_trigramme" }, { "data": "user_department_name" }, { "data": "user_service_name" }, { "data": "user_daily_cost" }],
 		dom: 'Bfrtip',
-		buttons: [
-			{
-				className: 'fa fa-plus svg-large btn-theme-fonce-leger',
-				action: function ( e, dt, node, config ) {
-					$("#createUser").modal("show");
-				}
+		buttons: [{
+			className: 'fa fa-plus svg-large btn-theme-fonce-leger',
+			action: function action(e, dt, node, config) {
+				$("#createUser").modal("show");
+			}
+		}, {
+			className: 'fa fa-edit svg-small btn-theme-clair-fort',
+			action: function action(e, dt, node, config) {
+				var rowData = table.rows({ selected: true }).data()[0];
+				// now do what you need to do wht the row data
+				$('#editUser').modal('show');
+
+				// var data = JSON.parse($(this).data('user'));
+				$("#editUser #user_name").text(rowData.user_first_name + " " + rowData.user_last_name);
+				$("#editUser #user_id").text('id='.concat(rowData.user_id));
+
+				var current_direction = rowData.user_department_id2;
+				// var current_service = data.user_service_id2;
+
+				$.each(rowData, function (key, value) {
+					$('#editUser #' + key).val(value);
+				});
+
+				makeServicesList_Edit(current_direction);
 			},
-			{
-				className: 'fa fa-edit svg-small btn-theme-clair-fort',
-				action: function ( e, dt, node, config ) {
-					var rowData = table.rows( { selected: true } ).data()[0];
-					// now do what you need to do wht the row data
-					$('#editUser').modal('show');
+			enabled: false
 
-					// var data = JSON.parse($(this).data('user'));
-					$("#editUser #user_name").text(rowData.user_first_name + " " + rowData.user_last_name);
-					$("#editUser #user_id").text('id='.concat(rowData.user_id));
-
-					var current_direction = rowData.user_department_id2;
-					// var current_service = data.user_service_id2;
-
-					$.each(rowData, function (key, value) {
-						$('#editUser #' + key).val(value);
-					});
-
-					makeServicesList_Edit(current_direction);
-
-				},
-				enabled:false,
-
-			},
-
-		],
-		initComplete: function () {
-			this.api().columns().every( function () {
+		}],
+		initComplete: function initComplete() {
+			this.api().columns().every(function () {
 				var that = this;
 
-				$( 'input', this.header() ).on( 'keyup change', function () {
+				$('input', this.header()).on('keyup change', function () {
 
 					if (that.search() !== this.value) {
-						that.search(this.value)
-							.draw();
+						that.search(this.value).draw();
 					}
 				});
 			});
 		}
 
-	} );
-	table.on( 'select deselect', function () {
-		var selectedRows = table.rows( { selected: true } ).count();
-		table.button( 1 ).enable( selectedRows === 1 );
 	});
-
-
-
+	table.on('select deselect', function () {
+		var selectedRows = table.rows({ selected: true }).count();
+		table.button(1).enable(selectedRows === 1);
+	});
 
 	//init modal fields of createUser
 	$(document).on('click', '#createUserButton', function () {
@@ -172,27 +229,25 @@ $(function () {
 
 	//Function dropdown for user crud
 	//Enable user services select if department is selected
-	$('#user_department_id').change(() => {
+	$('#user_department_id').change(function () {
 		$('#user_service_id').prop('disabled', false);
 
 		if ($("#user_department_id option:selected").text() === '') {
 			$('#user_service_id').empty();
 			$('#user_service_id').prop('disabled', true);
-		}
-		else {
+		} else {
 			var selected_direction = parseInt($("#user_department_id option:selected")[0].value);
 			makeServicesList_Create(selected_direction);
 		}
 	});
 
-	$('#user_department_id2').change(() => {
+	$('#user_department_id2').change(function () {
 		$('#user_service_id2').prop('disabled', false);
 
 		if ($("#user_department_id2 option:selected").text() === '') {
 			$('#user_service_id2').empty();
 			$('#user_service_id2').prop('disabled', true);
-		}
-		else {
+		} else {
 			var selected_direction = parseInt($("#user_department_id2 option:selected")[0].value);
 			makeServicesList_Edit(selected_direction);
 		}
@@ -212,7 +267,6 @@ $(function () {
 		});
 	}
 
-
 	function makeServicesList_Edit(user_department_id) {
 		$.getJSON('/users/getServicesList/' + user_department_id, function (data) {
 
@@ -222,8 +276,7 @@ $(function () {
 			list_service.empty(); // remove old options
 
 			$.each(data.user_service_id, function (key, value) {
-				if (key == current_service) list_service.append($("<option selected></option>").attr("value", key).text(value));
-				else list_service.append($("<option></option>").attr("value", key).text(value));
+				if (key == current_service) list_service.append($("<option selected></option>").attr("value", key).text(value));else list_service.append($("<option></option>").attr("value", key).text(value));
 			});
 		});
 	}
@@ -237,14 +290,14 @@ $(function () {
 		$('#editUser #user_service_id2').attr('disabled', false);
 	});
 
-	$('#user_create').submit(function(event) {
+	$('#user_create').submit(function (event) {
 		//validation des champs
 		var fail = false;
 		var fail_log = '';
 		var name;
-		$('#user_create').find( 'select, textarea, input' ).each(function(){
-			if(!$(this).prop('hidden')){
-				if( $(this).prop('required')){
+		$('#user_create').find('select, textarea, input').each(function () {
+			if (!$(this).prop('hidden')) {
+				if ($(this).prop('required')) {
 					//c'est ici qu'on testera les valeurs et expressions régulières
 					//pour le moment on ne teste que si le champ est vide
 
@@ -253,16 +306,16 @@ $(function () {
 					//Mais en attendant, c'est la meilleure solution
 					$('#createUser #user_department_id').attr('disabled', true);
 
-					if ($(this).attr('name') == "user_email" ) {
+					if ($(this).attr('name') == "user_email") {
 						var current_email = $(this).val();
-						if ( (current_email.length <= 3) || ( (current_email.indexOf("@") + 1) <= 1) || ( (current_email.indexOf("@") + 1) >= current_email.length) ) {
+						if (current_email.length <= 3 || current_email.indexOf("@") + 1 <= 1 || current_email.indexOf("@") + 1 >= current_email.length) {
 							fail = true;
 							name = $(this).attr('name');
 							fail_log += name + " is required.\n";
 						}
 					}
 
-					if (!$(this).val() ) {
+					if (!$(this).val()) {
 						fail = true;
 						name = $(this).attr('name');
 						fail_log += name + " is required.\n";
@@ -272,11 +325,10 @@ $(function () {
 		});
 		console.log(fail_log);
 
-		if ( fail ) {
+		if (fail) {
 			//c'est nok, on annule le submit
 			event.preventDefault();
-		}
-		else {
+		} else {
 			//c'est ok, on lance l'affichage du loading
 			$('#createUser #user_department_id').attr('disabled', false);
 			$('#createUser #user_service_id').attr('disabled', false);
@@ -285,14 +337,14 @@ $(function () {
 		}
 	});
 
-	$('#user_update').submit(function(event) {
+	$('#user_update').submit(function (event) {
 		//validation des champs
 		var fail = false;
 		var fail_log = '';
 		var name;
-		$('#user_update').find( 'select, textarea, input' ).each(function(){
-			if(!$(this).prop('hidden')){
-				if( $(this).prop('required')){
+		$('#user_update').find('select, textarea, input').each(function () {
+			if (!$(this).prop('hidden')) {
+				if ($(this).prop('required')) {
 					//c'est ici qu'on testera les valeurs et expressions régulières
 					//pour le moment on ne teste que si le champ est vide
 
@@ -301,16 +353,16 @@ $(function () {
 					//Mais en attendant, c'est la meilleure solution
 					$('#editUser #user_department_id2').attr('disabled', true);
 
-					if ($(this).attr('name') == "user_email" ) {
+					if ($(this).attr('name') == "user_email") {
 						var current_email = $(this).val();
-						if ( (current_email.length <= 3) || ( (current_email.indexOf("@") + 1) <= 1) || ( (current_email.indexOf("@") + 1) >= current_email.length) ) {
+						if (current_email.length <= 3 || current_email.indexOf("@") + 1 <= 1 || current_email.indexOf("@") + 1 >= current_email.length) {
 							fail = true;
 							name = $(this).attr('name');
 							fail_log += name + " is required.\n";
 						}
 					}
 
-					if (!$(this).val() ) {
+					if (!$(this).val()) {
 						fail = true;
 						name = $(this).attr('name');
 						fail_log += name + " is required.\n";
@@ -320,16 +372,18 @@ $(function () {
 		});
 		console.log(fail_log);
 
-		if ( fail ) {
+		if (fail) {
 			//c'est nok, on annule le submit
 			event.preventDefault();
-		}
-		else {
+		} else {
 			//c'est ok, on lance l'affichage du loading
 			$('#editUser #user_department_id2').attr('disabled', false);
 			$('#editUser #user_service_id2').attr('disabled', false);
 			$(this).find('#btn-submit-form').addClass('apply-spin');
 		}
 	});
-
 });
+
+/***/ })
+
+/******/ });

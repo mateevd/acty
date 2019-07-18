@@ -236,40 +236,40 @@ $(document).ready(function () {
 	});
 
 	/** SESSION TIMEOUT LOGOUT + REDIRECT**/
-	$(function () {
-		var session_timeout = "120";
-
-		$.idleTimer(session_timeout * 60000);
-
-		$(document).on("idle.idleTimer", function () {
-			var dest_url = '/logout';
-			$.ajax({
-				type: "POST",
-				url: dest_url,
-				data: { _token: $('meta[name="csrf-token"]').attr('content') },
-				success: function success() {
-					window.location.href = '/login';
-				}
-			});
-		});
-	});
-
-	//success message timeout
-	setTimeout(function () {
-		$('#successMessage').fadeOut('fast');
-	}, 5000);
+	// $(function () {
+	// 	var session_timeout = process.env.MIX_SESSION_LIFETIME;
+	//
+	// 	$.idleTimer(session_timeout * 60000);
+	//
+	// 	$(document).on("idle.idleTimer", function () {
+	// 		var dest_url = '/logout';
+	// 		$.ajax({
+	// 			type: "POST",
+	// 			url: dest_url,
+	// 			data: {_token: $('meta[name="csrf-token"]').attr('content')},
+	// 			success: function () {
+	// 				window.location.href = '/login';
+	// 			}
+	// 		});
+	// 	});
+	// });
+	//
+	// //success message timeout
+	// setTimeout(function () {
+	// 	$('#successMessage').fadeOut('fast');
+	// }, 5000);
 
 	//disable dropdown if att readonly
 	if ($(".select_false").attr("readonly")) {
 		$(".select_false").css("pointer-events", "none");
 	}
 
-	$(function () {
-		$('[data-toggle="popover"]').popover();
-	});
-	$('.popover-dismiss').popover({
-		trigger: 'focus'
-	});
+	// $(function () {
+	// 	$('[data-toggle="popover"]').popover()
+	// });
+	// $('.popover-dismiss').popover({
+	// 	trigger: 'focus'
+	// });
 
 	$(".readonly").keydown(function (e) {
 		e.preventDefault();
@@ -369,20 +369,22 @@ $(function () {
 	// Available panels
 	// #absence_user
 	// #absence_direction
-	var tab_active = localStorage.getItem('absences-tab-active');
-	if (tab_active) {
-		$('#absences-tab-selection a[href="' + tab_active + '"]').tab('show');
-	} else {
-		$('#absences-tab-selection a[href="#absence_user"]').tab('show'); //default panel
-	}
+	// var tab_active = localStorage.getItem('absences-tab-active');
+	// if (tab_active) {
+	// 	$('#absences-tab-selection a[href="' + tab_active + '"]').tab('show');
+	// }
+	// else {
+	// 	$('#absences-tab-selection a[href="#absence_user"]').tab('show'); //default panel
+	// }
+	//
+	// $('#absences-tab-selection a[data-toggle="tab"]').click( function (e) {
+	// 	var _target = $(e.target).attr('href');
+	// 	if (!_target) _target = $(this).attr('href');
+	//
+	// 	localStorage.setItem('absences-tab-active', _target);
+	// 	$('#absences-tab-selection a[href="' + _target + '"]').tab('show');
+	// });
 
-	$('#absences-tab-selection a[data-toggle="tab"]').click(function (e) {
-		var _target = $(e.target).attr('href');
-		if (!_target) _target = $(this).attr('href');
-
-		localStorage.setItem('absences-tab-active', _target);
-		$('#absences-tab-selection a[href="' + _target + '"]').tab('show');
-	});
 
 	//DAYS
 	$(document).on('click', '#addAbsenceButton', function () {
@@ -522,20 +524,21 @@ $(function () {
 	// #mine
 	// #ongoing
 	// #terminated
-	var tab_active = localStorage.getItem('activities-tab-active');
-	if (tab_active) {
-		$('#activities-tab-selection a[href="' + tab_active + '"]').tab('show');
-	} else {
-		$('#activities-tab-selection a[href="#mine"]').tab('show'); //default panel
-	}
-
-	$('#activities-tab-selection a[data-toggle="tab"]').click(function (e) {
-		var _target = $(e.target).attr('href');
-		if (!_target) _target = $(this).attr('href');
-
-		localStorage.setItem('activities-tab-active', _target);
-		$('#activities-tab-selection a[href="' + _target + '"]').tab('show');
-	});
+	// var tab_active = localStorage.getItem('activities-tab-active');
+	// if (tab_active) {
+	// 	$('#activities-tab-selection a[href="' + tab_active + '"]').tab('show');
+	// }
+	// else {
+	// 	$('#activities-tab-selection a[href="#mine"]').tab('show'); //default panel
+	// }
+	//
+	// $('#activities-tab-selection a[data-toggle="tab"]').click( function (e) {
+	// 	var _target = $(e.target).attr('href');
+	// 	if (!_target) _target = $(this).attr('href');
+	//
+	// 	localStorage.setItem('activities-tab-active', _target);
+	// 	$('#activities-tab-selection a[href="' + _target + '"]').tab('show');
+	// });
 
 	$(document).on('click', '#downloadButton', function () {
 		$('#exportTables').find('#type_activities').val("0");
@@ -950,25 +953,26 @@ $(document).on('click', '#detailsChargesButton', function () {
 	});
 });
 
-$(function () {
-	// Available panels
-	// #absence_user
-	// #absence_direction
-	var tab_active = localStorage.getItem('charges-tab-active');
-	if (tab_active) {
-		$('#charges-tab-selection a[href="' + tab_active + '"]').tab('show');
-	} else {
-		$('#charges-tab-selection a[href="#charges_all"]').tab('show'); //default panel
-	}
-
-	$('#charges-tab-selection a[data-toggle="tab"]').click(function (e) {
-		var _target = $(e.target).attr('href');
-		if (!_target) _target = $(this).attr('href');
-
-		localStorage.setItem('charges-tab-active', _target);
-		$('#charges-tab-selection a[href="' + _target + '"]').tab('show');
-	});
-});
+// $(function () {
+// 	// Available panels
+// 	// #absence_user
+// 	// #absence_direction
+// 	var tab_active = localStorage.getItem('charges-tab-active');
+// 	if (tab_active) {
+// 		$('#charges-tab-selection a[href="' + tab_active + '"]').tab('show');
+// 	}
+// 	else {
+// 		$('#charges-tab-selection a[href="#charges_all"]').tab('show'); //default panel
+// 	}
+//
+// 	$('#charges-tab-selection a[data-toggle="tab"]').click( function (e) {
+// 		var _target = $(e.target).attr('href');
+// 		if (!_target) _target = $(this).attr('href');
+//
+// 		localStorage.setItem('charges-tab-active', _target);
+// 		$('#charges-tab-selection a[href="' + _target + '"]').tab('show');
+// 	});
+// });
 
 /***/ }),
 /* 17 */,
@@ -1046,20 +1050,21 @@ $(function () {
 	// Available panels
 	// #dashboard_user
 	// #dashboard_entity
-	var tab_active = localStorage.getItem('dashboard-tab-active');
-	if (tab_active) {
-		$('#dashboard-tab-selection a[href="' + tab_active + '"]').tab('show');
-	} else {
-		$('#dashboard-tab-selection a[href="#dashboard_user"]').tab('show'); //default panel
-	}
-
-	$('#dashboard-tab-selection a[data-toggle="tab"]').click(function (e) {
-		var _target = $(e.target).attr('href');
-		if (!_target) _target = $(this).attr('href');
-
-		localStorage.setItem('dashboard-tab-active', _target);
-		$('#dashboard-tab-selection a[href="' + _target + '"]').tab('show');
-	});
+	// var tab_active = localStorage.getItem('dashboard-tab-active');
+	// if (tab_active) {
+	// 	$('#dashboard-tab-selection a[href="' + tab_active + '"]').tab('show');
+	// }
+	// else {
+	// 	$('#dashboard-tab-selection a[href="#dashboard_user"]').tab('show'); //default panel
+	// }
+	//
+	// $('#dashboard-tab-selection a[data-toggle="tab"]').click( function (e) {
+	// 	var _target = $(e.target).attr('href');
+	// 	if (!_target) _target = $(this).attr('href');
+	//
+	// 	localStorage.setItem('dashboard-tab-active', _target);
+	// 	$('#dashboard-tab-selection a[href="' + _target + '"]').tab('show');
+	// });
 });
 
 /***/ }),
@@ -1584,20 +1589,22 @@ $(function () {
 	// #task_types
 	// #open_days
 	// #change_log
-	var tab_active = localStorage.getItem('info-tab-active');
-	if (tab_active) {
-		$('#info-tab-selection a[href="' + tab_active + '"]').tab('show');
-	} else {
-		$('#info-tab-selection a[href="#task_types"]').tab('show'); //default panel
-	}
+	// var tab_active = localStorage.getItem('info-tab-active');
+	// if (tab_active) {
+	// 	$('#info-tab-selection a[href="' + tab_active + '"]').tab('show');
+	// }
+	// else {
+	// 	$('#info-tab-selection a[href="#task_types"]').tab('show'); //default panel
+	// }
+	//
+	// $('#info-tab-selection a[data-toggle="tab"]').click( function (e) {
+	// 	var _target = $(e.target).attr('href');
+	// 	if (!_target) _target = $(this).attr('href');
+	//
+	// 	localStorage.setItem('info-tab-active', _target);
+	// 	$('#info-tab-selection a[href="' + _target + '"]').tab('show');
+	// });
 
-	$('#info-tab-selection a[data-toggle="tab"]').click(function (e) {
-		var _target = $(e.target).attr('href');
-		if (!_target) _target = $(this).attr('href');
-
-		localStorage.setItem('info-tab-active', _target);
-		$('#info-tab-selection a[href="' + _target + '"]').tab('show');
-	});
 });
 
 /***/ }),
@@ -1609,20 +1616,21 @@ $(function () {
 
 	// Available panels
 	// #log_activity
-	var tab_active = localStorage.getItem('log_activity-tab-active');
-	if (tab_active) {
-		$('#log_activity-tab-selection a[href="' + tab_active + '"]').tab('show');
-	} else {
-		$('#log_activity-tab-selection a[href="#log_activity"]').tab('show'); //default panel
-	}
-
-	$('#plannilog_activityng-tab-selection a[data-toggle="tab"]').click(function (e) {
-		var _target = $(e.target).attr('href');
-		if (!_target) _target = $(this).attr('href');
-
-		localStorage.setItem('log_activity-tab-active', _target);
-		$('#log_activity-tab-selection a[href="' + _target + '"]').tab('show');
-	});
+	// var tab_active = localStorage.getItem('log_activity-tab-active');
+	// if (tab_active) {
+	// 	$('#log_activity-tab-selection a[href="' + tab_active + '"]').tab('show');
+	// }
+	// else {
+	// 	$('#log_activity-tab-selection a[href="#log_activity"]').tab('show'); //default panel
+	// }
+	//
+	// $('#plannilog_activityng-tab-selection a[data-toggle="tab"]').click( function (e) {
+	// 	var _target = $(e.target).attr('href');
+	// 	if (!_target) _target = $(this).attr('href');
+	//
+	// 	localStorage.setItem('log_activity-tab-active', _target);
+	// 	$('#log_activity-tab-selection a[href="' + _target + '"]').tab('show');
+	// });
 });
 
 /***/ }),
@@ -1914,20 +1922,21 @@ $(function () {
 	// Available panels
 	// #planning
 	// #resume
-	var tab_active = localStorage.getItem('planning-tab-active');
-	if (tab_active) {
-		$('#planning-tab-selection a[href="' + tab_active + '"]').tab('show');
-	} else {
-		$('#planning-tab-selection a[href="#planning"]').tab('show'); //default panel
-	}
-
-	$('#planning-tab-selection a[data-toggle="tab"]').click(function (e) {
-		var _target = $(e.target).attr('href');
-		if (!_target) _target = $(this).attr('href');
-
-		localStorage.setItem('planning-tab-active', _target);
-		$('#planning-tab-selection a[href="' + _target + '"]').tab('show');
-	});
+	// var tab_active = localStorage.getItem('planning-tab-active');
+	// if (tab_active) {
+	// 	$('#planning-tab-selection a[href="' + tab_active + '"]').tab('show');
+	// }
+	// else {
+	// 	$('#planning-tab-selection a[href="#planning"]').tab('show'); //default panel
+	// }
+	//
+	// $('#planning-tab-selection a[data-toggle="tab"]').click( function (e) {
+	// 	var _target = $(e.target).attr('href');
+	// 	if (!_target) _target = $(this).attr('href');
+	//
+	// 	localStorage.setItem('planning-tab-active', _target);
+	// 	$('#planning-tab-selection a[href="' + _target + '"]').tab('show');
+	// });
 });
 
 /***/ }),
@@ -1940,20 +1949,21 @@ $(function () {
 	// Available panels
 	// #mois_selectionne
 	// #mois_anterieurs
-	var tab_active = localStorage.getItem('tasks-tab-active');
-	if (tab_active) {
-		$('#tasks-tab-selection a[href="' + tab_active + '"]').tab('show');
-	} else {
-		$('#tasks-tab-selection a[href="#tasks_user"]').tab('show'); //default panel
-	}
-
-	$('#tasks-tab-selection a[data-toggle="tab"]').click(function (e) {
-		var _target = $(e.target).attr('href');
-		if (!_target) _target = $(this).attr('href');
-
-		localStorage.setItem('tasks-tab-active', _target);
-		$('#tasks-tab-selection a[href="' + _target + '"]').tab('show');
-	});
+	// var tab_active = localStorage.getItem('tasks-tab-active');
+	// if (tab_active) {
+	// 	$('#tasks-tab-selection a[href="' + tab_active + '"]').tab('show');
+	// }
+	// else {
+	// 	$('#tasks-tab-selection a[href="#tasks_user"]').tab('show'); //default panel
+	// }
+	//
+	// $('#tasks-tab-selection a[data-toggle="tab"]').click( function (e) {
+	// 	var _target = $(e.target).attr('href');
+	// 	if (!_target) _target = $(this).attr('href');
+	//
+	// 	localStorage.setItem('tasks-tab-active', _target);
+	// 	$('#tasks-tab-selection a[href="' + _target + '"]').tab('show');
+	// });
 
 	//Create task
 	$(document).on('click', '#createTaskBtn', function () {
@@ -2335,6 +2345,75 @@ $(function () {
 });
 
 $(function () {
+	$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+		$.fn.dataTable.tables({ visible: true, api: true }).columns.adjust();
+	});
+
+	$('#example thead th').each(function () {
+		var title = $(this).text();
+		$(this).html('<input style="z-index: 99999" type="text" placeholder="Search ' + title + '" />');
+	});
+
+	var table = $('#example').DataTable({
+		"processing": true,
+		"paginate": false,
+		// "responsive": true,
+		"searching": true,
+		"ordering": true,
+		"select": true,
+		"ajax": {
+			"url": "http://localhost:8000/users/getData",
+			"type": "GET"
+		},
+		"columns": [{ "data": "user_last_name" }, { "data": "user_first_name" }, { "data": "user_login" }, { "data": "user_role_name" }, { "data": "user_email" }, { "data": "user_status" }, { "data": "user_trigramme" }, { "data": "user_department_name" }, { "data": "user_service_name" }, { "data": "user_daily_cost" }],
+		dom: 'Bfrtip',
+		buttons: [{
+			className: 'fa fa-plus svg-large btn-theme-fonce-leger',
+			action: function action(e, dt, node, config) {
+				$("#createUser").modal("show");
+			}
+		}, {
+			className: 'fa fa-edit svg-small btn-theme-clair-fort',
+			action: function action(e, dt, node, config) {
+				var rowData = table.rows({ selected: true }).data()[0];
+				// now do what you need to do wht the row data
+				$('#editUser').modal('show');
+
+				// var data = JSON.parse($(this).data('user'));
+				$("#editUser #user_name").text(rowData.user_first_name + " " + rowData.user_last_name);
+				$("#editUser #user_id").text('id='.concat(rowData.user_id));
+
+				var current_direction = rowData.user_department_id2;
+				// var current_service = data.user_service_id2;
+
+				$.each(rowData, function (key, value) {
+					$('#editUser #' + key).val(value);
+				});
+
+				makeServicesList_Edit(current_direction);
+			},
+			enabled: false
+
+		}],
+		initComplete: function initComplete() {
+			this.api().columns().every(function () {
+				var that = this;
+
+				$('input', this.header()).on('keyup change', function () {
+
+					if (that.search() !== this.value) {
+						that.search(this.value).draw();
+					}
+				});
+			});
+		}
+
+	});
+	table.on('select deselect', function () {
+		var selectedRows = table.rows({ selected: true }).count();
+		table.button(1).enable(selectedRows === 1);
+	});
+
 	//init modal fields of createUser
 	$(document).on('click', '#createUserButton', function () {
 		$('#createUser').find('#user_first_name').val('');
@@ -2354,20 +2433,20 @@ $(function () {
 	});
 
 	//Edit user
-	$(document).on('click', '#editUserButton', function () {
-		var data = JSON.parse($(this).data('user'));
-		$("#editUser #user_name").text(data.user_first_name + " " + data.user_last_name);
-		$("#editUser #user_id").text('id='.concat(data.user_id));
-
-		var current_direction = data.user_department_id2;
-		// var current_service = data.user_service_id2;				
-
-		$.each(data, function (key, value) {
-			$('#editUser #' + key).val(value);
-		});
-
-		makeServicesList_Edit(current_direction);
-	});
+	// $(document).on('click', '#editUserButton', function () {
+	// 	var data = JSON.parse($(this).data('user'));
+	// 	$("#editUser #user_name").text(data.user_first_name + " " + data.user_last_name);
+	// 	$("#editUser #user_id").text('id='.concat(data.user_id));
+	//
+	// 	var current_direction = data.user_department_id2;
+	// 	// var current_service = data.user_service_id2;
+	//
+	// 	$.each(data, function (key, value) {
+	// 		$('#editUser #' + key).val(value);
+	// 	});
+	//
+	// 	makeServicesList_Edit(current_direction);
+	// });
 
 	//Terminate user
 	$(document).on('click', '#terminateUserButton', function () {
@@ -2563,20 +2642,22 @@ $(function () {
 	// Available panels
 	// #times_user
 	// #times_entity
-	var tab_active = localStorage.getItem('wdays-tab-active');
-	if (tab_active) {
-		$('#wdays-tab-selection a[href="' + tab_active + '"]').tab('show');
-	} else {
-		$('#wdays-tab-selection a[href="#times_user"]').tab('show'); //default panel
-	}
+	// var tab_active = localStorage.getItem('wdays-tab-active');
+	// if (tab_active) {
+	// 	$('#wdays-tab-selection a[href="' + tab_active + '"]').tab('show');
+	// }
+	// else {
+	// 	$('#wdays-tab-selection a[href="#times_user"]').tab('show'); //default panel
+	// }
+	//
+	// $('#wdays-tab-selection a[data-toggle="tab"]').click( function (e) {
+	// 	var _target = $(e.target).attr('href');
+	// 	if (!_target) _target = $(this).attr('href');
+	//
+	// 	localStorage.setItem('wdays-tab-active', _target);
+	// 	$('#wdays-tab-selection a[href="' + _target + '"]').tab('show');
+	// });
 
-	$('#wdays-tab-selection a[data-toggle="tab"]').click(function (e) {
-		var _target = $(e.target).attr('href');
-		if (!_target) _target = $(this).attr('href');
-
-		localStorage.setItem('wdays-tab-active', _target);
-		$('#wdays-tab-selection a[href="' + _target + '"]').tab('show');
-	});
 
 	//HOURS (TASKS PAGES)
 	$(document).on('click', '#addHoursButton', function () {

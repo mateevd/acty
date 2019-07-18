@@ -1,3 +1,81 @@
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "/";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 33);
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ 33:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(34);
+
+
+/***/ }),
+
+/***/ 34:
+/***/ (function(module, exports) {
+
 $(function () {
 
 	// Available panels
@@ -21,7 +99,7 @@ $(function () {
 
 	//Create task
 	$(document).on('click', '#createTaskBtn', function () {
-		
+
 		var _phase = JSON.parse($(this).data('phase'));
 
 		$('.createTask #phase_id').val(_phase.phase_id);
@@ -44,7 +122,6 @@ $(function () {
 		$('#editTask #activity_id').val(activity_id);
 		$("#editTask #task_name").text(data.task_name);
 		$("#editTask #task_id").text('id='.concat(data.task_id));
-
 	});
 
 	//Terminate task
@@ -151,7 +228,7 @@ $(function () {
 
 	//Function dropdown for copy multitask
 	//Enable phase select if activity selected
-	$('#task_activities_list').change(() => {
+	$('#task_activities_list').change(function () {
 		$('#task_phases_list').prop('disabled', false);
 		if ($("#task_activities_list option:selected").text() === '') {
 			$('#task_phases_list').empty();
@@ -167,8 +244,7 @@ $(function () {
 			var $phases_list = $("#task_phases_list");
 			$phases_list.empty(); // remove old options
 			$.each(data.phases_list, function (key, value) {
-				$phases_list.append($("<option></option>")
-					.attr("value", key).text(value));
+				$phases_list.append($("<option></option>").attr("value", key).text(value));
 			});
 			//Tri de la liste
 			sortSelect('task_phases_list');
@@ -177,7 +253,7 @@ $(function () {
 
 	//Function dropdown for move multitask
 	//Enable phase select if activity selected
-	$('#task_activities_list2').change(() => {
+	$('#task_activities_list2').change(function () {
 		$('#task_phases_list2').prop('disabled', false);
 		if ($("#task_activities_list2 option:selected").text() === '') {
 			$('#task_phases_list2').empty();
@@ -193,26 +269,24 @@ $(function () {
 			var $phases_list = $("#task_phases_list2");
 			$phases_list.empty(); // remove old options
 			$.each(data.phases_list, function (key, value) {
-				$phases_list.append($("<option></option>")
-					.attr("value", key).text(value));
+				$phases_list.append($("<option></option>").attr("value", key).text(value));
 			});
 			//Tri de la liste
 			sortSelect('task_phases_list2');
 		});
 	}
 
-
-	$('#task_create').submit(function(event) {
+	$('#task_create').submit(function (event) {
 		//validation des champs
 		var fail = false;
 		var fail_log = '';
 		var name;
-		$('#task_create').find( 'select, textarea, input' ).each(function(){
-			if(!$(this).prop('hidden')){
-				if( $(this).prop('required')){
+		$('#task_create').find('select, textarea, input').each(function () {
+			if (!$(this).prop('hidden')) {
+				if ($(this).prop('required')) {
 					//c'est ici qu'on testera les valeurs et expressions régulières
 					//pour le moment on ne teste que si le champ est vide
-					if (!$(this).val() ) {
+					if (!$(this).val()) {
 						fail = true;
 						name = $(this).attr('name');
 						fail_log += name + " is required.\n";
@@ -222,27 +296,26 @@ $(function () {
 		});
 		console.log(fail_log);
 
-		if ( fail ) {
+		if (fail) {
 			//c'est nok, on annule le submit
 			event.preventDefault();
-		}
-		else {
+		} else {
 			//c'est ok, on lance l'affichage du loading
 			$(this).find('#btn-submit-form').addClass('apply-spin');
 		}
 	});
 
-	$('#task_update' ).submit( function( event ) {
+	$('#task_update').submit(function (event) {
 		//validation des champs
 		var fail = false;
 		var fail_log = '';
 		var name;
-		$('#task_update').find( 'select, textarea, input' ).each(function(){
-			if(!$(this).prop('hidden')){
-				if( $(this).prop('required')){
+		$('#task_update').find('select, textarea, input').each(function () {
+			if (!$(this).prop('hidden')) {
+				if ($(this).prop('required')) {
 					//c'est ici qu'on testera les valeurs et expressions régulières
 					//pour le moment on ne teste que si le champ est vide
-					if (!$(this).val() ) {
+					if (!$(this).val()) {
 						fail = true;
 						name = $(this).attr('name');
 						fail_log += name + " is required.\n";
@@ -252,27 +325,26 @@ $(function () {
 		});
 		console.log(fail_log);
 
-		if ( fail ) {
+		if (fail) {
 			//c'est nok, on annule le submit
 			event.preventDefault();
-		}
-		else {
+		} else {
 			//c'est ok, on lance l'affichage du loading
 			$(this).find('#btn-submit-form').addClass('apply-spin');
 		}
 	});
 
-	$('#task_terminate_multi' ).submit( function( event ) {
+	$('#task_terminate_multi').submit(function (event) {
 		//validation des champs
 		var fail = false;
 		var fail_log = '';
 		var name;
-		$('#task_terminate_multi').find( 'select, textarea, input' ).each(function(){
-			if(!$(this).prop('hidden')){
-				if( $(this).prop('required')){
+		$('#task_terminate_multi').find('select, textarea, input').each(function () {
+			if (!$(this).prop('hidden')) {
+				if ($(this).prop('required')) {
 					//c'est ici qu'on testera les valeurs et expressions régulières
 					//pour le moment on ne teste que si le champ est vide
-					if (!$(this).val() ) {
+					if (!$(this).val()) {
 						fail = true;
 						name = $(this).attr('name');
 						fail_log += name + " is required.\n";
@@ -282,27 +354,26 @@ $(function () {
 		});
 		console.log(fail_log);
 
-		if ( fail ) {
+		if (fail) {
 			//c'est nok, on annule le submit
 			event.preventDefault();
-		}
-		else {
+		} else {
 			//c'est ok, on lance l'affichage du loading
 			$(this).find('#btn-submit-form').addClass('apply-spin');
 		}
 	});
 
-	$('#task_move_multi' ).submit( function( event ) {
+	$('#task_move_multi').submit(function (event) {
 		//validation des champs
 		var fail = false;
 		var fail_log = '';
 		var name;
-		$('#task_move_multi').find( 'select, textarea, input' ).each(function(){
-			if(!$(this).prop('hidden')){
-				if( $(this).prop('required')){
+		$('#task_move_multi').find('select, textarea, input').each(function () {
+			if (!$(this).prop('hidden')) {
+				if ($(this).prop('required')) {
 					//c'est ici qu'on testera les valeurs et expressions régulières
 					//pour le moment on ne teste que si le champ est vide
-					if (!$(this).val() ) {
+					if (!$(this).val()) {
 						fail = true;
 						name = $(this).attr('name');
 						fail_log += name + " is required.\n";
@@ -312,27 +383,26 @@ $(function () {
 		});
 		console.log(fail_log);
 
-		if ( fail ) {
+		if (fail) {
 			//c'est nok, on annule le submit
 			event.preventDefault();
-		}
-		else {
+		} else {
 			//c'est ok, on lance l'affichage du loading
 			$(this).find('#btn-submit-form').addClass('apply-spin');
 		}
 	});
 
-	$('#task_copy_multi' ).submit( function( event ) {
+	$('#task_copy_multi').submit(function (event) {
 		//validation des champs
 		var fail = false;
 		var fail_log = '';
 		var name;
-		$('#task_copy_multi').find( 'select, textarea, input' ).each(function(){
-			if(!$(this).prop('hidden')){
-				if( $(this).prop('required')){
+		$('#task_copy_multi').find('select, textarea, input').each(function () {
+			if (!$(this).prop('hidden')) {
+				if ($(this).prop('required')) {
 					//c'est ici qu'on testera les valeurs et expressions régulières
 					//pour le moment on ne teste que si le champ est vide
-					if (!$(this).val() ) {
+					if (!$(this).val()) {
 						fail = true;
 						name = $(this).attr('name');
 						fail_log += name + " is required.\n";
@@ -342,27 +412,26 @@ $(function () {
 		});
 		console.log(fail_log);
 
-		if ( fail ) {
+		if (fail) {
 			//c'est nok, on annule le submit
 			event.preventDefault();
-		}
-		else {
+		} else {
 			//c'est ok, on lance l'affichage du loading
 			$(this).find('#btn-submit-form').addClass('apply-spin');
 		}
 	});
 
-	$('#task_create_public').submit(function(event) {
+	$('#task_create_public').submit(function (event) {
 		//validation des champs
 		var fail = false;
 		var fail_log = '';
 		var name;
-		$('#task_create_public').find( 'select, textarea, input' ).each(function(){
-			if(!$(this).prop('hidden')){
-				if( $(this).prop('required')){
+		$('#task_create_public').find('select, textarea, input').each(function () {
+			if (!$(this).prop('hidden')) {
+				if ($(this).prop('required')) {
 					//c'est ici qu'on testera les valeurs et expressions régulières
 					//pour le moment on ne teste que si le champ est vide
-					if (!$(this).val() ) {
+					if (!$(this).val()) {
 						fail = true;
 						name = $(this).attr('name');
 						fail_log += name + " is required.\n";
@@ -372,14 +441,16 @@ $(function () {
 		});
 		console.log(fail_log);
 
-		if ( fail ) {
+		if (fail) {
 			//c'est nok, on annule le submit
 			event.preventDefault();
-		}
-		else {
+		} else {
 			//c'est ok, on lance l'affichage du loading
 			$(this).find('#btn-submit-form').addClass('apply-spin');
 		}
 	});
-
 });
+
+/***/ })
+
+/******/ });

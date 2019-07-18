@@ -1,3 +1,81 @@
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "/";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 11);
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ 11:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(12);
+
+
+/***/ }),
+
+/***/ 12:
+/***/ (function(module, exports) {
+
 $(function () {
 
 	// Available panels
@@ -44,14 +122,13 @@ $(function () {
 			$('#addAbsence').find('#absence_days').attr('count', 0);
 			$('#addAbsence').find('#absence_days').attr('value', 0);
 		});
-
 	});
 
 	$(document).on('click', '#editAbsenceButton', function () {
 		var data = JSON.parse($(this).data('absence'));
 
 		$.each(data, function (key, value) {
-				$('#editAbsence #' + key).val(value);
+			$('#editAbsence #' + key).val(value);
 		});
 
 		$('#editAbsence').find('#absence_days').attr('count', 0);
@@ -68,7 +145,7 @@ $(function () {
 			counter += val;
 			$('#editAbsence').find('#absence_days').attr('count', counter);
 			$('#editAbsence').find('#absence_days').val(counter);
-		});		
+		});
 
 		$("#delhoursBtn .modal-custom-btn-absence-reset").on('click', function () {
 			counter = parseFloat(data.absence_days);
@@ -76,7 +153,6 @@ $(function () {
 			$('#editAbsence').find('#absence_days').attr('count', 0);
 			$('#editAbsence').find('#absence_days').attr('value', 0);
 		});
-
 	});
 
 	//Enlève l'attribut disabled sur les inputs days - obligatoire
@@ -89,20 +165,19 @@ $(function () {
 		var absence_id = JSON.parse($(this).data('absence_id'));
 		$('#deleteAbsence #absence_id').val(absence_id);
 		$('#deleteAbsence #absence_id').text('id='.concat(absence_id));
-		
 	});
 
-	$('#absence_update' ).submit( function( event ) {
+	$('#absence_update').submit(function (event) {
 		//validation des champs
 		var fail = false;
 		var fail_log = '';
 		var name;
-		$('#absence_update').find( 'select, textarea, input' ).each(function(){
-			if(!$(this).prop('hidden')){
-				if( $(this).prop('required')){
+		$('#absence_update').find('select, textarea, input').each(function () {
+			if (!$(this).prop('hidden')) {
+				if ($(this).prop('required')) {
 					//c'est ici qu'on testera les valeurs et expressions régulières
 					//pour le moment on ne teste que si le champ est vide
-					if (!$(this).val() ) {
+					if (!$(this).val()) {
 						fail = true;
 						name = $(this).attr('name');
 						fail_log += name + " is required.\n";
@@ -112,27 +187,26 @@ $(function () {
 		});
 		console.log(fail_log);
 
-		if ( fail ) {
+		if (fail) {
 			//c'est nok, on annule le submit
 			event.preventDefault();
-		}
-		else {
+		} else {
 			//c'est ok, on lance l'affichage du loading
 			$(this).find('#btn-submit-form').addClass('apply-spin');
 		}
 	});
 
-	$('#absence_create' ).submit( function( event ) {
+	$('#absence_create').submit(function (event) {
 		//validation des champs
 		var fail = false;
 		var fail_log = '';
 		var name;
-		$('#absence_create').find( 'select, textarea, input' ).each(function(){
-			if(!$(this).prop('hidden')){
-				if( $(this).prop('required')){
+		$('#absence_create').find('select, textarea, input').each(function () {
+			if (!$(this).prop('hidden')) {
+				if ($(this).prop('required')) {
 					//c'est ici qu'on testera les valeurs et expressions régulières
 					//pour le moment on ne teste que si le champ est vide
-					if (!$(this).val() ) {
+					if (!$(this).val()) {
 						fail = true;
 						name = $(this).attr('name');
 						fail_log += name + " is required.\n";
@@ -142,14 +216,16 @@ $(function () {
 		});
 		console.log(fail_log);
 
-		if ( fail ) {
+		if (fail) {
 			//c'est nok, on annule le submit
 			event.preventDefault();
-		}
-		else {
+		} else {
 			//c'est ok, on lance l'affichage du loading
 			$(this).find('#btn-submit-form').addClass('apply-spin');
 		}
 	});
-
 });
+
+/***/ })
+
+/******/ });
