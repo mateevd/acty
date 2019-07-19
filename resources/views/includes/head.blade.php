@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
 <link rel="stylesheet" href="{{ asset('css/flashy.css') }}">
 <link rel="stylesheet" href="{{ asset('css/dragdrop.css') }}">
+<link rel="stylesheet" href="{{ asset('css/sortable.css') }}">
 
 @if(session()->get('theme') == 1)
 	<link rel="stylesheet" href="{{ asset('css/theme_01.css') }}">
@@ -47,8 +48,8 @@
 <script src="{{ asset('js/idleTimer.min.js') }}" defer></script>
 {{--<script rel="script" src="{{ asset('fontAwsome/js/all.min.js') }}"></script>--}}
 
-{{--<script rel="script" src="{{ asset('bootstrap-sortable/Scripts/bootstrap-sortable.js') }}"></script>--}}
-{{--<script rel="script" src="{{ asset('bootstrap-sortable/Scripts/moment.min.js') }}"></script>--}}
+<script rel="script" src="{{ asset('js/sortable.min.js') }}"></script>
+<script rel="script" src="{{ asset('js/moment.min.js') }}"></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
