@@ -86,17 +86,17 @@
 					</span>
 					<span class="default-entity-title-label italic">
 					@if(auth()->user()->role_id == config('constants.role_admin_id'))
-						({{ucfirst(config('constants.role_admin_id')}})@endif
+						({{ucfirst(config('constants.role_admin'))}})@endif
 					@if(auth()->user()->role_id == config('constants.role_directeur_id'))
-						({{ucfirst(config('constants.role_directeur_id')}})@endif
+						({{ucfirst(config('constants.role_directeur'))}})@endif
 					@if(auth()->user()->role_id == config('constants.role_service_id'))
-						({{ucfirst(config('constants.role_service_id')}})@endif
+						({{ucfirst(config('constants.role_service'))}})@endif
 					@if(auth()->user()->role_id == config('constants.role_projet_id'))
-						({{ucfirst(config('constants.role_projet_id')}})@endif
+						({{ucfirst(config('constants.role_projet'))}})@endif
 					@if(auth()->user()->role_id == config('constants.role_agent_id'))
-						({{ucfirst(config('constants.role_agent_id')}})@endif
+						({{ucfirst(config('constants.role_agent'))}})@endif
 					@if(auth()->user()->role_id == config('constants.role_prestataire_id'))
-						({{ucfirst(config('constants.role_prestataire_id')}})@endif
+						({{ucfirst(config('constants.role_prestataire'))}})@endif
 					</span>
 				</div>
 				<div class="flex-row flex-wrap-yes justify-flex-end pad-h-small pad-v-top-medium pad-v-bottom-small">
@@ -353,17 +353,17 @@
 					</span>
 					<span class="default-entity-title-label italic">
 					@if(auth()->user()->role_id == config('constants.role_admin_id'))
-						({{ucfirst(config('constants.role_admin_id')}})@endif
+						({{ucfirst(config('constants.role_admin_'))}})@endif
 					@if(auth()->user()->role_id == config('constants.role_directeur_id'))
-						({{ucfirst(config('constants.role_directeur_id')}})@endif
+						({{ucfirst(config('constants.role_directeur_'))}})@endif
 					@if(auth()->user()->role_id == config('constants.role_service_id'))
-						({{ucfirst(config('constants.role_service_id')}})@endif
+						({{ucfirst(config('constants.role_service_'))}})@endif
 					@if(auth()->user()->role_id == config('constants.role_projet_id'))
-						({{ucfirst(config('constants.role_projet_id')}})@endif
+						({{ucfirst(config('constants.role_projet_'))}})@endif
 					@if(auth()->user()->role_id == config('constants.role_agent_id'))
-						({{ucfirst(config('constants.role_agent_id')}})@endif
+						({{ucfirst(config('constants.role_agent'))}})@endif
 					@if(auth()->user()->role_id == config('constants.role_prestataire_id'))
-						({{ucfirst(config('constants.role_prestataire_id')}})@endif
+						({{ucfirst(config('constants.role_prestataire'))}})@endif
 					</span>
 				</div>
 				<div class="flex-row flex-wrap-yes justify-flex-end pad-h-small pad-v-top-medium pad-v-bottom-small">
@@ -610,7 +610,7 @@
 						</span>
 						<span class="default-entity-title-label italic">
 							@if(auth()->user()->role_id == config('constants.role_admin_id'))
-								{{' '}}({{ucfirst(trans('app.admin_id')}})@endif
+								{{' '}}({{ucfirst(trans('app.admin'))}})@endif
 							@if(auth()->user()->role_id == config('constants.role_directeur_id'))
 								{{' '}}({{trans('app.department')}})@endif
 							@if(auth()->user()->role_id == config('constants.role_service_id'))
@@ -621,7 +621,7 @@
 								{{' '}}({{'-'}})@endif
 							@if(auth()->user()->role_id == config('constants.role_prestataire_id'))
 								{{' '}}({{'-'}})@endif
-						</span>	
+						</span>
 					</div>
 					<div class="flex-row flex-wrap-yes justify-flex-end pad-h-small pad-v-top-medium pad-v-bottom-small">
 						<div class="flex-row flex-wrap-no justify-flex-end pad-h-small width-rem-20">
