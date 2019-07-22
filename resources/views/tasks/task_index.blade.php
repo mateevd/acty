@@ -353,13 +353,13 @@
 					</span>
 					<span class="default-entity-title-label italic">
 					@if(auth()->user()->role_id == config('constants.role_admin_id'))
-						({{ucfirst(config('constants.role_admin_'))}})@endif
+						({{ucfirst(config('constants.role_admin'))}})@endif
 					@if(auth()->user()->role_id == config('constants.role_directeur_id'))
-						({{ucfirst(config('constants.role_directeur_'))}})@endif
+						({{ucfirst(config('constants.role_directeur'))}})@endif
 					@if(auth()->user()->role_id == config('constants.role_service_id'))
-						({{ucfirst(config('constants.role_service_'))}})@endif
+						({{ucfirst(config('constants.role_service'))}})@endif
 					@if(auth()->user()->role_id == config('constants.role_projet_id'))
-						({{ucfirst(config('constants.role_projet_'))}})@endif
+						({{ucfirst(config('constants.role_projet'))}})@endif
 					@if(auth()->user()->role_id == config('constants.role_agent_id'))
 						({{ucfirst(config('constants.role_agent'))}})@endif
 					@if(auth()->user()->role_id == config('constants.role_prestataire_id'))
