@@ -115,6 +115,9 @@ $(document).ready(function () {
 		$("#user_card h1").filter(function () {
 			$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
 		});
+		$("#resume_card h1").filter(function () {
+			$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		});
 	});
 
 	$("#activitiesDetailsInput").on("keyup", function () {

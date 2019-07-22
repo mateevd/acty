@@ -219,4 +219,51 @@ class Task extends Model
 		return $count;
 	}	
 
+	public static function get_new_status($task_id)
+	{
+		//-----------------------------------------
+		//SQL
+		$status_active = config('constants.status_active');
+		$status_terminated = config('constants.status_terminated');
+		$status_not_validated = config('constants.status_not_validated');
+		$status_validated = config('constants.status_validated');
+
+		$status_phase = Task::get_status($task_id);
+
+		$active_wd_count = Task::count_wd_by_status($task_id, [$status_active]);
+		$terminated_wd_count = Task::count_wd_by_status($task_id, [$status_terminated]);
+		$not_validated_wd_count = Task::count_wd_by_status($task_id, [$status_not_validated]);
+		$validated_wd_count = Task::count_wd_by_status($task_id, [$status_validated]);
+
+
+		if ($active_wd_count > 0) {
+			return $status_active;
+		}
+
+		if (session()->get('cra_validate') == 0)
+		{
+			if (($terminated_wd_count > 0) ||
+			 	($not_validated_wd_count > 0) ||
+				($validated_wd_count > 0)) {
+				return $status_validated;
+			}
+		}
+		else
+		{
+			if ($not_validated_wd_count > 0) {
+				return $status_not_validated;
+			}
+
+			if ($terminated_wd_count > 0) {
+				return $status_terminated;
+			}
+
+			if ($validated_wd_count > 0) {
+				return $status_validated;
+			}
+		}
+
+		return -1;
+	}	
+
 }

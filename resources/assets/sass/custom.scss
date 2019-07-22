@@ -18,6 +18,7 @@
   --theme-clair-ultra: #fafaff;
 
   --theme-libelle: #103060;
+  --theme-libelle-light: #10306080;
 
   --theme-important: #ff9b00;  /*sur fond clair*/
   --theme-important-alt: #ffff00; /* sur fond foncé */
@@ -52,14 +53,17 @@
   /* statuts */
   --status-active: #103060;
   --status-active: var(--theme-libelle);
-  --status-terminated: #7f7f7f;
+  --status-terminated: #6291ff;
+  --status-terminated-dark: #5070dd;
   --status-not-validated: #f04040;
-  --status-validated: #60a040;
+  --status-validated: #58bb26;
+  --status-validated-dark: #47a214;
 
   /* icônes statiques d'état */
   --public: #87a800;
   --private: #cc2600;
   --milestone: #cc2600;
+  --ban: #cc2600;
 
   /* icônes d'action*/
   --action-creation: #6495ed;
@@ -99,7 +103,6 @@ html {
   -ms-overflow-style: scrollbar;
 
   height: 100%;
-  /*	overflow: hidden;*/
 }
 
 /*button,
@@ -188,6 +191,15 @@ div {
 /*------------------------------------------------------------------------------*/
 /*                             STYLE POLICES                                    */
 /*------------------------------------------------------------------------------*/
+/*---- style-journal   ----- */
+.style-libelle {
+  color: #103060;
+  color: var(--theme-libelle);
+}
+
+.style-libelle:hover {
+}
+
 /*---- style-date-du-jour   ----- */
 .style-date-du-jour {
   color: #ffff00 ;
@@ -379,10 +391,9 @@ div {
   color: #ff9b00 ;
   color: var(--theme-important) ;
 
-  font-size: 11px;
-  font-size: 1.1rem;
-
   font-weight: bold;
+  font-weight: bolder;
+  font-weight: 900;
 }
 
 .style-budget-total:hover {
@@ -428,14 +439,23 @@ div {
 
 /*---- style-validated   ----- */
 .style-validated {
-  color: #60a040 ;
+  color: #58bb26 ;
   color: var(--status-validated) ;
 }
 
 .style-validated:hover {
 }
 
-/*---- style-validated   ----- */
+/*---- style-validated-dark   ----- */
+.style-validated-dark {
+  color: #47a214 ;
+  color: var(--status-validated-dark) ;
+}
+
+.style-validated-dark:hover {
+}
+
+/*---- style-not-validated   ----- */
 .style-not-validated {
   color: #f04040 ;
   color: var(--status-not-validated) ;
@@ -444,13 +464,23 @@ div {
 .style-not-validated:hover {
 }
 
+
 /*---- style-terminated   ----- */
 .style-terminated {
-  color: #7f7f7f ;
+  color: #6291ff ;
   color: var(--status-terminated);
 }
 
 .style-terminated:hover {
+}
+
+/*---- style-terminated-dark   ----- */
+.style-terminated-dark {
+  color: #5070dd ;
+  color: var(--status-terminated-dark);
+}
+
+.style-terminated-dark:hover {
 }
 
 
@@ -611,7 +641,7 @@ div {
 }
 
 .fa-user-clock:hover{
-  color: #60a040 ;
+  color: #58bb26 ;
   color: var(--status-validated) ;
 }
 
@@ -621,7 +651,7 @@ div {
 }
 
 .fa-clock:hover{
-  color: #60a040 ;
+  color: #58bb26 ;
   color: var(--status-validated) ;
 }
 
@@ -780,7 +810,7 @@ div {
 
 
 .btn-theme-validated {
-  color: #60a040 ;
+  color: #58bb26 ;
   color: var(--status-validated) ;
 }
 
@@ -908,6 +938,31 @@ div {
   width: 0.1rem;
 }
 
+.small-cell {
+  width: 10px;
+  width: .2rem;
+}
+
+.medium-cell {
+  width: 50px;
+  width: 5rem;
+}
+
+.large-cell {
+  width: 100px;
+  width: 10rem;
+}
+
+.x-large-cell {
+  width: 150px;
+  width: 15rem;
+}
+
+.xx-large-cell {
+  width: 200px;
+  width: 20rem;
+}
+
 .action-btn-group,
 .action-btn-group-phase-title {
   display: -webkit-flex;
@@ -929,8 +984,8 @@ div {
 }
 
 .action-btn-group-phase-title{
-  height: 39px;
-  height: 3.9rem;
+  height: 34px;
+  height: 3.4rem;
 }
 
 .action-btn-activity{
@@ -1397,6 +1452,15 @@ div {
   top: -0.5rem;
 }
 
+.exp-status{
+  font-size: 10px;
+  font-size: 1rem;
+
+  position: relative;
+  top: -5px;
+  top: -0.5rem;
+}
+
 
 /*------------------------------------------------------------------------------*/
 /*                          SELECTION DATE                                      */
@@ -1504,8 +1568,9 @@ div {
 /* autorisé */
 /* non partagé (public/privé) */
 /* milestone (jalon) */
-.fa-star-half-alt,
+.fa-ban,
 .fa-star,
+.fa-star-half-alt,
 .fa-flag,
 .milestone-yes {
   font-size: 8px !important;
@@ -1528,6 +1593,14 @@ div {
   color: var(--activite) !important;}
 
 .allowed-no {
+  display: none
+}
+
+.ban-yes{
+  color: #cc2600 !important;
+  color: var(--ban) !important;}
+
+.ban-no {
   display: none
 }
 
@@ -2043,19 +2116,25 @@ div {
 /*									STATUTS										*/
 /*------------------------------------------------------------------------------*/
 /*terminated*/
-.tr-task-terminated
-{
-  opacity: 0.7;
-}
 .tr-task-terminated,
+.tr-task-not-validated,
+.tr-task-validated{
+  /*opacity: 0.7;*/
+}
+
+
+.tr-task-terminated,
+.tr-task-terminated .style-activite,
 .tr-task-terminated .style-tache,
 .tr-task-terminated .style-prevu,
+.tr-task-terminated .style-prevu-total,
 .tr-task-terminated .style-realise,
 .tr-task-terminated .style-realise-light{
-  color:  #7f7f7f;
+  color:  #6291ff;
   color: var(--status-terminated);
 
   font-weight: 400;
+  font-style: italic;
 }
 .tr-task-terminated .pastille {
 }
@@ -2065,18 +2144,18 @@ div {
 
 
 /*not validated*/
-.tr-task-not-validated
-{
-  opacity: 0.7;
-}
 .tr-task-not-validated,
+.tr-task-not-validated .style-activite,
 .tr-task-not-validated .style-tache,
 .tr-task-not-validated .style-prevu,
+.tr-task-not-validated .style-prevu-total,
 .tr-task-not-validated .style-realise,
 .tr-task-not-validated .style-realise-light{
   color:  #f04040;
   color: var(--status-not-validated);
+
   font-weight: 400;
+  font-style: italic;
 }
 .tr-task-not-validated .pastille {
 }
@@ -2086,19 +2165,18 @@ div {
 
 
 /*validated*/
-.tr-task-validated
-{
-  opacity: 0.7;
-}
 .tr-task-validated,
+.tr-task-validated .style-activite,
 .tr-task-validated .style-tache,
 .tr-task-validated .style-prevu,
+.tr-task-validated .style-prevu-total,
 .tr-task-validated .style-realise,
 .tr-task-validated .style-realise-light{
-  color:  #60a040;
+  color:  #58bb26;
   color: var(--status-validated);
 
   font-weight: 400;
+  font-style: italic;
 }
 .tr-task-validated .pastille {
 }
@@ -2106,14 +2184,20 @@ div {
   cursor: not-allowed;
 }
 
+.tr-activity-not-allowed,
+.tr-activity-not-allowed .style-activite,
+.tr-activity-not-allowed .style-prevu,
+.tr-activity-not-allowed .style-prevu-total,
+.tr-activity-not-allowed .style-realise,
+.tr-activity-not-allowed .style-realise-light{
+  color: #1030607f;
+  color: var(--theme-libelle-light);
 
-
-.tr-activity-not-allowed{
-  opacity: .4;
+  font-style: italic;
+  font-weight: 400;
 }
 
 .tr-activity-not-allowed:hover{
-  opacity: .7;
 }
 
 
@@ -2749,13 +2833,17 @@ option{
 }
 
 .planning-label{
-  white-space: nowrap;
+  font-weight: normal;
+  font-weight: 400;
 
-  font-weight: bold;
+  white-space: nowrap;
   text-align: center;
 }
 
 .planning-data{
+  font-weight: bold;
+  font-weight: 700;
+
   white-space: nowrap;
   text-align: center;
 }
@@ -2766,8 +2854,6 @@ option{
 
 
 .phases-title-data{
-  white-space: nowrap;
-
   color: #002045;
   color: var(--theme-libelle);
 
@@ -2888,8 +2974,11 @@ option{
 }
 
 .phase-title-indicator{
-  width: 40px;
-  width: 4rem;
+  width: 34px;
+  width: 3.4rem;
+
+  height: 34px;
+  height: 3.4rem;
 
   background-color: transparent;
 
@@ -2986,6 +3075,9 @@ option{
 }
 
 .default-entity-title-data{
+  font-size: 12px;
+  font-size: 1.2rem;
+
   white-space: nowrap;
 
   font-weight: bold;
@@ -2993,6 +3085,9 @@ option{
 
 .user-card {
   background-color: transparent;
+
+  font-size: 10px;
+  font-size: 1rem;
 
   margin-top: 5px;
   margin-top: 0.5rem;
@@ -3123,7 +3218,7 @@ option{
 }
 
 .btn-validation-sign{
-  color: #60a040 !important;
+  color: #58bb26 !important;
   color: var(--status-validated) !important;
 }
 
@@ -3977,6 +4072,14 @@ option{
 
 /*------------------------------------------------------------------------------*/
 /*								MUTUALISATION									*/
+/*	 							   DIVERS   									*/
+/*------------------------------------------------------------------------------*/
+.overflow-x-auto{
+  overflow-x: auto;
+}
+
+/*------------------------------------------------------------------------------*/
+/*								MUTUALISATION									*/
 /*	 							   MARGINS   									*/
 /*------------------------------------------------------------------------------*/
 /*MARGINS-----------------------------------------------------------------------*/
@@ -4404,6 +4507,10 @@ option{
   opacity: .9 !important;
 }
 
+.opacity-10{
+  opacity: 1 !important;
+}
+
 .text-lighter-40{
   color: rgba(0, 0, 0, .4) !important;
 }
@@ -4488,9 +4595,24 @@ option{
   max-height: 10rem;
 }
 
+.height-rem-3 {
+  height: 30px;
+  height: 3rem;
+}
+
+.height-rem-9 {
+  height: 90px;
+  height: 9rem;
+}
+
 .height-rem-10 {
   height: 100px;
   height: 10rem;
+}
+
+.height-rem-12 {
+  height: 120px;
+  height: 12rem;
 }
 
 .height-rem-15 {

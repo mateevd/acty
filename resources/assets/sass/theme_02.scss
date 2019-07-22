@@ -16,7 +16,8 @@
 	--theme-clair-ultra: #fafaff;
 
 	--theme-libelle: #085020;
-	
+	--theme-libelle-light: #08502080;
+
 	--theme-important: #ab4d00;  /*sur fond clair*/
 	--theme-important-alt: #ff8300; /* sur fond foncé */
 	--theme-important-back: #eeccaa; /* surlignage */
@@ -51,9 +52,9 @@
 	/* statuts */
 	--status-active: #085020;
 	--status-active: var(--theme-libelle);
-	--status-terminated: #7f7f7f;
+	--status-terminated: #6291ff;
 	--status-not-validated: #f04040;
-	--status-validated: #60a040;
+	--status-validated: #58bb26;
 
 	/* icônes statiques d'état */
 	--public: #87a800;
@@ -87,7 +88,3 @@
 	--task-head: #d6ab97;
 	--task-selected: #e8d5cd;
 }
-
-
-
-	
