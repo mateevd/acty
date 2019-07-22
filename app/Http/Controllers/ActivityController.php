@@ -47,7 +47,7 @@
 				return $next($request);
 			});
 			
-//			$this->phase_controller = new PhaseController();
+			$this->phase_controller = new PhaseController();
 			
 		}
 		
@@ -623,15 +623,9 @@
 		{
 			//-----------------------------------------
 			//SET CURRENT DATE OR GET GATE FROM FORM
-			if (session()->has(['current_date', 'current_month', 'current_year'])) {
-				$current_date = session()->get('current_date');
-				$current_month = session()->get('current_month');
-				$current_year = session()->get('current_year');
-			} else {
-				$current_date = Carbon::now();
-				$current_month = Carbon::now()->month;
-				$current_year = Carbon::now()->year;
-			}
+			$current_date = $this->current_date;
+			$current_month = $this->current_month;
+			$current_year = $this->current_year;
 			
 			//-----------------------------------------
 			//SQL

@@ -298,9 +298,9 @@
 					<div class="modal-custom-title">{{ucfirst(trans('app.export'))}}</div>
 					<div class="modal-custom-libelle">{{trans('app.desc_export')}}</div>
 
-					@if(auth()->user()->role_id == config('constants.role_admin') ||
-									auth()->user()->role_id == config('constants.role_directeur') ||
-									auth()->user()->role_id == config('constants.role_service') )
+					@if(auth()->user()->role_id == config('constants.role_admin_id') ||
+									auth()->user()->role_id == config('constants.role_directeur_id') ||
+									auth()->user()->role_id == config('constants.role_service_id') )
 						<form action="{{url('/download')}}" method="get"
 						      class="needs-validation hide-submit modal-custom-form" novalidate>
 							{{method_field('get')}}
