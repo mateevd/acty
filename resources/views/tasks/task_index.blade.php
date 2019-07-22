@@ -46,26 +46,7 @@
 				@endif
 			</ul>
 		</div>
-		<div class="navbar-tabs-select-date">
-			<form id="date_change" action="{{route('tâches')}}" method="get" name="dateSelect" class="hide-submit">
-				<div class="">
-					{!! Form::selectMonth('monthSelect', $current_date->month ? $current_date->month : Carbon\Carbon::now()->month ,
-							["class"=>"drop-date-common drop-date-month"])!!}
-				</div>
-				<div class="">
-					{!! Form::selectRange('yearSelect', config('constants.start_year'), config('constants.end_year'), $current_date->year ? $current_date->year : Carbon\Carbon::now()->year,
-							["class"=>"drop-date-common drop-date-year"])!!}
-				</div>
-				<div class="drop-date-submit">
-					<button id="btn-submit-form-date" class="drop-date-custom-btn"
-					        data-toggle="tooltip"
-					        data-placement="bottom"
-					        title="{{trans('app.ok')}}">
-						<i class="fas fa-arrow-circle-right"></i>
-					</button>
-				</div>
-			</form>
-		</div>
+		@include('includes.date_select')
 	</div>
 
 	<div class="tab-content">
