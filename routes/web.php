@@ -32,6 +32,8 @@ Auth::routes();
 		return redirect()->back();
 	})->middleware(\App\Http\Middleware\DateSelect::class);
 	
+	Route::get('/download', 'ActivityController@download');
+	
 	/*Projects Routes*/
 	Route::get('activities', ['uses' => 'ActivityController@index', 'as' => 'activités']);
 	Route::post('activities/create', ['uses' => 'ActivityController@create', 'as' => 'activities.create']);

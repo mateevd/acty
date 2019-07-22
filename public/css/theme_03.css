@@ -19,6 +19,7 @@
   --theme-clair-fort: #faf0ff;
   --theme-clair-ultra: #fbfaff;
   --theme-libelle: #500849;
+  --theme-libelle-light: #50084980;
   --theme-important: #da005d;
   /*sur fond clair*/
   --theme-important-alt: #ffb8d8;
@@ -57,9 +58,9 @@
   /* statuts */
   --status-active: #085020;
   --status-active: var(--theme-libelle);
-  --status-terminated: #7f7f7f;
+  --status-terminated: #6291ff;
   --status-not-validated: #f04040;
-  --status-validated: #60a040;
+  --status-validated: #58bb26;
   /* icônes statiques d'état */
   --public: #87a800;
   --private: #cc2600;
