@@ -44,7 +44,7 @@
 
   --task: #a0522d;
   --absence: #d11a1a;
-  --activite: #e69500;
+  --activity: #e69500;
   --historique: #7f7f7f;
   --deconnexion: #f04040;
   --charge: #6090c0;
@@ -100,6 +100,8 @@ html {
   /* sans toucher aux autres valeur de sizing en rem ===========================*/
   font-size: 62.5%;
 
+  overflow-x: auto;
+  overflow-y: auto;
   -ms-overflow-style: scrollbar;
 
   height: 100%;
@@ -260,7 +262,7 @@ div {
 /*---- style-activite   ----- */
 .style-activite {
   color: #e69500;
-  color: var(--activite);
+  color: var(--activity);
 
   font-weight: bold;
 }
@@ -1447,7 +1449,10 @@ div {
   font-size: 9px;
   font-size: 0.9rem;
 
-  position: relative;
+  /*	padding-left: 5px;
+      padding-left: .5rem;
+
+  */	position: relative;
   top: -5px;
   top: -0.5rem;
 }
@@ -1590,7 +1595,7 @@ div {
 
 .allowed-yes{
   color: #e69500 !important;
-  color: var(--activite) !important;}
+  color: var(--activity) !important;}
 
 .allowed-no {
   display: none
@@ -3071,16 +3076,26 @@ option{
 }
 
 .default-entity-title-label{
-  white-space: nowrap;
+  padding-right: 5px;
+  padding-right: .5rem;
+
+  padding-left: 5px;
+  padding-left: .5rem;
+  /*white-space: nowrap;*/
 }
 
 .default-entity-title-data{
   font-size: 12px;
   font-size: 1.2rem;
 
-  white-space: nowrap;
-
   font-weight: bold;
+
+  padding-right: 5px;
+  padding-right: .5rem;
+
+  padding-left: 5px;
+  padding-left: .5rem;
+  /*white-space: nowrap;*/
 }
 
 .user-card {
@@ -4483,7 +4498,15 @@ option{
   background-color: white;
 }
 
+.bg-activity {
+  background-color: #e69500;
+  background-color: var(--activity);
+}
 
+.bg-task {
+  background-color: #a0522d;
+  background-color: var(--task);
+}
 
 /*------------------------------------------------------------------------------*/
 /*								MUTUALISATION									*/
@@ -4535,6 +4558,11 @@ option{
 
 .width-30 {
   width: 30%;
+}
+
+.width-rem-1 {
+  width: 10px;
+  width: 1rem;
 }
 
 .width-rem-3 {
@@ -4595,9 +4623,19 @@ option{
   max-height: 10rem;
 }
 
+.height-rem-1 {
+  height: 10px;
+  height: 1rem;
+}
+
 .height-rem-3 {
   height: 30px;
   height: 3rem;
+}
+
+.height-rem-6 {
+  height: 60px;
+  height: 6rem;
 }
 
 .height-rem-9 {
@@ -4635,6 +4673,12 @@ option{
   height: 50rem;
 }
 
+/*BORDER-------------------------------------------------------------------------*/
+.border-round{
+  border-radius: 50%;
+}
+
+
 /*------------------------------------------------------------------------------*/
 /*								MUTUALISATION									*/
 /*	 							  POSITIONS 									*/
@@ -4670,6 +4714,10 @@ option{
 /*	 							   DIVERSES 									*/
 /*------------------------------------------------------------------------------*/
 /*DIVERS------------------------------------------------------------------------*/
+.text-center {
+  text-align: center;
+}
+
 .text-right {
   padding-right: 10px !important;
   padding-right: 1rem !important;
@@ -4696,10 +4744,11 @@ option{
   font-size: 1.1rem;
 }
 
-.font-12-px {
+.font-12px {
   font-size: 12px;
   font-size: 1.2rem;
 }
+
 
 /*------------------------------------------------------------------------------*/
 /*								SURCLASSAGE										*/
@@ -4865,53 +4914,4 @@ ul.circle {
 .bg-green {
   background-color: green;
 }
-
-.bg-yellow {
-  background-color: yellow;
-}
-
-.bg-orange {
-  background-color: orange;
-}
-
-.bg-blue {
-  background-color: blue;
-}
-
-
-
-/*------------------------------------------------------------------------------*/
-/*									À											*/
-/*							VÉRIFIER/CLASSER									*/
-/*------------------------------------------------------------------------------*/
-/*.stability {
-	position: fixed;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	margin: 0 auto 0 auto !important;
-	z-index: 1000;
-	width: 50%;
-	background: maroon;
-	color: yellow;
-	-webkit-border-radius: 1em 1em 0 0;
-	-moz-border-radius: 1em 1em 0 0;
-	border-radius: 1em 1em 0 0;
-	-moz-box-shadow: 0 0 1em #500;
-	-webkit-box-shadow: 0 0 1em #500;
-	box-shadow: 0 0 1em red;
-	padding: 0.5em 1em;
-	text-align: center;
-}*/
-
-
-/*------------------------------------------------------------------------------*/
-/*									À											*/
-/*								SUPPRIMER										*/
-/*------------------------------------------------------------------------------*/
-/*.a-btn-small {
-	position: relative;
-	top: 1px;
-	top: 0.1rem;
-}*/
 

@@ -12,10 +12,10 @@
 			@if(isset($phases))
 				{{--COLLAPSE ALLBUTTON--}}
 				<button id="collapseAllButton"
-						class="btn-common  svg-large btn-accordion-all collapsed-all"
-						aria-expanded="true" 
-						aria-controls="collapseAll"
-						data-phases=" {{$all_phase_id}} ">
+				        class="btn-common  svg-large btn-accordion-all collapsed-all"
+				        aria-expanded="true"
+				        aria-controls="collapseAll"
+				        data-phases=" {{$all_phase_id}} ">
 				</button>
 			@endif
 		</div>
@@ -27,64 +27,64 @@
 
 				{{--CREATE PHASE--}}
 				<button class="btn-common"
-						title="{{trans('phase.tool_create')}}"
-						data-toggle="modal"
-						data-toggle="tooltip"
-						data-placement="bottom"
-						data-target="#createPhase">
+				        title="{{trans('phase.tool_create')}}"
+				        data-toggle="modal"
+				        data-toggle="tooltip"
+				        data-placement="bottom"
+				        data-target="#createPhase">
 					<i class="fas fa-plus svg-large btn-theme-clair-ultra"></i>
 				</button>
 
 				{{--MOVE MULTI TASKS--}}
 				<button class="btn-common multi-tasks-select"
-						title="{{trans('task.act_move_multi')}}"
-						data-toggle="modal"
-						data-toggle="tooltip"
-						data-placement="bottom"
-						data-target="#moveMultiTask">
+				        title="{{trans('task.act_move_multi')}}"
+				        data-toggle="modal"
+				        data-toggle="tooltip"
+				        data-placement="bottom"
+				        data-target="#moveMultiTask">
 					<i class="fas fa-file-import svg-large btn-theme-clair-ultra btn-tasks-multi"></i>
 				</button>
 
 				{{--COPY MULTI TASKS--}}
 				<button class="btn-common multi-tasks-select"
-						title="{{trans('task.act_copy_multi')}}"
-						data-toggle="modal"
-						data-toggle="tooltip"
-						data-placement="bottom"
-						data-target="#copyMultiTask">
+				        title="{{trans('task.act_copy_multi')}}"
+				        data-toggle="modal"
+				        data-toggle="tooltip"
+				        data-placement="bottom"
+				        data-target="#copyMultiTask">
 					<i class="fas fa-copy svg-large btn-theme-clair-ultra btn-tasks-multi"></i>
 				</button>
 
 				{{--DELETE MULTI TASKS--}}
 				<button class="btn-common multi-tasks-select" id="deleteMultiTaskButton"
-						title="{{trans('task.act_delete_multi')}}"
-						data-toggle="modal"
-						data-toggle="tooltip"
-						data-placement="bottom"
-						data-activity_id=" {{json_encode($activity->activity_id)}} "
-						data-target="#deleteMultiTask">
+				        title="{{trans('task.act_delete_multi')}}"
+				        data-toggle="modal"
+				        data-toggle="tooltip"
+				        data-placement="bottom"
+				        data-activity_id=" {{json_encode($activity->activity_id)}} "
+				        data-target="#deleteMultiTask">
 					<i class="fas fa-trash svg-large btn-theme-clair-ultra btn-tasks-multi"></i>
 				</button>
 
 				{{--TERMINATE MULTI TASKS--}}
 				<button class="btn-common multi-tasks-select" id="terminateMultiTaskButton"
-						title="{{trans('task.act_terminate_multi')}}"
-						data-toggle="modal"
-						data-toggle="tooltip"
-						data-placement="bottom"
-						data-activity_id=" {{json_encode($activity->activity_id)}} "
-						data-target="#terminateMultiTask">
+				        title="{{trans('task.act_terminate_multi')}}"
+				        data-toggle="modal"
+				        data-toggle="tooltip"
+				        data-placement="bottom"
+				        data-activity_id=" {{json_encode($activity->activity_id)}} "
+				        data-target="#terminateMultiTask">
 					<i class="fas fa-check svg-large btn-theme-clair-ultra btn-tasks-multi"></i>
 				</button>
 
 				{{--ACTIVATE MULTI TASKS--}}
 				<button class="btn-common multi-tasks-select" id="activateMultiTaskButton"
-						title="{{trans('task.act_activate_multi')}}"
-						data-toggle="modal"
-						data-toggle="tooltip"
-						data-placement="bottom"
-						data-activity_id=" {{json_encode($activity->activity_id)}} "
-						data-target="#activateMultiTask">
+				        title="{{trans('task.act_activate_multi')}}"
+				        data-toggle="modal"
+				        data-toggle="tooltip"
+				        data-placement="bottom"
+				        data-activity_id=" {{json_encode($activity->activity_id)}} "
+				        data-target="#activateMultiTask">
 					<i class="fas fa-undo svg-large btn-theme-clair-ultra btn-tasks-multi"></i>
 				</button>
 			</div>
@@ -93,11 +93,11 @@
 
 	<div class="flex-row flex-wrap-yes justify-flex-start items-center ">
 		<div class="flex-row flex-wrap-yes justify-flex-start items-center flex-grow-no pad-h-small">
-			<span class="phases-title-label">{{trans('app.activity')}} : </span>
+			<span class="phases-title-label">{{trans('app.activity')}}{{trans('app.double_dot_separator')}}</span>
 			<span class="flex-wrap-yes phases-title-data">{{$activity->activity_name}}</span>
 		</div>
 		<div class="flex-row flex-wrap-yes justify-flex-start items-center flex-grow-1 pad-h-small">
-			<span class="phases-title-label">{{ucfirst(trans('app.code'))}} : </span>
+			<span class="phases-title-label">{{ucfirst(trans('app.code'))}}{{trans('app.double_dot_separator')}}</span>
 			<span class="flex-wrap-yes phases-title-data">{{$activity->activity_code}}</span>
 		</div>
 	</div>
@@ -113,191 +113,195 @@
 					<div class="table-responsive">
 						<table class="table table-phases">
 							<thead>
-								<tr>
-									<th class="phase-indicator phases-card-header text-center">
-										{{--COLLAPSE BUTTON--}}
-										<button id="collapseButton{{$phase->phase_id}}"
-												class="btn-common  svg-x-small btn-accordion collapsed"
-													aria-expanded="true" 
-													aria-controls="collapse{{$phase->phase_id}}"
-												data-toggle="collapse"
-												data-target="#task_panel{{$phase->phase_id}}">
+							<tr>
+								<th class="phase-indicator phases-card-header text-center">
+									{{--COLLAPSE BUTTON--}}
+									<button id="collapseButton{{$phase->phase_id}}"
+									        class="btn-common  svg-x-small btn-accordion collapsed"
+									        aria-expanded="true"
+									        aria-controls="collapse{{$phase->phase_id}}"
+									        data-toggle="collapse"
+									        data-target="#task_panel{{$phase->phase_id}}">
+									</button>
+								</th>
+
+								<th class="action-btn-item">
+									<div class="action-btn-phase justify-evenly">
+										{{--EDIT PHASE--}}
+										<button id="editButton"
+										        class="btn-common "
+										        title="{{ucfirst(trans('app.Edit'))}}"
+										        data-toggle="modal"
+										        data-toggle="tooltip"
+										        data-placement="bottom"
+										        data-phase=" {{json_encode($phase)}} "
+										        data-target="#editPhase"
+										        @if($phase->phase_status != config('constants.status_active')) disabled @endif>
+											<i class="fas fa-edit svg-small btn-theme-clair-ultra"></i>
 										</button>
-									</th>
+										{{--MOVE PHASE--}}
+										<button id="movePhaseButton"
+										        class="btn-common "
+										        title="{{ucfirst(trans('app.move'))}}"
+										        data-toggle="modal"
+										        data-toggle="tooltip"
+										        data-placement="bottom"
+										        data-phase_id=" {{json_encode($phase->phase_id)}} "
+										        data-phase_name=" {{json_encode($phase->phase_name)}} "
+										        data-activity_id=" {{json_encode($phase->activity_id)}} "
+										        data-target="#movePhase">
+											<i class="fas fa-file-import svg-small btn-theme-clair-ultra"></i>
+										</button>
 
-									<th class="action-btn-item">
-										<div class="action-btn-phase justify-evenly">
-											{{--EDIT PHASE--}}
-											<button id="editButton"
-													class="btn-common "
-													title="{{ucfirst(trans('app.Edit'))}}"
-													data-toggle="modal"
-													data-toggle="tooltip"
-													data-placement="bottom"
-													data-phase=" {{json_encode($phase)}} "
-													data-target="#editPhase"
-													@if($phase->phase_status != config('constants.status_active')) disabled @endif>
-												<i class="fas fa-edit svg-small btn-theme-clair-ultra"></i>
-											</button>
-											{{--MOVE PHASE--}}
-											<button id="movePhaseButton"
-													class="btn-common "
-													title="{{ucfirst(trans('app.move'))}}"
-													data-toggle="modal"
-													data-toggle="tooltip"
-													data-placement="bottom"
-													data-phase_id=" {{json_encode($phase->phase_id)}} "
-													data-phase_name=" {{json_encode($phase->phase_name)}} "
-													data-activity_id=" {{json_encode($phase->activity_id)}} "
-													data-target="#movePhase">
-												<i class="fas fa-file-import svg-small btn-theme-clair-ultra"></i>
-											</button>
+										{{--DELETE PHASE--}}
+										<button id="deletePhaseButton"
+										        class="btn-common "
+										        title="{{ucfirst(trans('app.delete'))}}"
+										        data-toggle="modal"
+										        data-toggle="tooltip"
+										        data-placement="bottom"
+										        data-phase_id=" {{json_encode($phase->phase_id)}} "
+										        data-phase_name=" {{json_encode($phase->phase_name)}} "
+										        data-activity_id=" {{json_encode($phase->activity_id)}} "
+										        data-target="#deletePhase">
+											<i class="fas fa-trash svg-small btn-theme-clair-ultra"></i>
+										</button>
 
-											{{--DELETE PHASE--}}
-											<button id="deletePhaseButton"
-													class="btn-common "
-													title="{{ucfirst(trans('app.delete'))}}"
-													data-toggle="modal"
-													data-toggle="tooltip"
-													data-placement="bottom"
-													data-phase_id=" {{json_encode($phase->phase_id)}} "
-													data-phase_name=" {{json_encode($phase->phase_name)}} "
-													data-activity_id=" {{json_encode($phase->activity_id)}} "
-													data-target="#deletePhase">
-												<i class="fas fa-trash svg-small btn-theme-clair-ultra"></i>
-											</button>
+										{{--TERMINATE PHASE--}}
+										<button id="terminateButton"
+										        class="btn-common "
+										        title="{{ucfirst(trans('app.terminate'))}}"
+										        data-toggle="modal"
+										        data-toggle="tooltip"
+										        data-placement="bottom"
+										        data-phase_id=" {{json_encode($phase->phase_id)}} "
+										        data-phase_name=" {{json_encode($phase->phase_name)}} "
+										        data-activity_id=" {{json_encode($phase->activity_id)}} "
+										        data-target="#terminatePhase"
+										        @if($phase->phase_status != config('constants.status_active')) hidden @endif>
+											<i class="fas fa-check svg-small btn-theme-clair-ultra"></i>
+										</button>
 
-											{{--TERMINATE PHASE--}}
-											<button id="terminateButton"
-													class="btn-common "
-													title="{{ucfirst(trans('app.terminate'))}}"
-													data-toggle="modal"
-													data-toggle="tooltip"
-													data-placement="bottom"
-													data-phase_id=" {{json_encode($phase->phase_id)}} "
-													data-phase_name=" {{json_encode($phase->phase_name)}} "
-													data-activity_id=" {{json_encode($phase->activity_id)}} "
-													data-target="#terminatePhase"
-													@if($phase->phase_status != config('constants.status_active')) hidden @endif>
-												<i class="fas fa-check svg-small btn-theme-clair-ultra"></i>
-											</button>
+										{{--ACTIVATE PHASE--}}
+										<button id="activateButton"
+										        class="btn-common "
+										        title="{{ucfirst(trans('app.activate'))}}"
+										        data-toggle="modal"
+										        data-toggle="tooltip"
+										        data-placement="bottom"
+										        data-phase_id=" {{json_encode($phase->phase_id)}} "
+										        data-phase_name=" {{json_encode($phase->phase_name)}} "
+										        data-activity_id=" {{json_encode($phase->activity_id)}} "
+										        data-target="#activatePhase"
+										        @if ( session()->get('cra_validate') == false && $phase->phase_status != config('constants.status_validated') ) hidden
+										        @endif
+										        @if ( session()->get('cra_validate') == true &&
+														($phase->phase_status != config('constants.status_terminated') &&
+														 $phase->phase_status != config('constants.status_not_validated') &&
+														 $phase->phase_status != config('constants.status_validated') ) ) hidden @endif >
+											<i class="fas fa-undo svg-small btn-theme-clair-ultra"></i>
+										</button>
 
-											{{--ACTIVATE PHASE--}}
-											<button id="activateButton"
-													class="btn-common "
-													title="{{ucfirst(trans('app.activate'))}}"
-													data-toggle="modal"
-													data-toggle="tooltip"
-													data-placement="bottom"
-													data-phase_id=" {{json_encode($phase->phase_id)}} "
-													data-phase_name=" {{json_encode($phase->phase_name)}} "
-													data-activity_id=" {{json_encode($phase->activity_id)}} "
-													data-target="#activatePhase"
-													@if ( session()->get('cra_validate') == false && $phase->phase_status != config('constants.status_validated') ) hidden @endif
-													@if ( session()->get('cra_validate') == true && 
-															($phase->phase_status != config('constants.status_terminated') &&
-															 $phase->phase_status != config('constants.status_not_validated') &&
-															 $phase->phase_status != config('constants.status_validated') ) ) hidden @endif >
-												<i class="fas fa-undo svg-small btn-theme-clair-ultra"></i>
-											</button>
-
-											{{--CHANGE PRIVACY PHASE--}}
-											<button id="privacyPhaseButton"
-													class="btn-common  
+										{{--CHANGE PRIVACY PHASE--}}
+										<button id="privacyPhaseButton"
+										        class="btn-common
 														@if ($phase->phase_private == 1) private @else public @endif"
-													title="{{ucfirst(trans('phase.act_privacy'))}}"
-													data-phase_id=" {{json_encode($phase->phase_id)}} "
-													data-phase_name=" {{json_encode($phase->phase_name)}} "
-													data-toggle="modal"
-													data-toggle="tooltip"
-													data-placement="bottom"
-													data-target="#privacyPhase">
-												@if($phase->phase_private == 1)
-													<i class="fas fa-lock svg-small"></i>
-												@else
-													<i class="fas fa-unlock-alt svg-small btn-theme-clair-ultra"></i>
-												@endif
-											</button>
-										</div>
-									</th>
-
-									<th class="wrap-yes phases-card-header">
-										<div class="flex-row flex-wrap-yes justify-flex-start items-center pad-h-small width-100
-													@if($phase->phase_status == config('constants.status_terminated')) tr-task-terminated @endif
-													@if($phase->phase_status == config('constants.status_not_validated')) tr-task-not-validated @endif
-													@if($phase->phase_status == config('constants.status_validated')) tr-task-validated @endif
-													">
-											<span class="font-12-px no-bold">Phase : </span>
-											<div class="flex-row flex-wrap-yes justify-flex-start items-center bold">{{$phase->phase_name}}</div>
-											<span class="exp-status style-libelle bold italic opacity-9">
-												{{trans('app.space_separator')}}{{'('}}{{$phase->count_tasks_active}}/
-											</span>
-											@if (session()->get('cra_validate'))
-												<span class="exp-status style-terminated-dark bold italic opacity-9"> 
-													{{$phase->count_tasks_terminated}}/
-												</span>
-												<span class="exp-status style-not-validated bold italic opacity-9">
-													{{$phase->count_tasks_not_validated}}/
-												</span>
+										        title="{{ucfirst(trans('phase.act_privacy'))}}"
+										        data-phase_id=" {{json_encode($phase->phase_id)}} "
+										        data-phase_name=" {{json_encode($phase->phase_name)}} "
+										        data-toggle="modal"
+										        data-toggle="tooltip"
+										        data-placement="bottom"
+										        data-target="#privacyPhase">
+											@if($phase->phase_private == 1)
+												<i class="fas fa-lock svg-small"></i>
+											@else
+												<i class="fas fa-unlock-alt svg-small btn-theme-clair-ultra"></i>
 											@endif
-											<span class="exp-status style-validated-dark bold italic opacity-9">
-												{{$phase->count_tasks_validated}}
-											</span>
-											<span class="exp-status style-libelle bold italic opacity-9">
-												{{')'}}
-											</span>
-										</div>
-									</th>	
+										</button>
+									</div>
+								</th>
 
-									<th class="wrap-yes phases-card-header">
-										<div class="flex-row flex-wrap-yes justify-flex-end">
-											<div class="flex-row flex-wrap-no justify-flex-start pad-h-small width-rem-15">
-												<span class="font-12-px no-bold 
+								<th class="wrap-yes phases-card-header">
+									<div class="flex-row flex-wrap-yes justify-flex-start items-center pad-h-small width-100
 													@if($phase->phase_status == config('constants.status_terminated')) tr-task-terminated @endif
-													@if($phase->phase_status == config('constants.status_not_validated')) tr-task-not-validated @endif
-													@if($phase->phase_status == config('constants.status_validated')) tr-task-validated @endif ">{{trans('activity.StartP')}} : </span>
-												<span class=" 
-													@if($phase->phase_status == config('constants.status_terminated')) tr-task-terminated @endif
-													@if($phase->phase_status == config('constants.status_not_validated')) tr-task-not-validated @endif
-													@if($phase->phase_status == config('constants.status_validated')) tr-task-validated @endif 
-													bold">{{\Carbon\Carbon::parse($phase->phase_start_p)->format('m/Y')}}</span>
-											</div>
-											<div class="flex-row flex-wrap-no justify-flex-start pad-h-small width-rem-15">
-												<span class="font-12-px no-bold 
-													@if($phase->phase_status == config('constants.status_terminated')) tr-task-terminated @endif
-													@if($phase->phase_status == config('constants.status_not_validated')) tr-task-not-validated @endif
-													@if($phase->phase_status == config('constants.status_validated')) tr-task-validated @endif ">{{trans('activity.DaysP_total')}} : </span>
-												<span class=" 
-													@if($phase->phase_status == config('constants.status_terminated')) tr-task-terminated @endif
-													@if($phase->phase_status == config('constants.status_not_validated')) tr-task-not-validated @endif
-													@if($phase->phase_status == config('constants.status_validated')) tr-task-validated @endif 
-													style-prevu-total bold">{{number_format($phase->phase_days_p_total, 3, ',', ' ')}}</span>
-											</div>
-											<div class="flex-row flex-wrap-no justify-flex-start pad-h-small width-rem-15">
-												<span class="font-12-px no-bold 
-													@if($phase->phase_status == config('constants.status_terminated')) tr-task-terminated @endif
-													@if($phase->phase_status == config('constants.status_not_validated')) tr-task-not-validated @endif
-													@if($phase->phase_status == config('constants.status_validated')) tr-task-validated @endif ">{{trans('activity.DaysRestant')}} : </span>
-												<span class=" 
-													@if($phase->phase_status == config('constants.status_terminated')) tr-task-terminated @endif
-													@if($phase->phase_status == config('constants.status_not_validated')) tr-task-not-validated @endif
-													@if($phase->phase_status == config('constants.status_validated')) tr-task-validated @endif 
-													style-prevu bold">{{number_format($phase->phase_days_p, 3, ',', ' ')}}</span>
-											</div>
-											<div class="flex-row flex-wrap-no justify-flex-start pad-h-small width-rem-15">
-												<span class="font-12-px no-bold 
-													@if($phase->phase_status == config('constants.status_terminated')) tr-task-terminated @endif
-													@if($phase->phase_status == config('constants.status_not_validated')) tr-task-not-validated @endif
-													@if($phase->phase_status == config('constants.status_validated')) tr-task-validated @endif ">{{trans('activity.DaysR')}} : </span>
-												<span class=" 
-													@if($phase->phase_status == config('constants.status_terminated')) tr-task-terminated @endif
-													@if($phase->phase_status == config('constants.status_not_validated')) tr-task-not-validated @endif
-													@if($phase->phase_status == config('constants.status_validated')) tr-task-validated @endif 
-													style-realise bold">{{number_format($phase->phase_days_r, 3, ',', ' ')}}</span>
-											</div>
+									@if($phase->phase_status == config('constants.status_not_validated')) tr-task-not-validated @endif
+									@if($phase->phase_status == config('constants.status_validated')) tr-task-validated @endif
+											">
+										<span class="font-12-px no-bold">{{ucfirst(trans('app.phase'))}}{{trans('app.double_dot_separator')}}</span>
+										<div class="flex-row flex-wrap-no justify-flex-start items-center bold italic">
+												<span class="exp-status style-libelle">
+													{{trans('app.space_separator')}}{{'('}}{{$phase->count_tasks_active}}
+													/
+												</span>
+											@if (session()->get('cra_validate'))
+												<span class="exp-status style-terminated-dark">
+														{{$phase->count_tasks_terminated}}/
+													</span>
+												<span class="exp-status style-not-validated">
+														{{$phase->count_tasks_not_validated}}/
+													</span>
+											@endif
+											<span class="exp-status style-validated-dark">
+													{{$phase->count_tasks_validated}}
+												</span>
+											<span class="exp-status style-libelle">
+													{{')'}}
+												</span>
 										</div>
-									</th>
-								</tr>
+									</div>
+								</th>
+
+								<th class="wrap-yes phases-card-header">
+									<div class="flex-row flex-wrap-yes justify-flex-end">
+										<div class="flex-row flex-wrap-no justify-flex-start pad-h-small width-rem-15">
+												<span class="font-12-px no-bold 
+													@if($phase->phase_status == config('constants.status_terminated')) tr-task-terminated @endif
+												@if($phase->phase_status == config('constants.status_not_validated')) tr-task-not-validated @endif
+												@if($phase->phase_status == config('constants.status_validated')) tr-task-validated @endif ">{{trans('activity.StartP')}}{{trans('app.double_dot_separator')}}</span>
+
+											<span class="
+													@if($phase->phase_status == config('constants.status_terminated')) tr-task-terminated @endif
+											@if($phase->phase_status == config('constants.status_not_validated')) tr-task-not-validated @endif
+											@if($phase->phase_status == config('constants.status_validated')) tr-task-validated @endif
+													bold">{{\Carbon\Carbon::parse($phase->phase_start_p)->format('m/Y')}}</span>
+										</div>
+										<div class="flex-row flex-wrap-no justify-flex-start pad-h-small width-rem-15">
+												<span class="font-12-px no-bold 
+													@if($phase->phase_status == config('constants.status_terminated')) tr-task-terminated @endif
+												@if($phase->phase_status == config('constants.status_not_validated')) tr-task-not-validated @endif
+												@if($phase->phase_status == config('constants.status_validated')) tr-task-validated @endif ">{{trans('activity.DaysP_total')}}{{trans('app.double_dot_separator')}}</span>
+											<span class="
+													@if($phase->phase_status == config('constants.status_terminated')) tr-task-terminated @endif
+											@if($phase->phase_status == config('constants.status_not_validated')) tr-task-not-validated @endif
+											@if($phase->phase_status == config('constants.status_validated')) tr-task-validated @endif
+													style-prevu-total bold">{{number_format($phase->phase_days_p_total, 3, ',', ' ')}}</span>
+										</div>
+										<div class="flex-row flex-wrap-no justify-flex-start pad-h-small width-rem-15">
+												<span class="font-12-px no-bold 
+													@if($phase->phase_status == config('constants.status_terminated')) tr-task-terminated @endif
+												@if($phase->phase_status == config('constants.status_not_validated')) tr-task-not-validated @endif
+												@if($phase->phase_status == config('constants.status_validated')) tr-task-validated @endif ">{{trans('activity.DaysRestant')}}{{trans('app.double_dot_separator')}}</span>
+											<span class="
+													@if($phase->phase_status == config('constants.status_terminated')) tr-task-terminated @endif
+											@if($phase->phase_status == config('constants.status_not_validated')) tr-task-not-validated @endif
+											@if($phase->phase_status == config('constants.status_validated')) tr-task-validated @endif
+													style-prevu bold">{{number_format($phase->phase_days_p, 3, ',', ' ')}}</span>
+										</div>
+										<div class="flex-row flex-wrap-no justify-flex-start pad-h-small width-rem-15">
+												<span class="font-12-px no-bold 
+													@if($phase->phase_status == config('constants.status_terminated')) tr-task-terminated @endif
+												@if($phase->phase_status == config('constants.status_not_validated')) tr-task-not-validated @endif
+												@if($phase->phase_status == config('constants.status_validated')) tr-task-validated @endif ">{{trans('activity.DaysR')}}{{trans('app.double_dot_separator')}}</span>
+											<span class="
+													@if($phase->phase_status == config('constants.status_terminated')) tr-task-terminated @endif
+											@if($phase->phase_status == config('constants.status_not_validated')) tr-task-not-validated @endif
+											@if($phase->phase_status == config('constants.status_validated')) tr-task-validated @endif
+													style-realise bold">{{number_format($phase->phase_days_r, 3, ',', ' ')}}</span>
+										</div>
+									</div>
+								</th>
+							</tr>
 							</thead>
 						</table>
 					</div>
@@ -305,27 +309,29 @@
 				</div>
 
 				{{--TASKS PANEL--}}
-				<div id="task_panel{{$phase->phase_id}}" class="collapse" role="tabpanel" data-parent="#accordion_phase{{$phase->phase_id}}" aria-labelledby="task_panel_heading{{$phase->phase_id}}">
+				<div id="task_panel{{$phase->phase_id}}" class="collapse" role="tabpanel"
+				     data-parent="#accordion_phase{{$phase->phase_id}}"
+				     aria-labelledby="task_panel_heading{{$phase->phase_id}}">
 					<div class="phases-card-body marg-h-small">
 						<div class="table-responsive">
 							<table class="table sortable table-tasks">
 								<thead>
 								<tr class="">
 									<th data-defaultsort="disabled" class="width-rem-3"></th>
-									
+
 									<th data-defaultsort="disabled" class="pad-h-none action-btn-group-task">
 										<div class="action-btn-group justify-center">
 											{{--CREATE TASKS--}}
 											<button id="createTaskBtn"
-													class="btn-common "
-													title="{{ucfirst(trans('task.act_create'))}}"
-													data-toggle="modal"
-													data-toggle="tooltip"
-													data-placement="bottom"
-													data-phase=" {{json_encode(['phase_id' => $phase->phase_id, 'phase_name' => $phase->phase_name, 'activity_id' => $phase->activity_id])}} "
-													name="createTaskOccurence"
-													data-target="#createTaskOccurence"
-													@if($phase->phase_status == config('constants.status_deleted')) disabled @endif>
+											        class="btn-common "
+											        title="{{ucfirst(trans('task.act_create'))}}"
+											        data-toggle="modal"
+											        data-toggle="tooltip"
+											        data-placement="bottom"
+											        data-phase=" {{json_encode(['phase_id' => $phase->phase_id, 'phase_name' => $phase->phase_name, 'activity_id' => $phase->activity_id])}} "
+											        name="createTaskOccurence"
+											        data-target="#createTaskOccurence"
+											        @if($phase->phase_status == config('constants.status_deleted')) disabled @endif>
 												<i class="far fa-calendar-plus svg-medium btn-theme-fonce-leger"></i>
 											</button>
 										</div>

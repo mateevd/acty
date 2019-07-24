@@ -70,11 +70,13 @@
 			</div>
 			<div class="flex-row flex-wrap-yes justify-flex-end pad-h-small pad-v-top-medium pad-v-bottom-small">
 				<div class="flex-row flex-wrap-no justify-flex-end pad-h-small width-rem-20">
-					<span class="default-entity-title-label">J.ouvrés <span class="exp-annee">({{substr(\Carbon\Carbon::parse($current_date)->format('m/Y'), 0, 2).'/'.substr(\Carbon\Carbon::parse($current_date)->format('m/Y'), 5, 2)}})</span> : </span>
+					<span class="default-entity-title-label">J.ouvrés<span class="exp-annee">({{substr(\Carbon\Carbon::parse($current_date)->format('m/Y'), 0, 2).'/'.substr(\Carbon\Carbon::parse($current_date)->format('m/Y'), 5, 2)}})</span> : </span>
+
 					<span class="default-entity-title-data">{{number_format($open_days_month, '3', ',', ' ')}}</span>
 				</div>
 				<div class="flex-row flex-wrap-no justify-flex-end pad-h-small width-rem-20">
-					<span class="default-entity-title-label">Absences <span class="exp-annee">({{substr(\Carbon\Carbon::parse($current_date)->format('m/Y'), 0, 2).'/'.substr(\Carbon\Carbon::parse($current_date)->format('m/Y'), 5, 2)}})</span> : </span>
+					<span class="default-entity-title-label">Absences<span class="exp-annee">({{substr(\Carbon\Carbon::parse($current_date)->format('m/Y'), 0, 2).'/'.substr(\Carbon\Carbon::parse($current_date)->format('m/Y'), 5, 2)}})</span> : </span>
+
 					<span class="default-entity-title-data style-absence">{{number_format($user_total_absence_month, '3', ',', ' ')}}</span>
 				</div>
 			</div>
@@ -190,11 +192,13 @@
 				</div>
 				<div class="flex-row flex-wrap-yes justify-flex-end pad-h-small pad-v-top-medium pad-v-bottom-small">
 					<div class="flex-row flex-wrap-no justify-flex-end pad-h-small width-rem-20">
-						<span class="default-entity-title-label">J.ouvrés <span class="exp-annee">({{substr(\Carbon\Carbon::parse($current_date)->format('m/Y'), 0, 2).'/'.substr(\Carbon\Carbon::parse($current_date)->format('m/Y'), 5, 2)}})</span> : </span>
+						<span class="default-entity-title-label">J.ouvrés<span class="exp-annee">({{substr(\Carbon\Carbon::parse($current_date)->format('m/Y'), 0, 2).'/'.substr(\Carbon\Carbon::parse($current_date)->format('m/Y'), 5, 2)}})</span> : </span>
+
 						<span class="default-entity-title-data">{{number_format($open_days_entity, '3', ',', ' ')}}</span>
 					</div>
 					<div class="flex-row flex-wrap-no justify-flex-end pad-h-small width-rem-20">
-						<span class="default-entity-title-label">Absences <span class="exp-annee">({{substr(\Carbon\Carbon::parse($current_date)->format('m/Y'), 0, 2).'/'.substr(\Carbon\Carbon::parse($current_date)->format('m/Y'), 5, 2)}})</span> : </span>
+						<span class="default-entity-title-label">Absences<span class="exp-annee">({{substr(\Carbon\Carbon::parse($current_date)->format('m/Y'), 0, 2).'/'.substr(\Carbon\Carbon::parse($current_date)->format('m/Y'), 5, 2)}})</span> : </span>
+
 						<span class="default-entity-title-data style-absence">{{number_format($entity_total_absences_month, '3', ',', ' ')}}</span>
 					</div>
 				</div>
