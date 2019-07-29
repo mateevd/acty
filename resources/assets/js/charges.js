@@ -4,6 +4,7 @@ $(document).on('click', '#detailsChargesButton', function () {
 	var charge_month = JSON.parse($(this).data('charge_month'));
 	var charge_year = JSON.parse($(this).data('charge_year'));
 	var full_name = $(this).data('full_name');
+	var user_role_id = parseInt($(this).data('user_role_id'));
 
 	$("#detailsCharges #user_id").text(user_id);
 	$("#detailsCharges #charge_month").text(charge_month);
@@ -32,7 +33,6 @@ $(document).on('click', '#detailsChargesButton', function () {
 			var display_task_days_p = $.number(value.task_days_p, 3, ',', ' ');
 			var display_task_days_r = $.number(value.task_days_r, 3, ',', ' ');
 
-			
 			if (value.task_status == 1) var status_flag = '<tr class="tr-task-terminated">'; else var status_flag = '<tr>';
 			if (value.task_status == 2) var status_flag = '<tr class="tr-task-not-validated">'; else var status_flag = '<tr>';
 			if (value.task_status == 3) var status_flag = '<tr class="tr-task-validated">'; else var status_flag = '<tr>';
@@ -40,7 +40,13 @@ $(document).on('click', '#detailsChargesButton', function () {
 			//create table + add values
 			var line_activity_name = $('<td class="text-left truncate-details">').attr("data-value", value.activity_name).text(value.activity_name);
 			var line_phase_name = $('<td class="text-left truncate-details">').attr("data-value", value.phase_name).text(value.phase_name);
-			var line_task_name = $('<td class="text-left truncate-details">').attr("data-value", value.task_name).text(value.task_name.concat(" - ").concat(value.task_status));
+
+			//Utile pour debug
+			if (user_role_id == 1)
+				var line_task_name = $('<td class="text-left truncate-details">').attr("data-value", value.task_name).text(value.task_name.concat(" (s:").concat(value.task_status).concat(")"));
+			else
+				var line_task_name = $('<td class="text-left truncate-details">').attr("data-value", value.task_name).text(value.task_name);
+
 			var line_task_type_name = $('<td class="text-left truncate-details">').attr("data-value", value.task_type_name).text(value.task_type_name);
 			var line_task_start_p = $('<td class="text-center truncate-details">').attr("data-value", value.task_start_p).text(display_task_start_p);
 			var line_task_end_p = $('<td class="text-center truncate-details">').attr("data-value", value.task_end_p).text(display_task_end_p);

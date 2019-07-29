@@ -118,7 +118,7 @@
 	     aria-labelledby="Afficher la vue simplifiée d'une activité">
 		<div class="modal-dialog modal-largest" role="document">
 			<div class="modal-content">
-				<div class="modal-custom-title">Vue simplifiée</div>
+				<div class="modal-custom-title">{{trans('activity.act_details')}}</div>
 				<div class="modal-custom-libelle" id="activity_name"></div>
 
 				<div class="flex-row flex-wrap-no justify-center items-center text-center pad-v-small marg-none modal-custom-libelle-ex has-search-sticky">
@@ -137,6 +137,8 @@
 				<form action="{{route('activities.details', $activity->activity_id)}}" method="get"
 				      class="needs-validation hide-submit modal-custom-form" novalidate>
 					{{csrf_field()}}
+					<input type="hidden" name="user_role_id" id="user_role_id">
+
 					@include('activities.activity_detail')
 
 					<div class="modal-custom-bottom">

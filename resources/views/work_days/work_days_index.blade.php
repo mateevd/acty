@@ -45,26 +45,7 @@
 				@endif
 			</ul>
 		</div>
-		<div class="navbar-tabs-select-date">
-			<form id="date_change" action="{{route('temps')}}" method="get" name="dateSelect" class="hide-submit">
-				<div class="">
-					{!! Form::selectMonth('monthSelect', $current_date->month ? $current_date->month : Carbon\Carbon::now()->month ,
-							["class"=>"drop-date-common drop-date-month"])!!}
-				</div>
-				<div class="">
-					{!! Form::selectRange('yearSelect', config('constants.start_year'), config('constants.end_year'), $current_date->year ? $current_date->year : Carbon\Carbon::now()->year,
-							["class"=>"drop-date-common drop-date-year"])!!}
-				</div>
-				<div class="drop-date-submit">
-					<button id="btn-submit-form-date" class="drop-date-custom-btn"
-					        data-toggle="tooltip"
-					        data-placement="bottom"
-					        title="{{trans('app.ok')}}">
-						<i class="fas fa-arrow-circle-right"></i>
-					</button>
-				</div>
-			</form>
-		</div>
+		@include('includes.date_select')
 	</div>
 
 	<div class="tab-content">
@@ -189,7 +170,11 @@
 							<td class="text-center wrap-yes truncate-small"
 							    data-value="{{ $userTime->task_start_p }}">{{Carbon\Carbon::parse($userTime->task_start_p)->format('m/Y')}}</td>
 							<td class="text-center">{{\Carbon\Carbon::parse($userTime->work_day_date)->format('d/m/Y')}}</td>
-							<td class="wrap-yes truncate-large">{{$userTime->work_day_description}}</td>
+							<td class="wrap-yes truncate-large">{{$userTime->work_day_description}}
+								@if(auth()->user()->role_id == config('constants.role_admin_id'))
+									{{trans('app.space_separator')}}(s:{{$userTime->work_day_status}})
+								@endif
+							</td>
 							<td data-value="{{$userTime->work_day_hours}}"
 							    class="text-right style-realise">{{ number_format( $userTime->work_day_hours, 3, ',', ' ') }}</td>
 						</tr>

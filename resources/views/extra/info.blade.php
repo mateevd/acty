@@ -2,97 +2,138 @@
 
 @section('content')
 
-{{--SELECT TAB--}}
-<div class="navbar-tabs">
-	<div class="navbar-tabs-select-tab">
-		<ul class="nav" role="tablist" id="info-tab-selection">
-			<li class="pad-h-right-small">
-				<a class="flex-row flex-wrap-no nav-link-period" href="#task_types" role="tab" data-toggle="tab">
-					{{trans('app.info_task_types')}}</a>
-			</li>
-			<li class="pad-h-right-small">
-				<a class="flex-row flex-wrap-no nav-link-period" href="#open_days" role="tab" data-toggle="tab">
-					{{trans('app.info_open_days')}}</a>
-			</li>
-			<li class="pad-h-right-small">
-				<a class="flex-row flex-wrap-no nav-link-period" href="#change_log" role="tab" data-toggle="tab">
-					{{trans('app.info_change_log')}}</a>
-			</li>
-		</ul>
+	{{--SELECT TAB--}}
+	<div class="navbar-tabs">
+		<div class="navbar-tabs-select-tab">
+			<ul class="nav" role="tablist" id="info-tab-selection">
+				<li class="pad-h-right-small">
+					<a class="flex-row flex-wrap-no nav-link-period" href="#task_types" role="tab" data-toggle="tab">
+						{{trans('app.info_task_types')}}</a>
+				</li>
+				<li class="pad-h-right-small">
+					<a class="flex-row flex-wrap-no nav-link-period" href="#open_days" role="tab" data-toggle="tab">
+						{{trans('app.info_open_days')}}</a>
+				</li>
+				<li class="pad-h-right-small">
+					<a class="flex-row flex-wrap-no nav-link-period" href="#change_log" role="tab" data-toggle="tab">
+						{{trans('app.info_change_log')}}</a>
+				</li>
+			</ul>
+		</div>
+		<div class="navbar-tabs-select-date">
+			<form id="date_change" action="{{route('info')}}" method="get" name="dateSelect" class="hide-submit">
+				<div class="">
+					{!! Form::selectMonth('monthSelect', $current_date->month ? $current_date->month : Carbon\Carbon::now()->month ,
+							["class"=>"drop-date-common drop-date-month"])!!}
+				</div>
+				<div class="">
+					{!! Form::selectRange('yearSelect', config('constants.start_year'), config('constants.end_year'), $current_date->year ? $current_date->year : Carbon\Carbon::now()->year,
+							["class"=>"drop-date-common drop-date-year"])!!}
+				</div>
+				<div class="drop-date-submit">
+					<button id="btn-submit-form-date" class="drop-date-custom-btn"
+					        data-toggle="tooltip"
+					        data-placement="bottom"
+					        title="{{trans('app.ok')}}">
+						<i class="fas fa-arrow-circle-right"></i>
+					</button>
+				</div>
+			</form>
+		</div>
 	</div>
-	@include('includes.date_select')
-</div>
 
-<div class="tab-content">
+	<div class="tab-content">
 
-	{{--TASK TYPES--}}
-	<div class="tab-pane" role="tabpanel" id="task_types">
-		<div class="table-responsive">
-			<table class="table sortable">
-				<thead>
-				<tr>
-					<th class="tiny-cell">{{trans('app.info_task_type')}}</th>
-					<th>{{ucfirst(trans('app.description'))}}</th>
-				</tr>
-				</thead>
-
-				<tbody id="filter_table">
-				@foreach($task_types as $task_type)
+		{{--TASK TYPES--}}
+		<div class="tab-pane" role="tabpanel" id="task_types">
+			<div class="table-responsive">
+				<table class="table sortable">
+					<thead>
 					<tr>
-						<td class="wrap-no">{{$task_type->task_name}}</td>
-						<td class="truncate-activites">{{$task_type->task_description}}</td>
+						<th class="tiny-cell">{{trans('app.info_task_type')}}</th>
+						<th>{{ucfirst(trans('app.description'))}}</th>
 					</tr>
-				@endforeach
-				</tbody>
-			</table>
+					</thead>
+
+					<tbody id="filter_table">
+					@foreach($task_types as $task_type)
+						<tr>
+							<td class="wrap-no">{{$task_type->task_name}}</td>
+							<td class="truncate-activites">{{$task_type->task_description}}</td>
+						</tr>
+					@endforeach
+					</tbody>
+				</table>
+			</div>
+			<div class="text-center total-separator"></div>
 		</div>
-		<div class="text-center total-separator"></div>
-	</div>
 
-	{{--TAB OPEN DAYS--}}
-	<div class="tab-pane" role="tabpanel" id="open_days">
-		<div class="table-responsive">
-			<table class="table sortable">
-				<thead>
-				<tr>
-					<th class="tiny-cell">{{ucfirst(trans('app.lab_year'))}}</th>
-					<th class="tiny-cell text-center">{{ucfirst(trans('app.lab_month'))}}</th>
-					<th>{{trans('app.info_open_days')}}</th>
-				</tr>
-				</thead>
-
-				<tbody id="filter_table">
-				@foreach($open_days as $open_day)
-					<tr class="@if ( ($open_day->year == Carbon\Carbon::now()->year) && ($open_day->month == Carbon\Carbon::now()->month) ) tr-connected-user @endif">
-						<td>{{$open_day->year}}</td>
-						<td class="text-center">{{$open_day->month}}</td>
-						<td>{{$open_day->days}}</td>
+		{{--TAB OPEN DAYS--}}
+		<div class="tab-pane" role="tabpanel" id="open_days">
+			<div class="table-responsive">
+				<table class="table sortable">
+					<thead>
+					<tr>
+						<th class="tiny-cell">{{ucfirst(trans('app.lab_year'))}}</th>
+						<th class="tiny-cell text-center">{{ucfirst(trans('app.lab_month'))}}</th>
+						<th>{{trans('app.info_open_days')}}</th>
 					</tr>
-				@endforeach
-				</tbody>
-			</table>
+					</thead>
+
+					<tbody id="filter_table">
+					@foreach($open_days as $open_day)
+						<tr class="@if ( ($open_day->year == Carbon\Carbon::now()->year) && ($open_day->month == Carbon\Carbon::now()->month) ) tr-connected-user @endif">
+							<td>{{$open_day->year}}</td>
+							<td class="text-center">{{$open_day->month}}</td>
+							<td>{{$open_day->days}}</td>
+						</tr>
+					@endforeach
+					</tbody>
+				</table>
+			</div>
+			<div class="text-center total-separator"></div>
 		</div>
-		<div class="text-center total-separator"></div>
-	</div>
 
-	{{--CHANGE LOG--}}
-	<div class="tab-pane" role="tabpanel" id="change_log">
-		<div class="table-responsive">
-			<table class="table sortable">
-				<thead>
-				<tr>
-					<th class="tiny-cell">Version</th>
-					<th>{{ucfirst(trans('app.description'))}}</th>
-				</tr>
-				</thead>
+		{{--CHANGE LOG--}}
+		<div class="tab-pane" role="tabpanel" id="change_log">
+			<div class="table-responsive">
+				<table class="table sortable">
+					<thead>
+					<tr>
+						<th class="tiny-cell">Version</th>
+						<th>{{ucfirst(trans('app.description'))}}</th>
+					</tr>
+					</thead>
 
-				<tbody id="filter_table">
+					<tbody id="filter_table">
 					<tr class="tr-connected-user">
-						<td class="wrap-no v-align-top">BUILD.1907 - REV.1301</td>
+						<td class="wrap-no v-align-top">BUILD.1909 - REV.0201</td>
 						<td class="">
 							<span class="bold underline">Changements majeurs</span>
 							<ul>
 								<li>Mise en place des CRAs (fonctionnalité optionnelle)</li>
+								<ul>
+									<li>Introduction de nouveaux statuts</li>
+									<ul>
+										<li>La liste des statuts lorsque la fonctionnalité des CRAs est activée est la suivante : </li>
+										<ul>
+											<li><label class="style-libelle bold">En cours</label> : affiché avec la couleur courante</li>
+											<li><label class="style-terminated bold">Terminé</label> : affiché avec une couleur bleue</li>
+											<li><label class="style-not-validated bold">Non validé</label> (refusé) : affiché avec une couleur rouge</li>
+											<li><label class="style-validated bold">Validé</label> : affiché avec une couleur verte</li>
+										</ul>
+										<li>La liste des statuts lorsque la fonctionnalité des CRAs n'est pas activée est la suivante : </li>
+										<ul>
+											<li><label class="style-libelle bold">En cours</label> : affiché avec la couleur courante</li>
+											<li><label class="style-validated bold">Terminé</label> : affiché avec une couleur verte</li>
+										</ul>
+									</ul>
+									<li>Création d'un onglet dans la page des <b>Temps</b></li>
+									<ul>
+										<li>Affichage du tri par défaut sur les chargements des tableaux</li>
+										<li>Affichage des utilisateurs de l'entité gérée sous forme de cartes</li>
+									</ul>
+								</ul>
 							</ul>
 							<hr>
 							<span class="bold underline">Changements mineurs</span>
@@ -103,41 +144,66 @@
 									<li>Toutes les pages ont désormais au moins un onglet</li>
 									<li>Les totaux des écrans sont désormais dans la partie supérieure</li>
 									<li>Affichage du tri par défaut sur les chargements des tableaux</li>
+									<li>Uniformaisation des styles</li>
+									<li>Optimisation du responsive design</li>
 								</ul>
-								<li>Refonte de l'écran <b>Tâches</b> : 
-								<ul>
-									<li>Édition, suppression et réactivation des tâches</li>
-									<li>Rajout de l'onglet entité</li>
-								</ul>
+								<li>Refonte de l'écran <b>Activités</b> :
+									<ul>
+										<li>Optimisation du temps de chargement</li>
+										<li>Simplification à deux onglets</li>
+										<ul>
+											<li>Onglet <b><i>Autorisées</i></b> : affichant uniquement les activités modifiables par l'utilisateur</li>
+											<li>Onglet <b><i>Toutes</i></b> : affichant toutes les activités</li>
+											<li>Chaque onglet à désormais entre parenthèses le nombre d'activités en fonction des statuts (cf. <i>Introduction de nouveaux statuts</i>)</li>
+										</ul>
+										<li>L'export a été amélioré, il permet désormais aux utilisateurs de récupérer :
+											<ul>
+												<li>La liste des activités (<span class="style-libelle bold italic">Toutes</span> ou <span class="style-libelle bold italic">Actives</span>)</li>
+												<li>Les charges (<span class="style-prevu bold italic">Prévu</span> et <span class="style-realise bold italic">Réalisé</span>) de leurs <b>Tâches</b>  sur une période donnée</li>
+												<li>Le détail de leurs <b>Temps</b> (<span class="style-realise bold italic">Réalisé</span>) sur une période donnée</li>
+											</ul>
+									</ul>
+								<li>Refonte de l'écran <b>Tâches</b> :
+									<ul>
+										<li>Édition, suppression et réactivation des tâches</li>
+										<li>Rajout de l'onglet entité</li>
+									</ul>
 								<li>Refonte mineure de l'écran <b>Charges</b> :
-								<ul>
-									<li>Rajout d'une icône lorsque toutes les tâches du mois sont validées</li>
-									<li>Possibilité de voir la charge en cliquant sur les pastilles</li>
-								</ul>
+									<ul>
+										<li>Rajout d'une icône lorsque toutes les tâches du mois sont validées</li>
+										<li>Possibilité de voir la charge en cliquant sur les pastilles</li>
+									</ul>
 								<li>Refonte mineure de l'écran <b>Planning</b> :
-								<ul>
-									<li>Légère refonte graphique pour une meilleure prise en compte des thèmes</li>
-									<li>Rajout de boutons globaux Terminer et Réactiver (avec la selection des tâches)</li>
-								</ul>
-								<li>Refonte mineure de l'écran <b>Indicateurs</b> : 
-								<ul>
-									<li>Rajout d'onglets</li>
-									<li>Meilleure distinction des données</li>
-									<li>Structuration des données compatibles avec les évolutions futures</li>
-								</ul>
-								<li>L'export permet maintenant aux utilisateurs de récupérer leurs temps réalisés sur une période donnée</li>
-								<li>Optimisation du moteur de mise à jour en cascade des tâches, phases et activités</li>
-								<li>Le bouton d'aide se trouve désormais dans le menu utilisateur, en haut, à doite</li>
-								<li>Rajout des thèmes "Printanier" et "Pourpre"</li>
+									<ul>
+										<li>Création d'un onglet <b><i>Indicateurs</i></b> et déplacement du résumé du projet dans ce dernier</li>
+										<li>Légère refonte graphique pour une meilleure prise en compte des thèmes</li>
+										<li>Uniformisation des largeurs de colonnes</li>
+										<li>Rajout de boutons globaux <b><i>Terminer</i></b> et <b><i>Réactiver</i></b> (avec la selection des tâches)</li>
+										<li>Chaque phase à désormais entre parenthèses le nombre de tâches en fonction des statuts (cf. <i>Introduction de nouveaux statuts</i>)</li>
+									</ul>
+								<li>Refonte mineure de l'écran <b>Indicateurs</b> :
+									<ul>
+										<li>Rajout d'onglets</li>
+										<li>Rajout d'un système de cartes évolutif</li>
+										<li>Meilleure distinction des données</li>
+										<li>Structuration des données compatibles avec les évolutions futures</li>
+									</ul>
+								<li>Général :
+									<ul>
+										<li>Optimisation du moteur de mise à jour en cascade des tâches, phases et activités</li>
+										<li>Le bouton d'aide se trouve désormais dans le menu utilisateur, en haut, à doite</li>
+										<li>Rajout des thèmes "<span class="style-02-libelle bold italic">Printanier</span>" et "<span class="style-03-libelle bold italic">Pourpre</span>"</li>
+									</ul>
 							</ul>
 							<hr>
 							<span class="bold underline">Correction de bugs</span>
 							<ul>
-								<li>1907-0052 : Correction dans l'affichage des boutons de rajout/suppression (temps et absences)</li>
+								<li>1907-0055 : Correction dans la validation de l'enveloppe (ajout et édition d'<b>Activité</b>) et du coût journalier (ajout et modification d'un <b>Utilisateur</b>)</li>
+								<li>1907-0052 : Correction dans l'affichage des boutons de rajout/suppression (<b>Temps</b> et <b>Absences</b>)</li>
 								<li>1907-0051 : Correction dans les autorisations liées au responsable adjoint</li>
 								<li>1907-0049 : Correction dans l'affichage du pied de page</li>
-								<li>1906-0044 : Correction dans l'icône de tri des tableaux qui était à l'envers</li>
-								<li>1906-0043 : Correction dans le tri de la liste des phase pour le déplacement et la copie multi-tâches</li>
+								<li>1906-0044 : Correction dans l'icône de tri des tableaux qui ne s'affichait pas correctement</li>
+								<li>1906-0043 : Correction dans le tri de la liste des phases pour le déplacement et la copie multi-tâches</li>
 							</ul>
 						</td>
 					</tr>
@@ -222,13 +288,12 @@
 						</td>
 					</tr>
 
-				</tbody>
-			</table>
+					</tbody>
+				</table>
+			</div>
+			<div class="text-center total-separator"></div>
 		</div>
-		<div class="text-center total-separator"></div>
+
 	</div>
-
-
-</div>
 
 @endsection

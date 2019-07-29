@@ -116,7 +116,10 @@
 				<i class="fas fa-flag 
 					@if($task->task_milestone == 1) milestone-yes 
 					@else milestone-no @endif"></i>
-				{{$task->task_name}} ({{$task->task_status}})
+				{{$task->task_name}}
+				@if(auth()->user()->role_id == config('constants.role_admin_id'))
+					{{trans('app.space_separator')}}(s:{{$task->task_status}})
+				@endif
 			</td>
 			<td class="text-left wrap-yes truncate-large">{{$task->task_type_name}}</td>
 			<td class="wrap-yes truncate-small"

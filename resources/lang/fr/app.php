@@ -99,9 +99,17 @@
 		'double_dot_separator' => ' : ',
 		
 		'open_days' => 'jours ouvrés',
+		'open_days_short' => 'j.o.',
 		'absence_days' => 'absences posées',
+		
+		'realise' => 'réalisé',
 		'realise_days' => 'jours réalisés',
-		'total_days' => 'jours prévus',
+		
+		'prevu_total' => 'prévu total',
+		'prevu_restant' => 'prévu restant',
+		'prevu' => 'prévu',
+		'restant' => 'restant',
+		
 		'restant_days' => 'jours restants',
 		'left_to_log_days' => 'jours restant à saisir',
 		
@@ -142,19 +150,15 @@
 		
 		'lab_prevu_total' => 'Total prévu',
 		'lab_prevu' => 'Prévu',
-		'lab_restant' => 'Restant',
-		'lab_realise' => 'Réalisé',
 		
 		'lab_responsable' => 'Responsable',
 		'lab_resp' => 'Resp.',
-		
-		'lab_date' => 'date',
 		
 		'opex' => 'opex',
 		'capex' => 'capex',
 		
 		'positive' => 'strictement supérieur à zéro',
-		'positive0' => 'supérieur ou égal à zéro',
+		'positive_int_0' => 'entier supérieur ou égal à zéro',
 
 
 
@@ -172,6 +176,13 @@
 		'anterieur_wom' => 'antérieure',
 		'anterieur_wom_pls' => 'antérieures',
 		
+		'date' => 'date',
+		'dates' => 'dates',
+		
+		'budget' => 'budget',
+		
+		'phase' => 'phase',
+		'phase_pls' => 'phases',
 		
 		'all_man' => 'tout',
 		'all_man_pls' => 'tous',

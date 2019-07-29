@@ -297,6 +297,9 @@
 								<i class="fas fa-flag
 								@if($currentTask->task_milestone == 1) milestone-yes @else milestone-no @endif"></i>
 								{{$currentTask->task_name}}
+								@if(auth()->user()->role_id == config('constants.role_admin_id'))
+									{{trans('app.space_separator')}}(s:{{$currentTask->task_status}})
+								@endif
 							</td>
 							<td class="wrap-yes truncate-large">{{$currentTask->task_type_name}}</td>
 							<td class="text-center wrap-yes truncate-small"
@@ -547,6 +550,9 @@
 							<td class="wrap-yes truncate-large style-tache">
 								<i class="fas fa-flag @if($oldTask->task_milestone == 1) milestone-yes @else milestone-no @endif"></i>
 								{{$oldTask->task_name}}
+								@if(auth()->user()->role_id == config('constants.role_admin_id'))
+									{{trans('app.space_separator')}}(s:{{$oldTask->task_status}})
+								@endif
 							</td>
 							<td class="wrap-yes truncate-large">{{$oldTask->task_type_name}}</td>
 							<td class="text-center wrap-yes truncate-small"
@@ -689,7 +695,10 @@
 								<td class="wrap-yes truncate-large style-tache">
 									<i class="fas fa-flag
 									@if($entityTask->task_milestone == 1) milestone-yes @else milestone-no @endif"></i>
-									{{$entityTask->task_name}} ({{$entityTask->task_status}})
+									{{$entityTask->task_name}}
+									@if(auth()->user()->role_id == config('constants.role_admin_id'))
+										{{trans('app.space_separator')}}(s:{{$entityTask->task_status}})
+									@endif
 								</td>
 								<td class="wrap-yes truncate-large">{{$entityTask->full_name_affected}}</td>
 								<td class="wrap-yes truncate-large">{{$entityTask->task_type_name}}</td>

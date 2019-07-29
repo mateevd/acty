@@ -22,6 +22,7 @@
 			<form action="{{route('charges.details', [$entity_charge->user_id, $entity_charge->mm, $entity_charge->yy])}}" method="get"
 			      class="needs-validation hide-submit modal-custom-form" novalidate>
 				{{csrf_field()}}
+				<input type="hidden" name="user_role_id" id="user_role_id">
 				<input type="hidden" name="charge_month" id="charge_month">
 				<input type="hidden" name="charge_year" id="charge_year">
 				@include('charges.charges_detail')

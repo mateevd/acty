@@ -67,26 +67,7 @@
 				</li>
 			</ul>
 		</div>
-		<div class="navbar-tabs-select-date">
-			<form id="date_change" action="{{route('activités')}}" method="get" name="dateSelect" class="hide-submit">
-				<div class="">
-					{!! Form::selectMonth('monthSelect', $current_date->month ? $current_date->month : Carbon\Carbon::now()->month , 
-							["class"=>"drop-date-common drop-date-month"])!!}
-				</div>
-				<div class="">
-					{!! Form::selectRange('yearSelect', config('constants.start_year'), config('constants.end_year'), $current_date->year ? $current_date->year : Carbon\Carbon::now()->year, 
-							["class"=>"drop-date-common drop-date-year"])!!}
-				</div>
-				<div class="drop-date-submit">
-					<button id="btn-submit-form-date" class="drop-date-custom-btn"
-					        data-toggle="tooltip"
-					        data-placement="bottom"
-					        title="{{trans('app.ok')}}">
-						<i class="fas fa-arrow-circle-right"></i>
-					</button>
-				</div>
-			</form>
-		</div>
+		@include('includes.date_select')
 	</div>
 
 	<div class="tab-content">
@@ -253,6 +234,7 @@
 									        data-toggle="modal"
 									        data-toggle="tooltip"
 									        data-placement="bottom"
+									        data-user_role_id=" {{auth()->user()->role_id == config('constants.role_admin_id')}} "
 									        data-activity_id="{{$activity->activity_id}}"
 									        data-activity_name=" {{json_encode($activity->activity_name)}} "
 									        data-target="#detailsActivity">
@@ -342,7 +324,10 @@
 							@if(auth()->user()->id == $activity->activity_manager) allowed-yes @else allowed-no @endif"
 								   alt="Responsable du projet"></i>
 
-								{{$activity->activity_name}} (s:{{$activity->activity_status}})
+								{{$activity->activity_name}}
+								@if(auth()->user()->role_id == config('constants.role_admin_id'))
+									{{trans('app.space_separator')}}(s:{{$activity->activity_status}})
+								@endif
 							</td>
 							<td class="wrap-no text-center">{{$activity->activity_manager_tri}}</td>
 							<td class="wrap-no text-center">{{$activity->activity_service_code}}</td>
@@ -593,6 +578,7 @@
 									        data-toggle="modal"
 									        data-toggle="tooltip"
 									        data-placement="bottom"
+									        data-user_role_id=" {{auth()->user()->role_id == config('constants.role_admin_id')}} "
 									        data-activity_id="{{$activity->activity_id}}"
 									        data-activity_name=" {{json_encode($activity->activity_name)}} "
 									        data-target="#detailsActivity">
@@ -682,7 +668,10 @@
 							@if(auth()->user()->id == $activity->activity_manager) allowed-yes @else allowed-no @endif"
 								   alt="Responsable du projet"></i>
 
-								{{$activity->activity_name}} (s:{{$activity->activity_status}})
+								{{$activity->activity_name}}
+								@if(auth()->user()->role_id = config('constants.role_admin_id'))
+									{{trans('app.space_separator')}}(s:{{$activity->activity_status}})
+								@endif
 							</td>
 							<td class="wrap-no text-center">{{$activity->activity_manager_tri}}</td>
 							<td class="wrap-no text-center">{{$activity->activity_service_code}}</td>

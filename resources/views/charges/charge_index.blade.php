@@ -14,26 +14,7 @@
 			</li>
 		</ul>
 	</div>
-	<div class="navbar-tabs-select-date">
-		<form id="date_change" action="{{route('charges')}}" method="get" name="dateSelect" class="hide-submit">
-			<div class="">
-				{!! Form::selectMonth('monthSelect', $current_date->month ? $current_date->month : Carbon\Carbon::now()->month , 
-						["class"=>"drop-date-common drop-date-month"])!!}
-			</div>
-			<div class="">
-				{!! Form::selectRange('yearSelect', config('constants.start_year'), config('constants.end_year'), $current_date->year ? $current_date->year : Carbon\Carbon::now()->year, 
-						["class"=>"drop-date-common drop-date-year"])!!}
-			</div>
-			<div class="drop-date-submit">
-				<button id="btn-submit-form-date" class="drop-date-custom-btn"
-				        data-toggle="tooltip"
-				        data-placement="bottom"
-				        title="{{trans('app.ok')}}">
-					<i class="fas fa-arrow-circle-right"></i>
-				</button>
-			</div>
-		</form>
-	</div>
+	@include('includes.date_select')
 </div>
 
 <div class="tab-pane" role="tabpanel" id="charges_all">
@@ -116,6 +97,7 @@
 									        data-toggle="modal"
 									        data-toggle="tooltip"
 									        data-user_id=" {{json_encode($entity_charge->user_id)}} "
+									        data-user_role_id=" {{auth()->user()->role_id == config('constants.role_admin')}} "
 									        data-charge_month=" {{json_encode($entity_charge->mm)}} "
 									        data-charge_year=" {{json_encode($entity_charge->yy)}} "
 											data-full_name=" {{$entity_charge->full_name}} ({{$entity_charge->display_month.'/'.$entity_charge->display_year}}) "

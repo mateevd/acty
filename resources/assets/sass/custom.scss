@@ -86,6 +86,11 @@
 
   /* tasks */
   --task-selected: #e8d5cd;
+
+  /*rappel des libelle des themes optionnels*/
+  --theme-01-libelle: #1f1f1f;
+  --theme-02-libelle: #085020;
+  --theme-03-libelle: #500849;
 }
 
 
@@ -193,7 +198,7 @@ div {
 /*------------------------------------------------------------------------------*/
 /*                             STYLE POLICES                                    */
 /*------------------------------------------------------------------------------*/
-/*---- style-journal   ----- */
+/*---- style-libelle   ----- */
 .style-libelle {
   color: #103060;
   color: var(--theme-libelle);
@@ -201,6 +206,34 @@ div {
 
 .style-libelle:hover {
 }
+
+/*---- style-01-libelle   ----- */
+.style-01-libelle {
+  color: #085020;
+  color: var(--theme-02-libelle);
+}
+
+.style-01-libelle:hover {
+}
+
+/*---- style-02-libelle   ----- */
+.style-02-libelle {
+  color: #085020;
+  color: var(--theme-02-libelle);
+}
+
+.style-02-libelle:hover {
+}
+
+/*---- style-03-libelle   ----- */
+.style-03-libelle {
+  color: #500849;
+  color: var(--theme-03-libelle);
+}
+
+.style-03-libelle:hover {
+}
+
 
 /*---- style-date-du-jour   ----- */
 .style-date-du-jour {
@@ -747,6 +780,16 @@ div {
 .svg-huge {
   font-size: 20px;
   font-size: 2.0rem;
+}
+
+.svg-terrific {
+  font-size: 30px;
+  font-size: 3rem;
+}
+
+.svg-terrificb {
+  font-size: 28px;
+  font-size: 2.8rem;
 }
 
 .svg-insane {
@@ -2304,7 +2347,49 @@ div {
   font-weight: bold;
 }
 
+.card-label{
+  font-size: 11px;
+  font-size: 1.1rem;
 
+  font-weight: normal;
+  font-weight: 400;
+
+  white-space: nowrap;
+  text-align: center;
+}
+
+.card-data{
+  font-size: 11px;
+  font-size: 1.1rem;
+
+  font-weight: bold;
+  font-weight: 700;
+
+  white-space: nowrap;
+  text-align: center;
+}
+
+.form-data{
+  font-size: 11px;
+  font-size: 1.1rem;
+
+  font-weight: normal;
+  font-weight: 400;
+
+  white-space: nowrap;
+  text-align: center;
+}
+
+.form-label{
+  font-size: 11px;
+  font-size: 1.1rem;
+
+  font-weight: bold;
+  font-weight: 700;
+
+  white-space: nowrap;
+  text-align: center;
+}
 
 /*------------------------------------------------------------------------------*/
 /*								CONFIG PAGE										*/
@@ -2365,12 +2450,6 @@ div {
 /*------------------------------------------------------------------------------*/
 /*								MODALES											*/
 /*------------------------------------------------------------------------------*/
-.global-modal-label {
-  white-space: nowrap;
-  font-weight: bold;
-  text-align: center;
-}
-
 .modal-custom-title {
   text-align: center;
 
@@ -2501,8 +2580,8 @@ div {
   height: 3.5rem;
 }
 
-.modal-custom-area-input,
-.modal-custom-fields-input {
+.m-area-input,
+.m-field-input {
   text-align: center;
 
   color: #002045;
@@ -2521,19 +2600,19 @@ div {
   height: 2.5rem;
 }
 
-.modal-custom-area-input {
+.m-area-input {
   height: 50px;
   height: 5rem;
 }
 
-.modal-custom-area-input:focus,
-.modal-custom-fields-input:focus {
+.m-area-input:focus,
+.m-field-input:focus {
   background-color: rgba(0, 0, 0, .1);
   /*opacity: .1;*/
 }
 
-.modal-custom-area-input:disabled,
-.modal-custom-fields-input:disabled {
+.m-area-input:disabled,
+.m-field-input:disabled {
   text-align: center;
 
   background-color: #f0f0ff;
@@ -2835,22 +2914,6 @@ option{
 
   background-color: #b0b0d0;
   background-color: var(--theme-clair-leger);
-}
-
-.planning-label{
-  font-weight: normal;
-  font-weight: 400;
-
-  white-space: nowrap;
-  text-align: center;
-}
-
-.planning-data{
-  font-weight: bold;
-  font-weight: 700;
-
-  white-space: nowrap;
-  text-align: center;
 }
 
 .phases-activity-data-no-bold {
@@ -4107,6 +4170,14 @@ option{
   margin: 0.5rem;
 }
 
+.marg-h-tiny {
+  margin-left: 2px;
+  margin-left: 0.2rem;
+
+  margin-right: 2px;
+  margin-right: 0.2rem;
+}
+
 .marg-h-small {
   margin-left: 5px;
   margin-left: 0.5rem;
@@ -4289,6 +4360,14 @@ option{
   padding: 0 2rem 0 2rem !important;
 }
 
+.pad-h-tiny {
+  padding-left: 2px;
+  padding-left: 0.2rem;
+
+  padding-right: 2px;
+  padding-right: 0.2rem;
+}
+
 .pad-h-small {
   padding-left: 5px;
   padding-left: 0.5rem;
@@ -4369,6 +4448,11 @@ option{
 .ln-b-dashed-small {
   border-bottom: 1px dashed #b0b0d0;
   border-bottom: 0.1rem dashed var(--theme-clair-leger);
+}
+
+.ln-b-dotted-small {
+  border-bottom: 1px dotted #b0b0d0;
+  border-bottom: 0.1rem dotted var(--theme-clair-leger);
 }
 
 .ln-b-dashed-small-fonce {
@@ -4570,6 +4654,11 @@ option{
   width: 3rem;
 }
 
+.width-rem-3b {
+  width: 28px;
+  width: 2.8rem;
+}
+
 .width-rem-5 {
   width: 50px;
   width: 5rem;
@@ -4630,7 +4719,12 @@ option{
 
 .height-rem-3 {
   height: 30px;
-  height: 3rem;
+  height: 3.0rem;
+}
+
+.height-rem-3b {
+  height: 28px;
+  height: 2.8rem;
 }
 
 .height-rem-6 {
@@ -4684,6 +4778,20 @@ option{
 /*	 							  POSITIONS 									*/
 /*------------------------------------------------------------------------------*/
 /*POSITIONS---------------------------------------------------------------------*/
+.pos-rel-m2 {
+  position: relative;
+
+  top: -2px;
+  top: -0.2rem;
+}
+
+.pos-rel-m1 {
+  position: relative;
+
+  top: -1px;
+  top: -0.1rem;
+}
+
 .pos-rel-1 {
   position: relative;
 
@@ -4739,7 +4847,12 @@ option{
   font-weight: normal !important;
 }
 
-.font-11-px {
+.font-10px {
+  font-size: 10px;
+  font-size: 1rem;
+}
+
+.font-11px {
   font-size: 11px;
   font-size: 1.1rem;
 }
@@ -4914,4 +5027,53 @@ ul.circle {
 .bg-green {
   background-color: green;
 }
+
+.bg-yellow {
+  background-color: yellow;
+}
+
+.bg-orange {
+  background-color: orange;
+}
+
+.bg-blue {
+  background-color: blue;
+}
+
+
+
+/*------------------------------------------------------------------------------*/
+/*									À											*/
+/*							VÉRIFIER/CLASSER									*/
+/*------------------------------------------------------------------------------*/
+/*.stability {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: 0 auto 0 auto !important;
+	z-index: 1000;
+	width: 50%;
+	background: maroon;
+	color: yellow;
+	-webkit-border-radius: 1em 1em 0 0;
+	-moz-border-radius: 1em 1em 0 0;
+	border-radius: 1em 1em 0 0;
+	-moz-box-shadow: 0 0 1em #500;
+	-webkit-box-shadow: 0 0 1em #500;
+	box-shadow: 0 0 1em red;
+	padding: 0.5em 1em;
+	text-align: center;
+}*/
+
+
+/*------------------------------------------------------------------------------*/
+/*									À											*/
+/*								SUPPRIMER										*/
+/*------------------------------------------------------------------------------*/
+/*.a-btn-small {
+	position: relative;
+	top: 1px;
+	top: 0.1rem;
+}*/
 

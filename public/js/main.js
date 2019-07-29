@@ -560,6 +560,8 @@ $(function () {
 	/*SHOW PROJECT DETAILS*/
 	$(document).on('click', '#detailsActivityButton', function () {
 		var data_name = JSON.parse($(this).data('activity_name'));
+		var user_role_id = parseInt($(this).data('user_role_id'));
+
 		$("#detailsActivity #activity_name").text(data_name);
 		$("#activity_details_table").empty(); // clear var after btn click
 		$("#activitiesDetailsInput").val(''); // clear var after btn click
@@ -601,9 +603,8 @@ $(function () {
 				//create table + add values
 				var line1 = $('<td class="text-left wrap-yes action-btn-no-body truncate-details">').attr("data-value", value.task_phase_name).text(value.task_phase_name);
 
-				//Utile pour debug des cra, à enlever une fois que tout est testé
-				//var line2 = $('<td class="text-left wrap-yes truncate-large">').attr("data-value", value.task_name).text(value.task_name);
-				var line2 = $('<td class="text-left wrap-yes truncate-large">').attr("data-value", value.task_name).text(value.task_name.concat(' (').concat(value.task_status).concat(')'));
+				//Utile pour debug
+				if (user_role_id == 1) var line2 = $('<td class="text-left wrap-yes truncate-large">').attr("data-value", value.task_name).text(value.task_name.concat(" (s:").concat(value.task_status).concat(")"));else var line2 = $('<td class="text-left wrap-yes truncate-large">').attr("data-value", value.task_name).text(value.task_name);
 
 				var line3 = $('<td class="text-left wrap-yes truncate-details">').attr("data-value", value.task_full_name).text(value.task_full_name);
 				var line4 = $('<td class="text-left wrap-yes truncate-details">').attr("data-value", value.task_type_name).text(value.task_type_name);
@@ -857,6 +858,7 @@ $(document).on('click', '#detailsChargesButton', function () {
 	var charge_month = JSON.parse($(this).data('charge_month'));
 	var charge_year = JSON.parse($(this).data('charge_year'));
 	var full_name = $(this).data('full_name');
+	var user_role_id = parseInt($(this).data('user_role_id'));
 
 	$("#detailsCharges #user_id").text(user_id);
 	$("#detailsCharges #charge_month").text(charge_month);
@@ -891,7 +893,10 @@ $(document).on('click', '#detailsChargesButton', function () {
 			//create table + add values
 			var line_activity_name = $('<td class="text-left truncate-details">').attr("data-value", value.activity_name).text(value.activity_name);
 			var line_phase_name = $('<td class="text-left truncate-details">').attr("data-value", value.phase_name).text(value.phase_name);
-			var line_task_name = $('<td class="text-left truncate-details">').attr("data-value", value.task_name).text(value.task_name.concat(" - ").concat(value.task_status));
+
+			//Utile pour debug
+			if (user_role_id == 1) var line_task_name = $('<td class="text-left truncate-details">').attr("data-value", value.task_name).text(value.task_name.concat(" (s:").concat(value.task_status).concat(")"));else var line_task_name = $('<td class="text-left truncate-details">').attr("data-value", value.task_name).text(value.task_name);
+
 			var line_task_type_name = $('<td class="text-left truncate-details">').attr("data-value", value.task_type_name).text(value.task_type_name);
 			var line_task_start_p = $('<td class="text-center truncate-details">').attr("data-value", value.task_start_p).text(display_task_start_p);
 			var line_task_end_p = $('<td class="text-center truncate-details">').attr("data-value", value.task_end_p).text(display_task_end_p);

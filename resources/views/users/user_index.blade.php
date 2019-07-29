@@ -13,16 +13,16 @@
 <div class="navbar-tabs">
 	<div class="navbar-tabs-select-tab">
 		<ul class="nav" role="tablist" id="users-tab-selection">
-			@if(auth()->user()->roles->name == (config('constants.role_admin')) ||
-			auth()->user()->roles->name == (config('constants.role_directeur')) ||
-			auth()->user()->roles->name == (config('constants.role_service')))
+			@if(auth()->user()->role_id == config('constants.role_admin_id') ||
+			auth()->user()->role_id == config('constants.role_directeur_id') ||
+			auth()->user()->role_id == config('constants.role_service_id'))
 				<li class="pad-h-right-small">
 					<a class="flex-row flex-wrap-no nav-link-period" href="#users_list" role="tab"
 					   data-toggle="tab">
 						<div>
-							@if(auth()->user()->roles->name == (config('constants.role_service'))) {{ucfirst(trans('app.service'))}} @endif
-							@if(auth()->user()->roles->name == (config('constants.role_directeur'))) {{ucfirst(trans('app.department'))}} @endif
-							@if(auth()->user()->roles->name == (config('constants.role_admin'))) {{ucfirst(trans('app.department'))}} @endif
+							@if(auth()->user()->role_id == config('constants.role_service_id')) {{ucfirst(trans('app.service'))}} @endif
+							@if(auth()->user()->role_id == config('constants.role_directeur_id')) {{ucfirst(trans('app.department'))}} @endif
+							@if(auth()->user()->role_id == config('constants.role_admin_id')) {{ucfirst(trans('app.department'))}} @endif
 						</div>
 					</a>
 				</li>
@@ -57,9 +57,6 @@
 					<th>{{trans('users.Login')}}</th>
 					<th>{{trans('users.Role')}}</th>
 					<th>{{trans('users.EmailAddress')}}</th>
-					@if(auth()->user()->roles->name == (config('constants.role_admin')))
-						<th class="text-center tiny-cell">{{trans('users.Status')}}</th>
-					@endif
 					<th class="text-center tiny-cell">{{trans('users.Trigram')}}</th>
 					<th class="text-center tiny-cell">{{trans('users.Department')}}</th>
 					<th class="text-center tiny-cell">{{trans('users.Service')}}</th>
@@ -127,12 +124,16 @@
 									<i class="fas fa-trash svg-small btn-theme-clair-fort"></i></button>
 							</div>
 						</td>
-						<td>{{$user->user_last_name}}</td>
+						<td>{{$user->user_last_name}}
+							@if(auth()->user()->role_id == config('constants.role_admin_id'))
+								{{trans('app.space_separator')}}(s:{{$user->user_status}})
+							@endif
+						</td>
 						<td>{{$user->user_first_name}}</td>
 						<td>{{$user->user_login}}</td>
 						<td>{{$user->user_role_name}}</td>
 						<td>{{$user->user_email}}</td>
-						@if(auth()->user()->roles->name == (config('constants.role_admin')))
+						@if(auth()->user()->role_id == config('constants.role_admin_id'))
 							<td class="text-center">{{$user->user_status}}</td>
 						@endif
 						<td class="text-center">{{$user->user_trigramme}}</td>

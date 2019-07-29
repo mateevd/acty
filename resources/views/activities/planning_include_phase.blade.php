@@ -95,6 +95,9 @@
 		<div class="flex-row flex-wrap-yes justify-flex-start items-center flex-grow-no pad-h-small">
 			<span class="phases-title-label">{{trans('app.activity')}}{{trans('app.double_dot_separator')}}</span>
 			<span class="flex-wrap-yes phases-title-data">{{$activity->activity_name}}</span>
+			@if(auth()->user()->role_id == config('constants.role_admin_id'))
+				{{trans('app.space_separator')}}(s:{{$activity->activity_status}})
+			@endif
 		</div>
 		<div class="flex-row flex-wrap-yes justify-flex-start items-center flex-grow-1 pad-h-small">
 			<span class="phases-title-label">{{ucfirst(trans('app.code'))}}{{trans('app.double_dot_separator')}}</span>

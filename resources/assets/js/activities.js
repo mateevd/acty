@@ -29,31 +29,31 @@ $(function () {
 	});
 
 	$(document).on('change', '#type_charges', function () {
-			var selected_item = $('#type_charges').val();
+		var selected_item = $('#type_charges').val();
 
-			if (selected_item == 1) {
-				$('#exportTables #is_dates').attr('hidden', false);
-				$('#exportTables #charge_date_end').attr('required', true);
-				$('#exportTables #charge_date_start').attr('required', true);
-			} else {
-				$('#exportTables #is_dates').attr('hidden', true);
-				$('#exportTables #charge_date_end').attr('required', false);
-				$('#exportTables #charge_date_start').attr('required', false);
-			}
+		if (selected_item == 1) {
+			$('#exportTables #is_dates').attr('hidden', false);
+			$('#exportTables #charge_date_end').attr('required', true);
+			$('#exportTables #charge_date_start').attr('required', true);
+		} else {
+			$('#exportTables #is_dates').attr('hidden', true);
+			$('#exportTables #charge_date_end').attr('required', false);
+			$('#exportTables #charge_date_start').attr('required', false);
+		}
 	});
 
 	$(document).on('change', '#type_personal', function () {
-			var selected_item = $('#type_personal').val();
+		var selected_item = $('#type_personal').val();
 
-			if (selected_item == 1) {
-				$('#exportTables #is_dates_personal').attr('hidden', false);
-				$('#exportTables #personal_date_end').attr('required', true);
-				$('#exportTables #personal_date_start').attr('required', true);
-			} else {
-				$('#exportTables #is_dates_personal').attr('hidden', true);
-				$('#exportTables #personal_date_end').attr('required', false);
-				$('#exportTables #personal_date_start').attr('required', false);
-			}
+		if (selected_item == 1) {
+			$('#exportTables #is_dates_personal').attr('hidden', false);
+			$('#exportTables #personal_date_end').attr('required', true);
+			$('#exportTables #personal_date_start').attr('required', true);
+		} else {
+			$('#exportTables #is_dates_personal').attr('hidden', true);
+			$('#exportTables #personal_date_end').attr('required', false);
+			$('#exportTables #personal_date_start').attr('required', false);
+		}
 	});
 
 	$(document).on('click', '#createActivityButton', function () {
@@ -89,6 +89,8 @@ $(function () {
 	/*SHOW PROJECT DETAILS*/
 	$(document).on('click', '#detailsActivityButton', function () {
 		var data_name = JSON.parse($(this).data('activity_name'));
+		var user_role_id = parseInt($(this).data('user_role_id'));
+
 		$("#detailsActivity #activity_name").text(data_name);
 		$("#activity_details_table").empty(); // clear var after btn click
 		$("#activitiesDetailsInput").val(''); // clear var after btn click
@@ -114,29 +116,31 @@ $(function () {
 				var display_task_days_r = $.number(value.task_days_r, 3, ',', ' ');
 
 				var status_flag = '<tr>';
-				
+
 				if (cra_validate == false)
 				{
-					if (value.task_status == 1) var status_flag = '<tr class="tr-task-terminated">'; 
-					if (value.task_status == 2) var status_flag = '<tr class="tr-task-not-validated">'; 
-					if (value.task_status == 3) var status_flag = '<tr class="tr-task-validated">'; 
+					if (value.task_status == 1) var status_flag = '<tr class="tr-task-terminated">';
+					if (value.task_status == 2) var status_flag = '<tr class="tr-task-not-validated">';
+					if (value.task_status == 3) var status_flag = '<tr class="tr-task-validated">';
 				}
 
 				if (cra_validate == true)
 				{
-					if (value.task_status == 1) var status_flag = '<tr class="tr-task-terminated">'; 
-					if (value.task_status == 2) var status_flag = '<tr class="tr-task-not-validated">'; 
-					if (value.task_status == 3) var status_flag = '<tr class="tr-task-validated">'; 
+					if (value.task_status == 1) var status_flag = '<tr class="tr-task-terminated">';
+					if (value.task_status == 2) var status_flag = '<tr class="tr-task-not-validated">';
+					if (value.task_status == 3) var status_flag = '<tr class="tr-task-validated">';
 				}
 
-				
+
 				//create table + add values
 				var line1 = $('<td class="text-left wrap-yes action-btn-no-body truncate-details">').attr("data-value", value.task_phase_name).text(value.task_phase_name);
 
-				//Utile pour debug des cra, à enlever une fois que tout est testé
-				//var line2 = $('<td class="text-left wrap-yes truncate-large">').attr("data-value", value.task_name).text(value.task_name);
-				var line2 = $('<td class="text-left wrap-yes truncate-large">').attr("data-value", value.task_name).text(value.task_name.concat(' (').concat(value.task_status).concat(')'));
-				
+				//Utile pour debug
+				if (user_role_id == 1)
+					var line2 = $('<td class="text-left wrap-yes truncate-large">').attr("data-value", value.task_name).text(value.task_name.concat(" (s:").concat(value.task_status).concat(")"));
+				else
+					var line2 = $('<td class="text-left wrap-yes truncate-large">').attr("data-value", value.task_name).text(value.task_name);
+
 				var line3 = $('<td class="text-left wrap-yes truncate-details">').attr("data-value", value.task_full_name).text(value.task_full_name);
 				var line4 = $('<td class="text-left wrap-yes truncate-details">').attr("data-value", value.task_type_name).text(value.task_type_name);
 				var line5 = $('<td class="text-center wrap-yes truncate-small">').attr("data-value", value.task_start_p).text(display_task_start_p);
@@ -372,25 +376,21 @@ $(function () {
 });
 
 
-	//bootstrap input validation
-	(function () {
-		'use strict';
-		window.addEventListener('load', function () {
-			// Fetch all the forms we want to apply custom Bootstrap validation styles to
-			var forms = document.getElementsByClassName('needs-validation');
-			// Loop over them and prevent submission
-			var validation = Array.prototype.filter.call(forms, function (form) {
-				form.addEventListener('submit', function (event) {
-					if (form.checkValidity() === false) {
-						event.preventDefault();
-						event.stopPropagation();
-					}
-					form.classList.add('was-validated');
-				}, false);
-			});
-		}, false);
-	})();
-
-
-
-	
+//bootstrap input validation
+(function () {
+	'use strict';
+	window.addEventListener('load', function () {
+		// Fetch all the forms we want to apply custom Bootstrap validation styles to
+		var forms = document.getElementsByClassName('needs-validation');
+		// Loop over them and prevent submission
+		var validation = Array.prototype.filter.call(forms, function (form) {
+			form.addEventListener('submit', function (event) {
+				if (form.checkValidity() === false) {
+					event.preventDefault();
+					event.stopPropagation();
+				}
+				form.classList.add('was-validated');
+			}, false);
+		});
+	}, false);
+})();
