@@ -1,5 +1,7 @@
 @if (session('success'))<div class="session-message session-success">{{ session('success') }}</div>@endif
 
+
+
 {{--SELECT PERIOD--}}
 <div class="navbar-tabs">
 	<div class="navbar-tabs-select-tab">
@@ -11,16 +13,16 @@
 						)</span>
 				</a>
 			</li>
-			@if(auth()->user()->roles->name == config('constants.role_admin') ||
-			auth()->user()->roles->name == config('constants.role_directeur') ||
-			auth()->user()->roles->name == config('constants.role_service'))
+			@if(auth()->user()->role_id == config('constants.role_admin_id') ||
+			auth()->user()->role_id == config('constants.role_directeur_id') ||
+			auth()->user()->role_id == config('constants.role_service_id'))
 				<li class="pad-h-right-small">
 					<a class="flex-row flex-wrap-no nav-link-period" href="#dashboard_entity" role="tab"
 					   data-toggle="tab">
 						<div>
-							@if(auth()->user()->roles->name == config('constants.role_service')) {{ucfirst(trans('app.service'))}} @endif
-							@if(auth()->user()->roles->name == config('constants.role_directeur')) {{ucfirst(trans('app.department'))}} @endif
-							@if(auth()->user()->roles->name == config('constants.role_admin')) {{ucfirst(trans('app.department'))}} @endif
+							@if(auth()->user()->role_id == config('constants.role_admin_id')) {{ucfirst(trans('app.department'))}} @endif
+							@if(auth()->user()->role_id == config('constants.role_directeur_id')) {{ucfirst(trans('app.department'))}} @endif
+							@if(auth()->user()->role_id == config('constants.role_service_id')) {{ucfirst(trans('app.service'))}} @endif
 						</div>
 						<span class="exp-annee">({{substr(\Carbon\Carbon::parse($current_date)->format('m/Y'), 0, 2).'/'.substr(\Carbon\Carbon::parse($current_date)->format('m/Y'), 5, 2)}}
 							)</span>
@@ -41,8 +43,8 @@
 
 	<div class="tab-pane" role="tabpanel" id="dashboard_entity">
 
-		@if(auth()->user()->role_id == config('constants.role_admin_id')|| 
-			auth()->user()->role_id == config('constants.role_directeur_id')|| 
+		@if(auth()->user()->role_id == config('constants.role_admin_id') ||
+			auth()->user()->role_id == config('constants.role_directeur_id') ||
 			auth()->user()->role_id == config('constants.role_service_id'))
 
 			<div class="flex-row flex-wrap-no justify-between items-center default-entity-title"
@@ -89,12 +91,12 @@
 				<h1 name="resume_card_entity_activities">
 					<div class="flex-col flex-wrap-no justify-flex-start items-center width-rem-25 height-rem-15 marg-small user-card">
 
-						<div class="flex-row flex-wrap-no justify-flex-start items-center user-card-title user-card-inner-separator width-100 height-rem-3 font-12px bold">
-							<div class="flex-row flex-wrap-no justify-center items-center width-rem-3 height-100 border-round bg-clair-fort">
-								<i class="far fa-dot-circle svg-huge style-activite"></i>
+						<div class="flex-row flex-wrap-no justify-flex-start items-center user-card-title user-card-inner-separator width-100 height-rem-3 font-12px bold pad-h-tiny">
+							<div class="flex-row flex-wrap-no justify-center items-center flex-shrink-no width-rem-3b height-rem-3b border-round bg-clair-fort">
+								<i class="fas fa-tachometer-alt svg-medium style-activite pos-rel-m2"></i>
 							</div>
-							<div class="flex-row flex-wrap-yes items-center justify-center pad-h-small width-100">
-								<div class="text-center">
+							<div class="flex-row flex-wrap-yes items-center justify-flex-start pad-h-small width-100">
+								<div>
 									{{ucfirst(trans('dashboard.entity_activities'))}}
 								</div>
 							</div>
@@ -154,12 +156,12 @@
 				<h1 name="resume_card_entity_activities_tasks">
 					<div class="flex-col flex-wrap-no justify-flex-start items-center width-rem-25 height-rem-15 marg-small user-card">
 
-						<div class="flex-row flex-wrap-no justify-flex-start items-center user-card-title user-card-inner-separator width-100 height-rem-3 font-12px bold">
-							<div class="flex-row flex-wrap-no justify-center items-center width-rem-3 height-100 border-round bg-clair-fort">
-								<i class="far fa-dot-circle svg-huge style-activite"></i>
+						<div class="flex-row flex-wrap-no justify-flex-start items-center user-card-title user-card-inner-separator width-100 height-rem-3 font-12px bold pad-h-tiny">
+							<div class="flex-row flex-wrap-no justify-center items-center flex-shrink-no width-rem-3b height-rem-3b border-round bg-clair-fort">
+								<i class="fas fa-tachometer-alt svg-medium style-activite pos-rel-m2"></i>
 							</div>
-							<div class="flex-row flex-wrap-yes items-center justify-center pad-h-small width-100">
-								<div class="text-center">
+							<div class="flex-row flex-wrap-yes items-center justify-flex-start pad-h-small width-100">
+								<div>
 									{{ucfirst(trans('dashboard.entity_activities_tasks'))}}
 								</div>
 							</div>
@@ -219,12 +221,12 @@
 				<h1 name="resume_card_entity_tasks">
 					<div class="flex-col flex-wrap-no justify-flex-start items-center width-rem-25 height-rem-15 marg-small user-card">
 
-						<div class="flex-row flex-wrap-no justify-flex-start items-center user-card-title user-card-inner-separator width-100 height-rem-3 font-12px bold">
-							<div class="flex-row flex-wrap-no justify-center items-center width-rem-3 height-100 border-round bg-clair-fort">
-								<i class="far fa-dot-circle svg-huge style-tache"></i>
+						<div class="flex-row flex-wrap-no justify-flex-start items-center user-card-title user-card-inner-separator width-100 height-rem-3 font-12px bold pad-h-tiny">
+							<div class="flex-row flex-wrap-no justify-center items-center flex-shrink-no width-rem-3b height-rem-3b border-round bg-clair-fort">
+								<i class="fas fa-tachometer-alt svg-medium style-tache pos-rel-m2"></i>
 							</div>
-							<div class="flex-row flex-wrap-yes items-center justify-center pad-h-left-small width-100">
-								<div class="text-center">
+							<div class="flex-row flex-wrap-yes items-center justify-flex-start pad-h-left-small width-100">
+								<div>
 									{{ucfirst(trans('dashboard.entity_implication'))}}
 								</div>
 							</div>
@@ -284,12 +286,12 @@
 				<h1 name="resume_card_entoty_tasks_activities">
 					<div class="flex-col flex-wrap-no justify-flex-start items-center width-rem-25 height-rem-15 marg-small user-card">
 
-						<div class="flex-row flex-wrap-no justify-flex-start items-center user-card-title user-card-inner-separator width-100 height-rem-3 font-12px bold">
-							<div class="flex-row flex-wrap-no justify-center items-center width-rem-3 height-100 border-round bg-clair-fort">
-								<i class="far fa-dot-circle svg-huge style-tache"></i>
+						<div class="flex-row flex-wrap-no justify-flex-start items-center user-card-title user-card-inner-separator width-100 height-rem-3 font-12px bold pad-h-tiny">
+							<div class="flex-row flex-wrap-no justify-center items-center flex-shrink-no width-rem-3b height-rem-3b border-round bg-clair-fort">
+								<i class="fas fa-tachometer-alt svg-medium style-tache pos-rel-m2"></i>
 							</div>
-							<div class="flex-row flex-wrap-yes items-center justify-center pad-h-left-small width-100">
-								<div class="text-center">
+							<div class="flex-row flex-wrap-yes items-center justify-flex-start pad-h-left-small width-100">
+								<div>
 									{{ucfirst(trans('dashboard.entity_implication_activities'))}}
 								</div>
 							</div>
@@ -344,9 +346,9 @@
 					</div>
 				</h1>
 				{{--ACTIVITES FOR ENTITY TASKS - END--}}
-
 			</div>
 
+			{{--RESOURCES DASHBOARD - START--}}
 			<div class="dashboard-title">
 				@if(auth()->user()->role_id == config('constants.role_admin_id')
 				|| auth()->user()->role_id == config('constants.role_directeur_id')
@@ -364,153 +366,74 @@
 						</span>
 			</div>
 
-			<div class="dashboard-content justify-evenly pad-h-none">
+			{{--DASHBOARD TIMES CARDS - START--}}
+			<div id="dashboard_entity_times_card" class="flex-row flex-wrap-yes justify-flex-start items-center user-card-outer-separator">
 
-				{{--OPEN_DAYS--}}
-				<div class="dashboard-column flex-basis-20 flex-grow-1 flex-shrink-1">
-					<div class="dashboard-subject marg-v-bottom-medium ln-b-solid-small ">J.ouvrés</div>
-					<div class="dashboard-card pad-v-small">
-						<div class="dashboard-label">{{ucfirst(\Carbon\Carbon::parse($current_date)->addMonth(-2)->localeMonth).' '.\Carbon\Carbon::parse($current_date)->addMonth(-2)->year}}</div>
-						<div class="dashboard-data ">{{round($entity_open_days_array[-2],1)}}</div>
-					</div>
-					<div class="dashboard-card pad-v-small">
-						<div class="dashboard-label">{{ucfirst(\Carbon\Carbon::parse($current_date)->addMonth(-1)->localeMonth).' '.\Carbon\Carbon::parse($current_date)->addMonth(-2)->year}}</div>
-						<div class="dashboard-data ">{{round($entity_open_days_array[-1],1)}}</div>
-					</div>
-					<div class="dashboard-card pad-v-small tr-connected-user">
-						<div class="dashboard-label">{{ucfirst(\Carbon\Carbon::parse($current_date)->addMonth(0)->localeMonth).' '.\Carbon\Carbon::parse($current_date)->addMonth(-2)->year}}</div>
-						<div class="dashboard-data ">{{round($entity_open_days_array[0],1)}}</div>
-					</div>
-					<div class="dashboard-card pad-v-small">
-						<div class="dashboard-label">{{ucfirst(\Carbon\Carbon::parse($current_date)->addMonth(+1)->localeMonth).' '.\Carbon\Carbon::parse($current_date)->addMonth(-2)->year}}</div>
-						<div class="dashboard-data ">{{round($entity_open_days_array[1],1)}}</div>
-					</div>
-					<div class="dashboard-card pad-v-small">
-						<div class="dashboard-label">{{ucfirst(\Carbon\Carbon::parse($current_date)->addMonth(+2)->localeMonth).' '.\Carbon\Carbon::parse($current_date)->addMonth(-2)->year}}</div>
-						<div class="dashboard-data ">{{round($entity_open_days_array[2],1)}}</div>
-					</div>
-					<div class="dashboard-card pad-v-small">
-						<div class="dashboard-label">{{ucfirst(\Carbon\Carbon::parse($current_date)->addMonth(+3)->localeMonth).' '.\Carbon\Carbon::parse($current_date)->addMonth(-2)->year}}</div>
-						<div class="dashboard-data ">{{round($entity_open_days_array[3],1)}}</div>
-					</div>
-				</div>
+				@for($i=-2; $i<=6; $i++)
+					<h1 name="resume_card_entoty_times_m{{$i}}">
+						<div class="flex-col flex-wrap-no justify-flex-start items-center width-rem-25 height-rem-15 marg-small user-card">
 
-				{{--ABSENCES--}}
-				<div class="dashboard-column flex-basis-20 flex-grow-1 flex-shrink-1">
-					<div class="dashboard-subject marg-v-bottom-medium ln-b-solid-small style-absence">Absences</div>
-					<div class="dashboard-card pad-v-small">
-						<div class="dashboard-label">{{ucfirst(\Carbon\Carbon::parse($current_date)->addMonth(-2)->localeMonth).' '.\Carbon\Carbon::parse($current_date)->addMonth(-2)->year}}</div>
-						<div class="dashboard-data style-absence">{{round($entity_abs_array[-2],1)}}</div>
-					</div>
-					<div class="dashboard-card pad-v-small">
-						<div class="dashboard-label">{{ucfirst(\Carbon\Carbon::parse($current_date)->addMonth(-1)->localeMonth).' '.\Carbon\Carbon::parse($current_date)->addMonth(-2)->year}}</div>
-						<div class="dashboard-data style-absence">{{round($entity_abs_array[-1],1)}}</div>
-					</div>
-					<div class="dashboard-card pad-v-small tr-connected-user">
-						<div class="dashboard-label">{{ucfirst(\Carbon\Carbon::parse($current_date)->addMonth(0)->localeMonth).' '.\Carbon\Carbon::parse($current_date)->addMonth(-2)->year}}</div>
-						<div class="dashboard-data style-absence">{{round($entity_abs_array[0],1)}}</div>
-					</div>
-					<div class="dashboard-card pad-v-small">
-						<div class="dashboard-label">{{ucfirst(\Carbon\Carbon::parse($current_date)->addMonth(+1)->localeMonth).' '.\Carbon\Carbon::parse($current_date)->addMonth(-2)->year}}</div>
-						<div class="dashboard-data style-absence">{{round($entity_abs_array[1],1)}}</div>
-					</div>
-					<div class="dashboard-card pad-v-small">
-						<div class="dashboard-label">{{ucfirst(\Carbon\Carbon::parse($current_date)->addMonth(+2)->localeMonth).' '.\Carbon\Carbon::parse($current_date)->addMonth(-2)->year}}</div>
-						<div class="dashboard-data style-absence">{{round($entity_abs_array[2],1)}}</div>
-					</div>
-					<div class="dashboard-card pad-v-small">
-						<div class="dashboard-label">{{ucfirst(\Carbon\Carbon::parse($current_date)->addMonth(+3)->localeMonth).' '.\Carbon\Carbon::parse($current_date)->addMonth(-2)->year}}</div>
-						<div class="dashboard-data style-absence">{{round($entity_abs_array[3],1)}}</div>
-					</div>
-				</div>
+							<div class="flex-row flex-wrap-no justify-flex-start items-center user-card-title user-card-inner-separator width-100 height-rem-3 font-12px bold">
+								<div class="flex-row flex-wrap-no justify-center items-center flex-shrink-no width-rem-3b height-rem-3b border-round bg-clair-fort style-libelle bold 
+									@if(strlen(round($entity_open_days_array[$i],1))>4) font-10px 
+									@elseif(strlen(round($entity_open_days_array[$i],1))>3) font-11px 
+									@else font-12px 
+									@endif marg-h-tiny">{{round($entity_open_days_array[$i],1)}}
+								</div>
+								<div class="flex-row flex-wrap-no justify-center items-center flex-shrink-no width-rem-3b height-rem-3b border-round bg-clair-fort style-absence bold 
+									@if(strlen(round($entity_abs_array[$i],1))>4) font-10px 
+									@elseif(strlen(round($entity_abs_array[$i],1))>3) font-11px 
+									@else font-12px 
+									@endif">{{round($entity_abs_array[$i],1)}}
+								</div>
+								<div class="flex-row flex-wrap-yes items-center justify-flex-start pad-h-small width-100">
+									<div>
+										{{ucfirst(\Carbon\Carbon::parse($current_date)->addMonth($i)->localeMonth).' '.\Carbon\Carbon::parse($current_date)->addMonth($i)->year}}
+									</div>
+								</div>
+							</div>
 
-				{{--PREVU-TOTAL--}}
-				<div class="dashboard-column flex-basis-20 flex-grow-1 flex-shrink-1">
-					<div class="dashboard-subject marg-v-bottom-medium ln-b-solid-small style-prevu-total">Prévu total</div>
-					<div class="dashboard-card pad-v-small">
-						<div class="dashboard-label">{{ucfirst(\Carbon\Carbon::parse($current_date)->addMonth(-2)->localeMonth).' '.\Carbon\Carbon::parse($current_date)->addMonth(-2)->year}}</div>
-						<div class="dashboard-data style-prevu-total">{{round($entity_prevu_total_array[-2],1)}}</div>
-					</div>
-					<div class="dashboard-card pad-v-small">
-						<div class="dashboard-label">{{ucfirst(\Carbon\Carbon::parse($current_date)->addMonth(-1)->localeMonth).' '.\Carbon\Carbon::parse($current_date)->addMonth(-2)->year}}</div>
-						<div class="dashboard-data style-prevu-total">{{round($entity_prevu_total_array[-1],1)}}</div>
-					</div>
-					<div class="dashboard-card pad-v-small tr-connected-user">
-						<div class="dashboard-label">{{ucfirst(\Carbon\Carbon::parse($current_date)->addMonth(0)->localeMonth).' '.\Carbon\Carbon::parse($current_date)->addMonth(-2)->year}}</div>
-						<div class="dashboard-data style-prevu-total">{{round($entity_prevu_total_array[0],1)}}</div>
-					</div>
-					<div class="dashboard-card pad-v-small">
-						<div class="dashboard-label">{{ucfirst(\Carbon\Carbon::parse($current_date)->addMonth(+1)->localeMonth).' '.\Carbon\Carbon::parse($current_date)->addMonth(-2)->year}}</div>
-						<div class="dashboard-data style-prevu-total">{{round($entity_prevu_total_array[1],1)}}</div>
-					</div>
-					<div class="dashboard-card pad-v-small">
-						<div class="dashboard-label">{{ucfirst(\Carbon\Carbon::parse($current_date)->addMonth(+2)->localeMonth).' '.\Carbon\Carbon::parse($current_date)->addMonth(-2)->year}}</div>
-						<div class="dashboard-data style-prevu-total">{{round($entity_prevu_total_array[2],1)}}</div>
-					</div>
-					<div class="dashboard-card pad-v-small">
-						<div class="dashboard-label">{{ucfirst(\Carbon\Carbon::parse($current_date)->addMonth(+3)->localeMonth).' '.\Carbon\Carbon::parse($current_date)->addMonth(-2)->year}}</div>
-						<div class="dashboard-data style-prevu-total">{{round($entity_prevu_total_array[3],1)}}</div>
-					</div>
-				</div>
 
-				{{--REALISE--}}
-				<div class="dashboard-column flex-basis-20 flex-grow-1 flex-shrink-1">
-					<div class="dashboard-subject marg-v-bottom-medium ln-b-solid-small style-realise">Réalisé</div>
-					<div class="dashboard-card pad-v-small">
-						<div class="dashboard-label">{{ucfirst(\Carbon\Carbon::parse($current_date)->addMonth(-2)->localeMonth).' '.\Carbon\Carbon::parse($current_date)->addMonth(-2)->year}}</div>
-						<div class="dashboard-data style-realise">{{round($entity_realise_array[-2],1)}}</div>
-					</div>
-					<div class="dashboard-card pad-v-small">
-						<div class="dashboard-label">{{ucfirst(\Carbon\Carbon::parse($current_date)->addMonth(-1)->localeMonth).' '.\Carbon\Carbon::parse($current_date)->addMonth(-2)->year}}</div>
-						<div class="dashboard-data style-realise">{{round($entity_realise_array[-1],1)}}</div>
-					</div>
-					<div class="dashboard-card pad-v-small tr-connected-user">
-						<div class="dashboard-label">{{ucfirst(\Carbon\Carbon::parse($current_date)->addMonth(0)->localeMonth).' '.\Carbon\Carbon::parse($current_date)->addMonth(-2)->year}}</div>
-						<div class="dashboard-data style-realise">{{round($entity_realise_array[0],1)}}</div>
-					</div>
-					<div class="dashboard-card pad-v-small">
-						<div class="dashboard-label">{{ucfirst(\Carbon\Carbon::parse($current_date)->addMonth(+1)->localeMonth).' '.\Carbon\Carbon::parse($current_date)->addMonth(-2)->year}}</div>
-						<div class="dashboard-data style-realise">{{round($entity_realise_array[1],1)}}</div>
-					</div>
-					<div class="dashboard-card pad-v-small">
-						<div class="dashboard-label">{{ucfirst(\Carbon\Carbon::parse($current_date)->addMonth(+2)->localeMonth).' '.\Carbon\Carbon::parse($current_date)->addMonth(-2)->year}}</div>
-						<div class="dashboard-data style-realise">{{round($entity_realise_array[2],1)}}</div>
-					</div>
-					<div class="dashboard-card pad-v-small">
-						<div class="dashboard-label">{{ucfirst(\Carbon\Carbon::parse($current_date)->addMonth(+3)->localeMonth).' '.\Carbon\Carbon::parse($current_date)->addMonth(-2)->year}}</div>
-						<div class="dashboard-data style-realise">{{round($entity_realise_array[3],1)}}</div>
-					</div>
-				</div>
+							<div class="flex-row flex-wrap-yes justify-evenly project-summary pad-h-medium pad-v-small height-rem-12">
+								<div class="flex-row flex-wrap-no justify-evenly align-stretch width-100">
+									<div class="flex-col flex-wrap-no justify-center pad-h-small align-stretch">
+										<div class="flex-col flex-wrap-no justify-fled-end text-center pad-v-only-small">
+											<label for="start_p" class="card-label">{{ucfirst(trans('app.prevu_total'))}}</label>
+											<label for="start_p"
+											       class="card-data style-prevu-total">{{round($entity_prevu_total_array[$i],1)}}</label>
+										</div>
+									</div>
+									<div class="flex-col flex-wrap-no justify-center pad-h-small align-stretch">
+										<div class="flex-col flex-wrap-no justify-fled-end text-center pad-v-only-small">
+											<label for="start_p" class="card-label">{{ucfirst(trans('app.prevu_restant'))}}</label>
+											<label for="start_p"
+											       class="card-data style-prevu">{{round($entity_prevu_array[$i],1)}}</label>
+										</div>
+									</div>
+								</div>
+								<div class="flex-row flex-wrap-no justify-evenly align-stretch width-100">
+									<div class="flex-col flex-wrap-no justify-center pad-h-small align-stretch">
+										<div class="flex-col flex-wrap-no justify-fled-end text-center pad-v-only-small">
+											<label for="start_p" class="card-label">{{ucfirst(trans('app.realise'))}}</label>
+											<label for="start_p"
+											       class="card-data style-realise">{{round($entity_realise_array[$i],1)}}</label>
+										</div>
+									</div>
+									<div class="flex-col flex-wrap-no justify-center pad-h-small align-stretch">
+										<div class="flex-col flex-wrap-no justify-fled-end text-center pad-v-only-small">
+											<label for="start_p" class="card-label">{{ucfirst(trans('app.restant'))}}</label>
+											<label for="start_p"
+											       class="card-data style-realise-light no-bold">{{round($entity_restant_array[$i],1)}}</label>
+										</div>
+									</div>
+								</div>
 
-				{{--RESTANT--}}
-				<div class="dashboard-column flex-basis-20 flex-grow-1 flex-shrink-1">
-					<div class="dashboard-subject marg-v-bottom-medium ln-b-solid-small style-realise-light no-bold">Restant</div>
-					<div class="dashboard-card pad-v-small">
-						<div class="dashboard-label">{{ucfirst(\Carbon\Carbon::parse($current_date)->addMonth(-2)->localeMonth).' '.\Carbon\Carbon::parse($current_date)->addMonth(-2)->year}}</div>
-						<div class="dashboard-data style-realise-light no-bold">{{round($entity_restant_array[-2],1)}}</div>
-					</div>
-					<div class="dashboard-card pad-v-small">
-						<div class="dashboard-label">{{ucfirst(\Carbon\Carbon::parse($current_date)->addMonth(-1)->localeMonth).' '.\Carbon\Carbon::parse($current_date)->addMonth(-2)->year}}</div>
-						<div class="dashboard-data style-realise-light no-bold">{{round($entity_restant_array[-1],1)}}</div>
-					</div>
-					<div class="dashboard-card pad-v-small tr-connected-user">
-						<div class="dashboard-label">{{ucfirst(\Carbon\Carbon::parse($current_date)->addMonth(0)->localeMonth).' '.\Carbon\Carbon::parse($current_date)->addMonth(-2)->year}}</div>
-						<div class="dashboard-data style-realise-light no-bold">{{round($entity_restant_array[0],1)}}</div>
-					</div>
-					<div class="dashboard-card pad-v-small">
-						<div class="dashboard-label">{{ucfirst(\Carbon\Carbon::parse($current_date)->addMonth(+1)->localeMonth).' '.\Carbon\Carbon::parse($current_date)->addMonth(-2)->year}}</div>
-						<div class="dashboard-data style-realise-light no-bold">{{round($entity_restant_array[1],1)}}</div>
-					</div>
-					<div class="dashboard-card pad-v-small">
-						<div class="dashboard-label">{{ucfirst(\Carbon\Carbon::parse($current_date)->addMonth(+2)->localeMonth).' '.\Carbon\Carbon::parse($current_date)->addMonth(-2)->year}}</div>
-						<div class="dashboard-data style-realise-light no-bold">{{round($entity_restant_array[2],1)}}</div>
-					</div>
-					<div class="dashboard-card pad-v-small">
-						<div class="dashboard-label">{{ucfirst(\Carbon\Carbon::parse($current_date)->addMonth(+3)->localeMonth).' '.\Carbon\Carbon::parse($current_date)->addMonth(-2)->year}}</div>
-						<div class="dashboard-data style-realise-light no-bold">{{round($entity_restant_array[3],1)}}</div>
-					</div>
-				</div>
+							</div>
+						</div>
+					</h1>
+				@endfor
 			</div>
+			{{--DASHBOARDS TIMES CARDS - END--}}
 
 			<div class="text-center table-separator"></div>
 		@endif

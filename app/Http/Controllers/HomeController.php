@@ -114,18 +114,22 @@
 		public function index()
 		{
 			//-----------------------------------------
+			//SQL
 			//SET CURRENT DATE OR GET GATE FROM FORM
 			$current_date = $this->current_date;
 			$current_month = $this->current_month;
 			$current_year = $this->current_year;
 			
-			$dateStartMonth = Carbon::parse($this->current_date)->startOfMonth();
-			$dateEndMonth = Carbon::parse($this->current_date)->endOfMonth();
+			$dateStartMonth = Carbon::parse($current_date)->startOfMonth();
+			$dateEndMonth = Carbon::parse($current_date)->endOfMonth();
 			
 			$cra_validate = session()->get('cra_validate');
 			
+			$period_fisrt = -2;
+			$period_last = 6;
+			
 			//-----------------------------------------
-			// ACTIVITIES COUNT BY STATUS
+			// USER/ENTITY ACTIVITIES
 			//-----------------------------------------
 			//FOR ENTITY
 			$ea = DB::table('activities')
@@ -295,7 +299,7 @@
 			
 			
 			//-----------------------------------------
-			// ACTIVITIES FOR USER/ENTITY TASKS
+			// ACTIVITIES FOR USER/ENTITY TASKS 
 			//-----------------------------------------
 			//FOR ENTITY
 			$a4et = DB::table('activities')
@@ -479,16 +483,16 @@
 			
 			
 			//-----------------------------------------
-			// ABSENCES COUNT
+			// ABSENCES COUNT 
 			//-----------------------------------------
 			//FOR ENTITY
 			$eabs = DB::table('absences')
-				->select(DB::raw('month(absences.date) as mm, IFNULL(sum(absences.days), 0) as absences_month'))
+				->select(DB::raw('concat(year(absences.date), lpad(month(absences.date), 2, "00")) as yyyymm, IFNULL(sum(absences.days), 0) as absences_month'))
 				->leftJoin('users', 'users.id', '=', 'absences.user_id')
-				->whereBetween('absences.date',  [	Carbon::parse($dateStartMonth)->addMonth(-2)->startOfMonth(),
-					Carbon::parse($dateStartMonth)->addMonth(+3)->endOfMonth()])
-				->groupBy('mm')
-				->orderBy('mm');
+				->whereBetween('absences.date',  [	Carbon::parse($dateStartMonth)->addMonth($period_fisrt)->startOfMonth(),
+					Carbon::parse($dateStartMonth)->addMonth($period_last)->endOfMonth()])
+				->groupBy('yyyymm')
+				->orderBy('yyyymm');
 			
 			switch ($eabs) {
 				case auth()->user()->role_id == config('constants.role_directeur_id') || auth()->user()->role_id == config('constants.role_admin_id'):
@@ -507,62 +511,55 @@
 			
 			$entity_abs_array = [];
 			
-			for ($i=-2; $i<4; $i++) {
+			for ($i=$period_fisrt; $i<=$period_last; $i++) {
 				$entity_abs_array[$i] = 0;
 			}
 			
 			foreach ($eabs as $absences_count) {
-				
-				if ($absences_count->mm == Carbon::parse($dateStartMonth)->addMonth(-2)->startOfMonth()->month) $entity_abs_array['-2'] = $absences_count->absences_month;
-				if ($absences_count->mm == Carbon::parse($dateStartMonth)->addMonth(-1)->startOfMonth()->month) $entity_abs_array['-1'] = $absences_count->absences_month;
-				if ($absences_count->mm == Carbon::parse($dateStartMonth)->addMonth(0)->startOfMonth()->month) $entity_abs_array['0'] = $absences_count->absences_month;
-				if ($absences_count->mm == Carbon::parse($dateStartMonth)->addMonth(+1)->startOfMonth()->month) $entity_abs_array['1'] = $absences_count->absences_month;
-				if ($absences_count->mm == Carbon::parse($dateStartMonth)->addMonth(+2)->startOfMonth()->month) $entity_abs_array['2'] = $absences_count->absences_month;
-				if ($absences_count->mm == Carbon::parse($dateStartMonth)->addMonth(+3)->startOfMonth()->month) $entity_abs_array['3'] = $absences_count->absences_month;
+				for($i=$period_fisrt; $i<=$period_last; $i++) {
+					$key = Carbon::parse($dateStartMonth)->addMonth($i)->startOfMonth()->year . str_pad(Carbon::parse($dateStartMonth)->addMonth($i)->startOfMonth()->month, 2, "00", STR_PAD_LEFT);
+					if ($absences_count->yyyymm == $key) $entity_abs_array[$i] = $absences_count->absences_month;
+				}
 			}
 			
 			//FOR USER
 			$uabs = DB::table('absences')
-				->select(DB::raw('month(absences.date) as mm, IFNULL(sum(absences.days), 0) as absences_month'))
+				->select(DB::raw('concat(year(absences.date), lpad(month(absences.date), 2, "00")) as yyyymm, IFNULL(sum(absences.days), 0) as absences_month'))
 				->leftJoin('users', 'users.id', '=', 'absences.user_id')
-				->whereBetween('absences.date',  [	Carbon::parse($dateStartMonth)->addMonth(-2)->startOfMonth(),
-					Carbon::parse($dateStartMonth)->addMonth(+3)->endOfMonth()])
-				->groupBy('mm')
-				->orderBy('mm')
+				->whereBetween('absences.date',  [	Carbon::parse($dateStartMonth)->addMonth($period_fisrt)->startOfMonth(),
+					Carbon::parse($dateStartMonth)->addMonth($period_last)->endOfMonth()])
+				->groupBy('yyyymm')
+				->orderBy('yyyymm')
 				->where('users.id', '=', auth()->user()->id)
 				->get();
 			
 			$user_abs_array = [];
 			
-			for ($i=-2; $i<4; $i++) {
+			for ($i=$period_fisrt; $i<=$period_last; $i++) {
 				$user_abs_array[$i] = 0;
 			}
 			
 			foreach ($uabs as $absences_count) {
-				
-				if ($absences_count->mm == Carbon::parse($dateStartMonth)->addMonth(-2)->startOfMonth()->month) $user_abs_array['-2'] = $absences_count->absences_month;
-				if ($absences_count->mm == Carbon::parse($dateStartMonth)->addMonth(-1)->startOfMonth()->month) $user_abs_array['-1'] = $absences_count->absences_month;
-				if ($absences_count->mm == Carbon::parse($dateStartMonth)->addMonth(0)->startOfMonth()->month) $user_abs_array['0'] = $absences_count->absences_month;
-				if ($absences_count->mm == Carbon::parse($dateStartMonth)->addMonth(+1)->startOfMonth()->month) $user_abs_array['1'] = $absences_count->absences_month;
-				if ($absences_count->mm == Carbon::parse($dateStartMonth)->addMonth(+2)->startOfMonth()->month) $user_abs_array['2'] = $absences_count->absences_month;
-				if ($absences_count->mm == Carbon::parse($dateStartMonth)->addMonth(+3)->startOfMonth()->month) $user_abs_array['3'] = $absences_count->absences_month;
+				for($i=$period_fisrt; $i<=$period_last; $i++) {
+					$key = Carbon::parse($dateStartMonth)->addMonth($i)->startOfMonth()->year . str_pad(Carbon::parse($dateStartMonth)->addMonth($i)->startOfMonth()->month, 2, "00", STR_PAD_LEFT);
+					if ($absences_count->yyyymm == $key) $user_abs_array[$i] = $absences_count->absences_month;
+				}
 			}
 			
-			
 			//-----------------------------------------
-			// TOTAL PREVU COUNT
+			// TOTAL PREVU COUNT 
 			//-----------------------------------------
 			//FOR ENTITY
 			$etp = DB::table('tasks')
-				->select(DB::raw('month(tasks.start_p) as mm, IFNULL(sum(tasks.days_p), 0) as prevu_total'))
+				->select(DB::raw('concat(year(tasks.start_p), lpad(month(tasks.start_p), 2, "00")) as yyyymm, IFNULL(sum(tasks.days_p), 0) as prevu_total'))
 				->leftJoin('phases', 'phases.id', '=', 'tasks.phase_id')
 				->leftJoin('activities', 'activities.id', '=', 'phases.activity_id')
 				->whereIn('activities.status', [$this->status_active, $this->status_terminated, $this->status_not_validated, $this->status_validated])
 				->whereIn('tasks.status', [$this->status_active, $this->status_terminated, $this->status_not_validated,$this->status_validated])
-				->whereBetween('tasks.start_p',  [	Carbon::parse($dateStartMonth)->addMonth(-2)->startOfMonth(),
-					Carbon::parse($dateStartMonth)->addMonth(+3)->endOfMonth()])
-				->groupBy('mm')
-				->orderBy('mm');
+				->whereBetween('tasks.start_p',  [	Carbon::parse($dateStartMonth)->addMonth($period_fisrt)->startOfMonth(),
+					Carbon::parse($dateStartMonth)->addMonth($period_last)->endOfMonth()])
+				->groupBy('yyyymm')
+				->orderBy('yyyymm');
 			
 			switch ($etp) {
 				case auth()->user()->role_id == config('constants.role_directeur_id') || auth()->user()->role_id == config('constants.role_admin_id'):
@@ -581,63 +578,127 @@
 			
 			$entity_prevu_total_array = [];
 			
-			for ($i=-2; $i<4; $i++) {
+			for ($i=$period_fisrt; $i<=$period_last; $i++) {
 				$entity_prevu_total_array[$i] = 0;
 			}
 			
 			foreach ($etp as $prevu_total_month) {
-				
-				if ($prevu_total_month->mm == Carbon::parse($dateStartMonth)->addMonth(-2)->startOfMonth()->month) $entity_prevu_total_array['-2'] = $prevu_total_month->prevu_total;
-				if ($prevu_total_month->mm == Carbon::parse($dateStartMonth)->addMonth(-1)->startOfMonth()->month) $entity_prevu_total_array['-1'] = $prevu_total_month->prevu_total;
-				if ($prevu_total_month->mm == Carbon::parse($dateStartMonth)->addMonth(0)->startOfMonth()->month) $entity_prevu_total_array['0'] = $prevu_total_month->prevu_total;
-				if ($prevu_total_month->mm == Carbon::parse($dateStartMonth)->addMonth(+1)->startOfMonth()->month) $entity_prevu_total_array['1'] = $prevu_total_month->prevu_total;
-				if ($prevu_total_month->mm == Carbon::parse($dateStartMonth)->addMonth(+2)->startOfMonth()->month) $entity_prevu_total_array['2'] = $prevu_total_month->prevu_total;
-				if ($prevu_total_month->mm == Carbon::parse($dateStartMonth)->addMonth(+3)->startOfMonth()->month) $entity_prevu_total_array['3'] = $prevu_total_month->prevu_total;
+				for($i=$period_fisrt; $i<=$period_last; $i++) {
+					$key = Carbon::parse($dateStartMonth)->addMonth($i)->startOfMonth()->year . str_pad(Carbon::parse($dateStartMonth)->addMonth($i)->startOfMonth()->month, 2, "00", STR_PAD_LEFT);
+					if ($prevu_total_month->yyyymm == $key) $entity_prevu_total_array[$i] = $prevu_total_month->prevu_total;
+				}
 			}
 			
 			//FOR USER
 			$utp = DB::table('tasks')
-				->select(DB::raw('month(tasks.start_p) as mm, IFNULL(sum(tasks.days_p), 0) as prevu_total'))
+				->select(DB::raw('concat(year(tasks.start_p), lpad(month(tasks.start_p), 2, "00")) as yyyymm, IFNULL(sum(tasks.days_p), 0) as prevu_total'))
 				->leftJoin('phases', 'phases.id', '=', 'tasks.phase_id')
 				->leftJoin('activities', 'activities.id', '=', 'phases.activity_id')
 				->whereIn('activities.status', [$this->status_active, $this->status_terminated, $this->status_not_validated, $this->status_validated])
 				->whereIn('tasks.status', [$this->status_active, $this->status_terminated, $this->status_not_validated,$this->status_validated])
-				->whereBetween('tasks.start_p',  [	Carbon::parse($dateStartMonth)->addMonth(-2)->startOfMonth(),
-					Carbon::parse($dateStartMonth)->addMonth(+3)->endOfMonth()])
-				->groupBy('mm')
-				->orderBy('mm')
+				->whereBetween('tasks.start_p',  [	Carbon::parse($dateStartMonth)->addMonth($period_fisrt)->startOfMonth(),
+					Carbon::parse($dateStartMonth)->addMonth($period_last)->endOfMonth()])
+				->groupBy('yyyymm')
+				->orderBy('yyyymm')
 				->where('tasks.user_id', '=', auth()->user()->id)
 				->get();
 			
 			$user_prevu_total_array = [];
 			
-			for ($i=-2; $i<4; $i++) {
+			for ($i=$period_fisrt; $i<=$period_last; $i++) {
 				$user_prevu_total_array[$i] = 0;
 			}
 			
 			foreach ($utp as $prevu_total_month) {
-				
-				if ($prevu_total_month->mm == Carbon::parse($dateStartMonth)->addMonth(-2)->startOfMonth()->month) $user_prevu_total_array['-2'] = $prevu_total_month->prevu_total;
-				if ($prevu_total_month->mm == Carbon::parse($dateStartMonth)->addMonth(-1)->startOfMonth()->month) $user_prevu_total_array['-1'] = $prevu_total_month->prevu_total;
-				if ($prevu_total_month->mm == Carbon::parse($dateStartMonth)->addMonth(0)->startOfMonth()->month) $user_prevu_total_array['0'] = $prevu_total_month->prevu_total;
-				if ($prevu_total_month->mm == Carbon::parse($dateStartMonth)->addMonth(+1)->startOfMonth()->month) $user_prevu_total_array['1'] = $prevu_total_month->prevu_total;
-				if ($prevu_total_month->mm == Carbon::parse($dateStartMonth)->addMonth(+2)->startOfMonth()->month) $user_prevu_total_array['2'] = $prevu_total_month->prevu_total;
-				if ($prevu_total_month->mm == Carbon::parse($dateStartMonth)->addMonth(+3)->startOfMonth()->month) $user_prevu_total_array['3'] = $prevu_total_month->prevu_total;
+				for($i=$period_fisrt; $i<=$period_last; $i++) {
+					$key = Carbon::parse($dateStartMonth)->addMonth($i)->startOfMonth()->year . str_pad(Carbon::parse($dateStartMonth)->addMonth($i)->startOfMonth()->month, 2, "00", STR_PAD_LEFT);
+					if ($prevu_total_month->yyyymm == $key) $user_prevu_total_array[$i] = $prevu_total_month->prevu_total;
+				}
+			}
+			
+			//-----------------------------------------
+			// RESTANT COUNT 
+			//-----------------------------------------
+			//FOR ENTITY
+			$ep = DB::table('tasks')
+				->select(DB::raw('concat(year(tasks.start_p), lpad(month(tasks.start_p), 2, "00")) as yyyymm, IFNULL(sum(tasks.days_p), 0) as prevu'))
+				->leftJoin('phases', 'phases.id', '=', 'tasks.phase_id')
+				->leftJoin('activities', 'activities.id', '=', 'phases.activity_id')
+				->whereIn('activities.status', [$this->status_active, $this->status_terminated, $this->status_not_validated, $this->status_validated])
+				->whereIn('tasks.status', [$this->status_active, $this->status_terminated, $this->status_not_validated])
+				->whereBetween('tasks.start_p',  [	Carbon::parse($dateStartMonth)->addMonth($period_fisrt)->startOfMonth(),
+					Carbon::parse($dateStartMonth)->addMonth($period_last)->endOfMonth()])
+				->groupBy('yyyymm')
+				->orderBy('yyyymm');
+			
+			switch ($ep) {
+				case auth()->user()->role_id == config('constants.role_directeur_id') || auth()->user()->role_id == config('constants.role_admin_id'):
+					$ep = $ep->where('activities.department_id', '=', auth()->user()->department_id)->get();
+					break;
+				case (auth()->user()->role_id == config('constants.role_service_id')):
+					$ep = $ep->where('activities.service_id', '=', auth()->user()->service_id)->get();
+					break;
+				case (auth()->user()->role_id == config('constants.role_projet_id')):
+					$ep = $ep->where('activities.manager', '=', auth()->user()->id)->get();
+					break;
+				default:
+					$ep = $ep->where('tasks.user_id', '=', auth()->user()->id)->get();
+					break;
+			}
+			
+			$entity_prevu_array = [];
+			
+			for ($i=$period_fisrt; $i<=$period_last; $i++) {
+				$entity_prevu_array[$i] = 0;
+			}
+			
+			foreach ($ep as $prevu_month) {
+				for($i=$period_fisrt; $i<=$period_last; $i++) {
+					$key = Carbon::parse($dateStartMonth)->addMonth($i)->startOfMonth()->year . str_pad(Carbon::parse($dateStartMonth)->addMonth($i)->startOfMonth()->month, 2, "00", STR_PAD_LEFT);
+					if ($prevu_month->yyyymm == $key) $entity_prevu_array[$i] = $prevu_month->prevu;
+				}
+			}
+			
+			//FOR USER
+			$up = DB::table('tasks')
+				->select(DB::raw('concat(year(tasks.start_p), lpad(month(tasks.start_p), 2, "00")) as yyyymm, IFNULL(sum(tasks.days_p), 0) as prevu'))
+				->leftJoin('phases', 'phases.id', '=', 'tasks.phase_id')
+				->leftJoin('activities', 'activities.id', '=', 'phases.activity_id')
+				->whereIn('activities.status', [$this->status_active, $this->status_terminated, $this->status_not_validated, $this->status_validated])
+				->whereIn('tasks.status', [$this->status_active, $this->status_terminated, $this->status_not_validated])
+				->whereBetween('tasks.start_p',  [	Carbon::parse($dateStartMonth)->addMonth($period_fisrt)->startOfMonth(),
+					Carbon::parse($dateStartMonth)->addMonth($period_last)->endOfMonth()])
+				->groupBy('yyyymm')
+				->orderBy('yyyymm')
+				->where('tasks.user_id', '=', auth()->user()->id)
+				->get();
+			
+			$user_prevu_array = [];
+			
+			for ($i=$period_fisrt; $i<=$period_last; $i++) {
+				$user_prevu_array[$i] = 0;
+			}
+			
+			foreach ($up as $prevu_month) {
+				for($i=$period_fisrt; $i<=$period_last; $i++) {
+					$key = Carbon::parse($dateStartMonth)->addMonth($i)->startOfMonth()->year . str_pad(Carbon::parse($dateStartMonth)->addMonth($i)->startOfMonth()->month, 2, "00", STR_PAD_LEFT);
+					if ($prevu_month->yyyymm == $key) $user_prevu_array[$i] = $prevu_month->prevu;
+				}
 			}
 			
 			
 			//-----------------------------------------
-			// REALISE COUNT
+			// REALISE COUNT 
 			//-----------------------------------------
 			//FOR ENTITY
 			$er = DB::table('work_days')
-				->select(DB::raw('month(work_days.date) as mm, IFNULL(sum(work_days.days), 0) as realise'))
+				->select(DB::raw('concat(year(work_days.date), lpad(month(work_days.date), 2, "00")) as yyyymm, IFNULL(sum(work_days.days), 0) as realise'))
 				->leftJoin('users', 'users.id', '=', 'work_days.user_id')
 				->whereIn('work_days.status', [$this->status_active, $this->status_terminated, $this->status_not_validated, $this->status_validated])
-				->whereBetween('work_days.date',  [	Carbon::parse($dateStartMonth)->addMonth(-2)->startOfMonth(),
-					Carbon::parse($dateStartMonth)->addMonth(+3)->endOfMonth()])
-				->groupBy('mm')
-				->orderBy('mm');
+				->whereBetween('work_days.date',  [	Carbon::parse($dateStartMonth)->addMonth($period_fisrt)->startOfMonth(),
+					Carbon::parse($dateStartMonth)->addMonth($period_last)->endOfMonth()])
+				->groupBy('yyyymm')
+				->orderBy('yyyymm');
 			
 			switch ($er) {
 				case auth()->user()->role_id == config('constants.role_directeur_id') || auth()->user()->role_id == config('constants.role_admin_id'):
@@ -656,48 +717,41 @@
 			
 			$entity_realise_array = [];
 			
-			for ($i=-2; $i<4; $i++) {
+			for ($i=$period_fisrt; $i<=$period_last; $i++) {
 				$entity_realise_array[$i] = 0;
 			}
 			
 			foreach ($er as $realise_month) {
-				
-				if ($realise_month->mm == Carbon::parse($dateStartMonth)->addMonth(-2)->startOfMonth()->month) $entity_realise_array['-2'] = $realise_month->realise;
-				if ($realise_month->mm == Carbon::parse($dateStartMonth)->addMonth(-1)->startOfMonth()->month) $entity_realise_array['-1'] = $realise_month->realise;
-				if ($realise_month->mm == Carbon::parse($dateStartMonth)->addMonth(0)->startOfMonth()->month) $entity_realise_array['0'] = $realise_month->realise;
-				if ($realise_month->mm == Carbon::parse($dateStartMonth)->addMonth(+1)->startOfMonth()->month) $entity_realise_array['1'] = $realise_month->realise;
-				if ($realise_month->mm == Carbon::parse($dateStartMonth)->addMonth(+2)->startOfMonth()->month) $entity_realise_array['2'] = $realise_month->realise;
-				if ($realise_month->mm == Carbon::parse($dateStartMonth)->addMonth(+3)->startOfMonth()->month) $entity_realise_array['3'] = $realise_month->realise;
+				for($i=$period_fisrt; $i<=$period_last; $i++) {
+					$key = Carbon::parse($dateStartMonth)->addMonth($i)->startOfMonth()->year . str_pad(Carbon::parse($dateStartMonth)->addMonth($i)->startOfMonth()->month, 2, "00", STR_PAD_LEFT);
+					if ($realise_month->yyyymm == $key) $entity_realise_array[$i] = $realise_month->realise;
+				}
 			}
 			
 			//FOR USER
 			$ur = DB::table('work_days')
-				->select(DB::raw('month(work_days.date) as mm, IFNULL(sum(work_days.days), 0) as realise'))
+				->select(DB::raw('concat(year(work_days.date), lpad(month(work_days.date), 2, "00")) as yyyymm, IFNULL(sum(work_days.days), 0) as realise'))
 				->leftJoin('users', 'users.id', '=', 'work_days.user_id')
 				->whereIn('work_days.status', [$this->status_active, $this->status_terminated, $this->status_not_validated, $this->status_validated])
-				->whereBetween('work_days.date',  [	Carbon::parse($dateStartMonth)->addMonth(-2)->startOfMonth(),
-					Carbon::parse($dateStartMonth)->addMonth(+3)->endOfMonth()])
-				->groupBy('mm')
-				->orderBy('mm')
+				->whereBetween('work_days.date',  [	Carbon::parse($dateStartMonth)->addMonth($period_fisrt)->startOfMonth(),
+					Carbon::parse($dateStartMonth)->addMonth($period_last)->endOfMonth()])
+				->groupBy('yyyymm')
+				->orderBy('yyyymm')
 				->where('users.id', '=', auth()->user()->id)
 				->get();
 			
 			$user_realise_array = [];
 			
-			for ($i=-2; $i<4; $i++) {
+			for ($i=$period_fisrt; $i<=$period_last; $i++) {
 				$user_realise_array[$i] = 0;
 			}
 			
 			foreach ($ur as $realise_month) {
-				
-				if ($realise_month->mm == Carbon::parse($dateStartMonth)->addMonth(-2)->startOfMonth()->month) $user_realise_array['-2'] = $realise_month->realise;
-				if ($realise_month->mm == Carbon::parse($dateStartMonth)->addMonth(-1)->startOfMonth()->month) $user_realise_array['-1'] = $realise_month->realise;
-				if ($realise_month->mm == Carbon::parse($dateStartMonth)->addMonth(0)->startOfMonth()->month) $user_realise_array['0'] = $realise_month->realise;
-				if ($realise_month->mm == Carbon::parse($dateStartMonth)->addMonth(+1)->startOfMonth()->month) $user_realise_array['1'] = $realise_month->realise;
-				if ($realise_month->mm == Carbon::parse($dateStartMonth)->addMonth(+2)->startOfMonth()->month) $user_realise_array['2'] = $realise_month->realise;
-				if ($realise_month->mm == Carbon::parse($dateStartMonth)->addMonth(+3)->startOfMonth()->month) $user_realise_array['3'] = $realise_month->realise;
+				for($i=$period_fisrt; $i<=$period_last; $i++) {
+					$key = Carbon::parse($dateStartMonth)->addMonth($i)->startOfMonth()->year . str_pad(Carbon::parse($dateStartMonth)->addMonth($i)->startOfMonth()->month, 2, "00", STR_PAD_LEFT);
+					if ($realise_month->yyyymm == $key) $user_realise_array[$i] = $realise_month->realise;
+				}
 			}
-			
 			
 			//-----------------------------------------
 			// OPEN_DAYS BY MONTH
@@ -724,10 +778,9 @@
 			$eppl = $eppl
 				->distinct()->count();
 			
-			
 			// COUNT OD FOR PERIOD
 			$sql_open_days_range = [];
-			for ($i=-2; $i<4; $i++) {
+			for ($i=$period_fisrt; $i<=$period_last; $i++) {
 				$tmp_month = array(
 					'mm' => Carbon::parse($dateStartMonth)->addMonth($i)->startOfMonth()->month,
 					'yy' => Carbon::parse($dateStartMonth)->addMonth($i)->startOfMonth()->year);
@@ -735,7 +788,8 @@
 				$sql_open_days_range[$i] = $tmp_month;
 			}
 			
-			$open_days_by_month = DB::table('open_days');
+			$open_days_by_month = DB::table('open_days')
+				->select(DB::raw('concat(open_days.year, lpad(open_days.month, 2, "00")) as yyyymm, IFNULL((open_days.days), 0) as od'));
 			
 			foreach ($sql_open_days_range as $sodr)
 			{
@@ -747,30 +801,30 @@
 			}
 			
 			$open_days_by_month = $open_days_by_month
-				->groupBy('mm')
-				->orderBy('mm')
-				->select(DB::raw('open_days.month as mm, IFNULL((open_days.days), 0) as od'))
+				->groupBy('yyyymm')
+				->orderBy('yyyymm')
 				->get();
 			
-			for ($i=-2; $i<4; $i++) {
+			for ($i=$period_fisrt; $i<=$period_last; $i++) {
 				$entity_open_days_array[$i] = 0;
 				$user_open_days_array[$i] = 0;
 			}
 			
 			foreach ($open_days_by_month as $open_days) {
 				
-				for($cm=-2; $cm<4; $cm++)
+				for($i=$period_fisrt; $i<=$period_last; $i++)
 				{
-					if ($open_days->mm == Carbon::parse($dateStartMonth)->addMonth($cm)->startOfMonth()->month)
+					$key = Carbon::parse($dateStartMonth)->addMonth($i)->startOfMonth()->year . str_pad(Carbon::parse($dateStartMonth)->addMonth($i)->startOfMonth()->month, 2, "00", STR_PAD_LEFT);
+					
+					if ($open_days->yyyymm == $key)
 					{
-						$entity_open_days_array[$cm] = $open_days->od*$eppl;
-						$user_open_days_array[$cm] = $open_days->od*1;
+						$entity_open_days_array[$i] = $open_days->od*$eppl;
+						$user_open_days_array[$i] = $open_days->od*1;
 						
 						// RESTANT COUNT
-						$entity_restant_array[$cm] = $entity_open_days_array[$cm] - $entity_abs_array[$cm] - $entity_realise_array[$cm];
-						$user_restant_array[$cm] = $user_open_days_array[$cm] - $user_abs_array[$cm] - $user_realise_array[$cm];
+						$entity_restant_array[$i] = $entity_open_days_array[$i] - $entity_abs_array[$i] - $entity_realise_array[$i];
+						$user_restant_array[$i] = $user_open_days_array[$i] - $user_abs_array[$i] - $user_realise_array[$i];
 					}
-					
 				}
 			}
 			
@@ -799,10 +853,9 @@
 				'entity_open_days_array',
 				'entity_abs_array',
 				'entity_prevu_total_array',
+				'entity_prevu_array',
 				'entity_realise_array',
 				'entity_restant_array',
-				
-				
 				
 				'user_activities_running_count',
 				'user_activities_terminated_count',
@@ -827,6 +880,7 @@
 				'user_open_days_array',
 				'user_abs_array',
 				'user_prevu_total_array',
+				'user_prevu_array',
 				'user_realise_array',
 				'user_restant_array'
 			));
