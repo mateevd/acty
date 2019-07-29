@@ -15,27 +15,27 @@
             <div class="flex-col flex-wrap-no justify-center pad-h-medium pad-v-top-medium pad-v-bottom-small">
                 <div class="flex-col flex-wrap-no justify-flex-end text-center width-rem-15 pad-v-small">
                     <label for="login"
-                           class="dashboard-label text-center">{{ trans('login.Log') }}</label>
+                           class="form-label">{{ trans('login.Log') }}</label>
                     <div class="flex-row flex-wrap-no marg-none">
                         <i class="fas fa-user svg-inside"></i>
                         <input id="login" type="text"
-                               class="form-control{{ $errors->has('login') ? ' is-invalid' : '' }} modal-custom-fields-input"
+                               class="form-control m-field-input{{ $errors->has('login') ? ' is-invalid' : '' }}"
                                name="login" value="{{ old('login') }}" required autofocus tabindex="1">
                     </div>
                 </div>
                 <div class="flex-col flex-wrap-no justify-flex-end text-center width-rem-15 pad-v-small">
                     <label for="password"
-                           class="dashboard-label text-center">{{ trans('login.Password') }}</label>
+                           class="form-label">{{ trans('login.Password') }}</label>
                     <div class="flex-row flex-wrap-no marg-none">
                         <i class="fas fa-key svg-inside"></i>
                         <input id="password" type="password"
-                               class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }} modal-custom-fields-input"
+                               class="form-control m-field-input{{ $errors->has('password') ? ' is-invalid' : '' }}"
                                name="password" required tabindex="2">
                     </div>
                 </div>
                 <div class="flex-row flex-wrap-no justify-center text-center width-rem-15 pad-v-small">
-                    <label for="remember" class="flex-row flex-wrap-yes dashboard-label text-center">{{ trans('login.Remember') }}</label>
-                    <div class="flex-row flex-wrap-yes dashboard-label text-center pad-h-left-small">
+                    <label for="remember" class="flex-row flex-wrap-yes form-label">{{ trans('login.Remember') }}</label>
+                    <div class="flex-row flex-wrap-yes pad-h-left-small">
                         <input type="checkbox" name="remember" id="remember"
                                {{ old('remember') ? 'checked' : '' }} tabindex="3">
                     </div>
@@ -56,6 +56,7 @@
 
             </div>
         </form>
+    </div>
     </div>
 
     <div class="text-center total-separator"></div>
