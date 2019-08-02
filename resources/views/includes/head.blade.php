@@ -45,11 +45,12 @@
 <script src="{{ asset('js/app.js') }}" defer></script>
 {{--<script src="https://kit.fontawesome.com/4d3b8c129c.js"></script>--}}
 <script src="{{ asset('js/main.js') }}" defer></script>
-<script src="{{ asset('js/idleTimer.min.js') }}" defer></script>
 {{--<script rel="script" src="{{ asset('fontAwsome/js/all.min.js') }}"></script>--}}
 
 <script rel="script" src="{{ asset('js/sortable.min.js') }}"></script>
 <script rel="script" src="{{ asset('js/moment.min.js') }}"></script>
+<script rel="script" src="{{ asset('js/jquery.number.js') }}" defer></script>
+<script src="{{ asset('js/idleTimer.min.js') }}" defer></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
