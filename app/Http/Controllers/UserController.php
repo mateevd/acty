@@ -45,8 +45,9 @@
 		 * @param $value string/int $value the value to be handled
 		 * @return int value
 		 */
-		public function getInt($value) {
-			if ( is_int($value)) {
+		public function getInt($value)
+		{
+			if (is_int($value)) {
 				return $value;
 			}
 			return intval($value);
@@ -121,7 +122,7 @@
 			$current_month = $this->current_month;
 			$current_year = $this->current_year;
 			
-
+			
 			$users = DB::table('users')
 				->leftJoin('roles', 'roles.id', '=', 'users.role_id')
 				->leftJoin('services', 'services.id', '=', 'users.service_id')
@@ -189,16 +190,21 @@
 				->where('id', '>=', auth()->user()->roles->id)
 				->pluck('name', 'id');
 			
-			return view('users.user_index', 
-				compact(
-					'current_date',
-					'current_year',
-					'current_month',
-
-					'users', 
-					'departments', 
-					'services', 
-					'roles'));
+			if (\auth()->user()->role_id == config('constants.role_agent_id')) {
+				return redirect('home');
+			} else {
+				return view('users.user_index',
+					compact(
+						'current_date',
+						'current_year',
+						'current_month',
+						
+						'users',
+						'departments',
+						'services',
+						'roles'));
+			}
+			
 		}
 		
 		public function getServicesList($user_department_id)
